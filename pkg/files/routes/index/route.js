@@ -1,4 +1,4 @@
-/**
+/**.
  * Route - Index
  *
  * @param {IncomingMessage} incoming - The given IncomingMessage Object.
@@ -9,7 +9,7 @@ export async function index( incoming, outgoing ){
     
     return new Promise( ( resolve, reject ) => {
     
-        if( incoming.method === 'GET') {
+        if( incoming.method === 'GET' ) {
             
             outgoing.statusCode = 200
             outgoing.statusMessage = 'OK'

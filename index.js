@@ -8,7 +8,7 @@ import {
     status404,
 } from './lib/koorie/exporter.js'
 
-import {routes as rts} from './lib/koorie/initialize.js'
+import { routes as rts } from './lib/koorie/initialize.js'
 
 export const routes = rts
 
