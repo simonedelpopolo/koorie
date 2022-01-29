@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.3.8-alpha",
+  "version": "0.3.10-alpha",
   "description": "Node.js server.",
   "main": "index.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "access": "public"
   },
   "scripts": {
-    "postinstall" : "node ./install.js",
+    "postinstall" : "node ./pkg/install.js",
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
     "nodemon.koorie-cluster-json": "npx nodemon executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost",
