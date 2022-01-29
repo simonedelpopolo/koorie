@@ -1,0 +1,31 @@
+{
+  "name": "koorie",
+  "version": "0.3.8-alpha",
+  "description": "Node.js server.",
+  "main": "index.js",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "postinstall" : "node ./install.js",
+    "eslint": "npx eslint . --ext .js",
+    "eslint-fix": "npx eslint --fix . --ext .js",
+    "nodemon.koorie-cluster-json": "npx nodemon executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost",
+    "koorie-cluster": "node executable.js --cluster --port=2653 --address=localhost --static-files=public",
+    "koorie-cluster-json": "node executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost",
+    "koorie": "node executable.js --port=8080 --address=localhost --static-files=public"
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "eslint-plugin-jsdoc": "^37.6.1",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "boolean-jokes": "^1.4.5",
+    "json-swiss-knife": "^1.5.7",
+    "oftypes": "^0.3.1-beta"
+  },
+  "author": "Simone Del Popolo",
+  "license": "Apache-2.0"
+}
