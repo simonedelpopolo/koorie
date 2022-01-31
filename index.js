@@ -1,4 +1,6 @@
 import  { flags as flags_ } from './lib/flags/exporter.js'
+import { process_exit as pe } from './lib/flags/flags__.js'
+import { routes as rts } from './lib/koorie/server.js'
 import {
     cluster__,
     logger__,
@@ -8,9 +10,8 @@ import {
     status404,
 } from './lib/koorie/exporter.js'
 
-import { routes as rts } from './lib/koorie/server.js'
-
 export const routes = rts
+export const process_exit = pe
 
 /**
  * Argument Parser.
