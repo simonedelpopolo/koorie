@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.3.22-alpha",
+  "version": "0.3.23-alpha",
   "description": "Node.js server.",
   "main": "index.js",
   "type": "module",
@@ -22,9 +22,9 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "boolean-jokes": "^1.4.5",
-    "json-swiss-knife": "^1.5.7",
-    "oftypes": "^0.3.2"
+    "boolean-jokes": "latest",
+    "json-swiss-knife": "latest",
+    "oftypes": "latest"
   },
   "author": "Simone Del Popolo",
   "license": "Apache-2.0"
