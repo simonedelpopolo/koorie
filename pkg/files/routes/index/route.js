@@ -1,5 +1,5 @@
-/**.
- * Route - Index
+/**
+ * Route - Index.
  *
  * @param {IncomingMessage} incoming - The given IncomingMessage Object.
  * @param {ServerResponse} outgoing - The given ServerResponse Object.
