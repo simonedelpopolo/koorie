@@ -1,7 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "oftypes": "beta",
+    "oftypes": "latest",
     "koorie": "latest"
   },
   "scripts": {
