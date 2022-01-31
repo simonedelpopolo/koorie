@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.3.20-alpha",
+  "version": "0.3.21-alpha",
   "description": "Node.js server.",
   "main": "index.js",
   "type": "module",
