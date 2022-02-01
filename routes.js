@@ -4,6 +4,7 @@ import { process_exit, routes } from './index.js'
 
 const routes_list = [
     { route:'', func:index }
+    
 ]
 
 export default async () => {

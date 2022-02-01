@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.3.23-alpha",
+  "version": "0.4.24-alpha",
   "description": "Node.js server.",
   "main": "index.js",
   "type": "module",
@@ -11,10 +11,9 @@
     "postinstall" : "node ./pkg/install.js",
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
-    "nodemon.koorie-cluster-json": "npx nodemon executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost",
-    "koorie-cluster": "node executable.js --cluster --port=2653 --address=localhost --static-files=public",
-    "koorie-cluster-json": "node executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost",
-    "koorie": "node executable.js --port=8080 --address=localhost --static-files=public"
+    "nodemon.koorie": "node executable.js",
+    "nodemon.koorie-cluster-json-react": "npx nodemon executable.js -c='{\"cpus\":8,\"init\":\"default\"}' --static-files=public --port=2654 --address=localhost --react",
+    "nodemon.koorie-react": "npx nodemon --trace-warnings executable.js --port=8080 --address=localhost --static-files=public -r"
   },
   "devDependencies": {
     "eslint": "^8.6.0",

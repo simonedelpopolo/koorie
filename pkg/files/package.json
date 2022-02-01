@@ -5,6 +5,6 @@
     "koorie": "latest"
   },
   "scripts": {
-    "koorie-serve": "node index.js --static-files=public --cluster='{\"init\":\"index.js\"}'"
+    "koorie-serve": "node index.js"
   }
 }

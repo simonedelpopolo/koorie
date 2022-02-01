@@ -1,17 +1,25 @@
-import  { flags as flags_ } from './lib/flags/exporter.js'
-import { process_exit as pe } from './lib/flags/flags__.js'
-import { routes as rts } from './lib/koorie/server.js'
+import  { arguments__, process_exit_, stderr_ } from './lib/flags/exporter.js'
 import {
-    cluster__,
+    dispatcher__,
+    fork__,
     logger__,
+    routes__,
     routing__,
-    server as s,
-    status200,
-    status404,
+    server__,
 } from './lib/koorie/exporter.js'
 
-export const routes = rts
-export const process_exit = pe
+export const routes = routes__
+export const process_exit = process_exit_
+
+/**
+ * Wrap to process.stderr.write.
+ *
+ * @param {string|any} message - The message to the stderr.
+ * @returns {any}
+ */
+export function stderr( message ){
+    return stderr_( message )
+}
 
 /**
  * Argument Parser.
@@ -20,11 +28,8 @@ export const process_exit = pe
  * @returns {Promise<unknown>}
  */
 export async function flags( args ){
-    return flags_( args )
+    return arguments__( args )
 }
-
-export const code200 = status200
-export const code404 = status404
 
 /**
  * Handles the server log.
@@ -32,7 +37,7 @@ export const code404 = status404
  * @param {{quiet:boolean, write:{disk:boolean, filename:string}=,info:any[]}} options - Infos.
  * @returns {*}
  */
-export function logger( options ){
+export async function logger( options ){
     return logger__( options )
 }
 
@@ -42,17 +47,30 @@ export function logger( options ){
  * @param {{cpus:number,init:string}|number} options - Parsed arguments.
  * @returns {Promise<void>}
  */
-export function cluster_( options ) {
-    return cluster__( options )
+export async function fork( options ) {
+    return fork__( options )
 }
 
 /**
- * Handles the response of the index.html.
+ * Dispatcher.
  *
+ * @param {object} parameters - .
+ * @returns {Promise<*>}
+ */
+export async function dispatcher( parameters ){
+    return dispatcher__( parameters )
+}
+
+/**
+ *  Routing.
+ *
+ * @param {{buffer:Buffer, log:object}|Error} response - .
+ * @param {IncomingMessage=} incoming - .
+ * @param {ServerResponse=} outgoing - .
  * @returns {Promise<void>}
  */
-export function routing( ){
-    return routing__()
+export async function routing( response, incoming, outgoing ){
+    return routing__( response, incoming, outgoing )
 }
 
 /**
@@ -61,6 +79,6 @@ export function routing( ){
  * @param {{p:string,port:string,a:string,address:string,c:string,cluster:string|object,s:string,'static-files':string}|null} flags - Parsed arguments.
  * @returns {Promise<void>}
  */
-export function server( flags ){
-    return s( flags )
+export async function server( flags ){
+    return server__( flags )
 }
