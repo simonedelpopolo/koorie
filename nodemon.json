@@ -5,7 +5,8 @@
     ".idea",
     "**/.DS_Store",
     "**/*.md",
-    ".github"
+    ".git",
+    "assertions"
   ],
   "watch": [
     "./*",

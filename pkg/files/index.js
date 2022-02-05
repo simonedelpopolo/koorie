@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-import routes from './routes.js'
+import routes from './middleware.js'
 import { flags, server } from 'koorie'
-
-// Splicing out from `process.argv` the paths for node and executable.js
+// Splicing out from `process.argv` the paths for node and index.js
 process.argv.splice( 0, 2 )
 
 // Process name.
