@@ -1,9 +1,10 @@
-.git/
+.git
 .gitignore
 .idea
 .eslintrc.json
 .eslintignore
 nodemon.json
-./middleware.js
-./routes
-./assertions
+/middleware.js
+/routes
+assertions
+.github
