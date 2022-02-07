@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.4.70-experimental",
+  "version": "0.4.80-cli",
   "description": "Node.js server. ESM Module asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -13,10 +13,10 @@
   ],
   "main": "whisk.js",
   "bin": {
-    "koorie": "index.js"
+    "koorie": "index.js",
+    "koorie-cli": "cli.js"
   },
   "scripts": {
-    "postinstall": "node ./pkg/install.js",
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
     "tests": "cd assertions && node assertions.js",

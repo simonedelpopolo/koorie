@@ -1,3 +1,4 @@
+import { init__ } from './lib/cli/exporter.js'
 import koorie from './lib/koorie.js'
 import  { arguments__, process_exit_, stderr_ } from './lib/flags/exporter.js'
 import {
@@ -25,6 +26,18 @@ export const domain = domain__
 export const koorie__ = koorie
 export const process_exit = process_exit_
 export const routes = routes__
+
+/**
+ * Initialization script. An object from a json string passed to the terminal.
+ * The arguments it is not required.
+ *
+ * @param {{name:string=,description:string=,version:string=}=} options - The json parsed options.
+ * @returns {Promise<void>}
+ * @example npx koorie init='{"name":"my-app", "description":"my frivolous app"}'
+ */
+export async function init( options ){
+    return init__( options )
+}
 
 /**
  * Wrap to process.stderr.write.
