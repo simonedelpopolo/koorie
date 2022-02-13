@@ -19,7 +19,7 @@
   "scripts": {
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
-    "tests": "cd assertions && node assertions.js",
+    "assertions": "cd assertions && node assertions.js",
     "autocannon": "cd assertions && node assertions.js autocannon",
     "koorie": "node koorie.js",
     "nodemon.koorie": "nodemon --trace-warnings koorie.js -s=public",
