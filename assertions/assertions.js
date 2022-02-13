@@ -70,7 +70,6 @@ const Assertions = {
         const koorie = spawn( 'node', [
             'koorie.js',
             '--port',
-            '--logger=quiet:true',
             '-a=localhost',
             '-s=assertions/public'
         ], {
