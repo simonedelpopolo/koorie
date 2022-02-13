@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "0.4.81-experimental",
+  "version": "0.4.85-experimental",
   "description": "Node.js server. ESM Module asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -11,20 +11,20 @@
     "darwin",
     "!win32"
   ],
-  "main": "whisk.js",
+  "main": "index.js",
   "bin": {
-    "koorie": "index.js",
-    "koorie-cli": "cli.js"
+    "koorie": "koorie.js",
+    "koorie-shell": "shell.js"
   },
   "scripts": {
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
     "tests": "cd assertions && node assertions.js",
-    "autocannon0": "cd assertions && node assertions.js autocannon0",
-    "koorie": "node index.js",
-    "nodemon.koorie": "nodemon --trace-warnings index.js -s=public",
-    "nodemon.koorie-cluster-react": "npx nodemon --trace-warnings index.js --cluster --static-files=public --port=2654 --address=localhost --react",
-    "nodemon.koorie-react": "npx nodemon --trace-warnings index.js --port=8080 --address=localhost --static-files=public --react"
+    "autocannon": "cd assertions && node assertions.js autocannon",
+    "koorie": "node koorie.js",
+    "nodemon.koorie": "nodemon --trace-warnings koorie.js -s=public",
+    "nodemon.koorie-cluster-react": "npx nodemon --trace-warnings koorie.js --cluster --static-files=public --port=2654 --address=localhost --react",
+    "nodemon.koorie-react": "npx nodemon --trace-warnings koorie.js --port=8080 --address=localhost --static-files=public --react"
   },
   "publishConfig": {
     "access": "public"

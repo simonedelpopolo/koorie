@@ -9,13 +9,29 @@ import { undefined_ } from 'oftypes'
  */
 export async function index( incoming, outgoing, koorie ){
     
-    const message = await koorie.post( 'message', koorie.body_ )
-    
-    if( await undefined_( message.invalid ) === true ){
-        return new Promise( ( resolve ) => {
-            console.log( message )
-            resolve( Buffer.from( JSON.stringify( message ) ) )
-        } )
+    if( incoming.method === 'POST' ){
+        const message = await koorie.post( 'index', koorie.body_ )
+        
+        if( await undefined_( message.invalid ) === true ){
+            
+            return new Promise( ( resolve ) => {
+                
+                outgoing.statusCode = 200
+                outgoing.setHeader( 'content-type', 'application/json' )
+                outgoing.setHeader( 'koorie-api', 'true' )
+                outgoing.statusMessage = 'Ok'
+                
+                let bufferIncoming = Buffer.from( JSON.stringify( message ) )
+                let responseMessage = {
+                    buffer:bufferIncoming,
+                    incoming:{
+                        length: Buffer.byteLength( bufferIncoming ),
+                        payload: bufferIncoming
+                    }
+                }
+                resolve( responseMessage )
+            } )
+        }
     }
     
     return new Promise( ( resolve, reject ) => {
