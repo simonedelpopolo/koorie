@@ -1,0 +1,8 @@
+; public directory
+static-files = assertions/public
+
+; number of cpus
+cluster = full
+
+; logger
+logger = quiet:true:write:koorie.log
