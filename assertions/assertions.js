@@ -1,6 +1,7 @@
+/* eslint-disable capitalized-comments */
 import autocannon from 'autocannon'
 import { EventEmitter } from 'events'
-import flags from '../lib/flags.js'
+import input from '../lib/input.js'
 import { koorie__ } from '../index.js'
 import { spawn } from 'child_process'
 
@@ -45,7 +46,7 @@ const tests = {
 
 const Assertions = {
     
-    // Koorie Object
+    // Object [koorie]
     koorie_object : async () => {
         
         console.log( '---------------------------------------------------------------------------' )
@@ -55,11 +56,11 @@ const Assertions = {
     
     },
     
-    // Flags Object
-    flags_object : async () => {
+    // - Object [input]
+    input_object : async () => {
         
         console.log( '---------------------------------------------------------------------------' )
-        console.log( flags )
+        console.log( input )
         AssertionEvent.emit( 'end' )
         console.log( '---------------------------------------------------------------------------' )
         
@@ -69,8 +70,9 @@ const Assertions = {
         
         const koorie = spawn( 'node', [
             'koorie.js',
-            '--port',
+            '--port=34562',
             '-a=localhost',
+            '-l=quiet:true',
             '-s=assertions/public'
         ], {
             cwd: '../',
@@ -82,25 +84,25 @@ const Assertions = {
         } )
         
         koorie.on( 'spawn', () => {
-
+            
             // Give some time for Koorie to be ready 100%
             setTimeout( () => {
                 const instance = autocannon( {
-                    url: 'http://localhost:3001',
+                    url: 'http://localhost:34562',
                     method: 'GET',
                     duration: 5,
                     connections: 220,
                 }, console.log )
-    
+                
                 instance.on( 'done', () => {
                     koorie.kill( 'SIGINT' )
-    
+                    
                     not_last = false
                     // Gives some time to autocannon print results then emit 'end'
                     setTimeout( () => AssertionEvent.emit( 'end' ), 100 )
                     
                 } )
-    
+                
                 // Just render results
                 autocannon.track( instance, {
                     renderProgressBar: true,
