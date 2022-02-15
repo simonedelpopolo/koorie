@@ -9,3 +9,5 @@ nodemon.json
 assertions
 .github
 .clinic
+.koorierc
+_.koorierc
