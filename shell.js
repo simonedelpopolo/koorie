@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import { entry_point, init } from './index.js'
 
-// Splicing out from `process.argv` the paths for node and shell.js
+// - splicing out from `process.argv` the paths for node and shell.js
 process.argv.splice( 0, 2 )
 
-// Process name.
+// - process.title
 process.title = 'koorie-shell'
 
 const entry_point_run = await entry_point( process.argv )
