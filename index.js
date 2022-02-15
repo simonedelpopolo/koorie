@@ -1,6 +1,7 @@
-import  { arguments__ } from './lib/arguments/exporter.js'
 import { init__ } from './lib/shell/exporter.js'
 import koorie from './lib/koorie.js'
+import { parser__ } from './lib/config/exporter.js'
+import { shell_exit_codes__ } from './lib/errors/exporter.js'
 import {
     body__,
     domain__,
@@ -15,20 +16,22 @@ import {
     routing__,
     server__,
 } from './lib/koorie/exporter.js'
-import { koorieErrors__, serverErrors__, shell_exit_codes__ } from './lib/errors/exporter.js'
+import { entry_point__, process_title__ } from './lib/input/exporter.js'
 import { process_exit_, stderr_ } from './lib/activity/exporter.js'
 
+export const entry_point = entry_point__
+export const process_title = process_title__
 export const protocol = protocol__
 export const resource = resource__
 export const koorieIncoming = incoming__
-export const serverErrors = serverErrors__
-export const koorieErrors = koorieErrors__
 export const shell_exit_codes = shell_exit_codes__
 export const domain = domain__
 export const koorie__ = koorie
 export const process_exit = process_exit_
 export const stderr = stderr_
 export const routes = routes__
+export const config_get = parser__.get
+export const config_set = parser__.set
 
 /**
  * Initialization script. An object from a json string passed to the terminal.
@@ -40,16 +43,6 @@ export const routes = routes__
  */
 export async function init( options ){
     return init__( options )
-}
-
-/**
- * Argument Parser.
- *
- * @param {string[]} args - Given arguments from terminal.
- * @returns {Promise<unknown>}
- */
-export async function flags( args ){
-    return arguments__( args )
 }
 
 /**
@@ -65,12 +58,12 @@ export async function logger( options ){
 /**
  * Handles the cluster and forks.
  *
- * @param {{cpus:number,init:string}|number} options - Parsed arguments.
- * @param {string} static_files - Static files absolute path (directory `public`).
+ * @param {number|string|boolean} cpus - Parsed arguments. If is set 0 it will use all the available CPUs.
+ * @param {{path:string, flag:string}} static_files - Static files absolute path (directory `public`).
  * @returns {Promise<void>}
  */
-export async function fork( options, static_files ) {
-    return fork__( options, static_files )
+export async function fork( cpus, static_files ) {
+    return fork__( cpus, static_files )
 }
 
 
@@ -116,7 +109,7 @@ export async function outgoing( response, outgoing ){
 }
 
 /**
- * Lightweight server for react-dang app.
+ * Lightweight server.
  *
  * @param {{p:string,port:string,a:string,address:string,c:string,cluster:string|object,s:string,'static-files':string}|null} flags - Parsed arguments.
  * @returns {Promise<void>}
