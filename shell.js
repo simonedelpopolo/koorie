@@ -20,6 +20,12 @@ switch ( shell.command ){
         delete shell.command
         
         await init( shell )
+        
+        break
+    
+    case 'route':
+        delete shell.command
+        
         break
     
 }
