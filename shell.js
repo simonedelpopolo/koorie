@@ -15,7 +15,7 @@ const shell = await entry_point_run.value
 switch ( shell.command ){
     
     // Switcher for recognized commands no need for default case.
-    // Checks have been done at Object input.entry_point
+    // Checks have been done at Object [ input.entry_point ]
     case 'init':
         delete shell.command
         
