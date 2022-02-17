@@ -27,7 +27,7 @@ ___
     - [--logger[-l]](#--logger-l)
     - [--middleware[-ml]](#--middleware-ml)
     - [--port[-p]](#--port-p)
-    - [--protocol[-l]](#--protocol-l)
+    - [--protocol[-pr]](#--protocol-pr)
     - [--react[-r]](#--react-r)
     - [--static-files[-s]](#--static-files-s)
   - [Koorie-Shell commands and flags](#koorie-shell-commands-and-flags)
