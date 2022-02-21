@@ -1,5 +1,4 @@
 import Answer from '../../lib/extends/Promise/Answer.js'
-import { undefined_ } from 'oftypes'
 
 /**
  * Route - Index.
@@ -9,32 +8,7 @@ import { undefined_ } from 'oftypes'
  * @param {object} koorie - .
  * @returns {Promise | PromiseFulfilledResult<{buffer:Buffer}> | PromiseRejectedResult<Buffer>}
  */
-export async function index( incoming, outgoing ){
-
-    if( incoming.method === 'POST' ){
-        const message = await Answer.koorie().post( 'index', await Answer.koorie().body_ )
-        
-        if( await undefined_( message.invalid ) === true ){
-            
-            return new Answer( ( good ) => {
-                
-                outgoing.statusCode = 200
-                outgoing.setHeader( 'content-type', 'application/json' )
-                outgoing.setHeader( 'koorie-api', 'true' )
-                outgoing.statusMessage = 'Ok'
-                
-                let bufferIncoming = Buffer.from( JSON.stringify( message ) )
-                let responseMessage = {
-                    buffer:bufferIncoming,
-                    incoming:{
-                        length: Buffer.byteLength( bufferIncoming ),
-                        payload: bufferIncoming
-                    }
-                }
-                good( responseMessage )
-            } )
-        }
-    }
+export async function gni( incoming, outgoing ){
     
     return new Answer( ( good, bad ) => {
         
@@ -45,7 +19,7 @@ export async function index( incoming, outgoing ){
             outgoing.setHeader( 'koorie-api', 'true' )
             outgoing.setHeader( 'content-type', 'application/json' )
             
-            const response = { route_index:'responseSðððððððynciiiii' }
+            const response = { route_gni:'gniffffffzzzzsssss' }
             const buffer = Buffer.from( JSON.stringify( response ) )
             
             good( {
@@ -58,12 +32,12 @@ export async function index( incoming, outgoing ){
             outgoing.statusMessage = 'Only GET request here ;)'
             outgoing.setHeader( 'koorie-api', 'false' )
             outgoing.setHeader( 'content-type', 'application/json' )
-    
+            
             const failed = { message: 'Only GET request here ;)' }
             const buffer = Buffer.from( JSON.stringify( failed ) )
             
             bad( buffer )
         }
-    
+        
     } )
 }
