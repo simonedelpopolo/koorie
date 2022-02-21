@@ -1,9 +1,7 @@
 /* eslint-disable capitalized-comments */
-import autocannon from 'autocannon'
 import { EventEmitter } from 'events'
 import input from '../lib/input.js'
 import { koorie__ } from '../index.js'
-import { spawn } from 'child_process'
 
 // Slicing out node and assertion.js paths.
 process.argv.splice( 0, 2 )
@@ -63,54 +61,6 @@ const Assertions = {
         console.log( input )
         AssertionEvent.emit( 'end' )
         console.log( '---------------------------------------------------------------------------' )
-        
-    },
-    
-    autocannon: async() => {
-        
-        const koorie = spawn( 'node', [
-            'koorie.js',
-            '--port=34562',
-            '-a=localhost',
-            '-l=quiet:true',
-            '-s=assertions/public'
-        ], {
-            cwd: '../',
-            stdio: [
-                'ignore',
-                process.stdout,
-                process.stderr,
-            ],
-        } )
-        
-        koorie.on( 'spawn', () => {
-            
-            // Give some time for Koorie to be ready 100%
-            setTimeout( () => {
-                const instance = autocannon( {
-                    url: 'http://localhost:34562',
-                    method: 'GET',
-                    duration: 5,
-                    connections: 220,
-                }, console.log )
-                
-                instance.on( 'done', () => {
-                    koorie.kill( 'SIGINT' )
-                    
-                    not_last = false
-                    // Gives some time to autocannon print results then emit 'end'
-                    setTimeout( () => AssertionEvent.emit( 'end' ), 100 )
-                    
-                } )
-                
-                // Just render results
-                autocannon.track( instance, {
-                    renderProgressBar: true,
-                    renderLatencyTable: true
-                } )
-            }, 100 )
-            
-        } )
         
     },
     
