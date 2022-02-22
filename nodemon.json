@@ -16,7 +16,8 @@
     "package.json",
     "package-lock.json",
     "LICENSE",
-    ".github"
+    ".github",
+    "routes"
   ],
   "watch": [
     "./*",

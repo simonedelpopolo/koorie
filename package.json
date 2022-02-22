@@ -21,7 +21,7 @@
     "eslint-fix": "npx eslint --fix . --ext .js",
     "assertions": "cd assertions && node assertions.js",
     "autocannon": "cd assertions && node assertions.js autocannon",
-    "nodemon.koorie": "nodemon --trace-warnings koorie.js -s=assertions/public"
+    "nodemon.koorie": "nodemon --trace-warnings koorie.js -s=assertions/public --hot"
   },
   "publishConfig": {
     "access": "public"
