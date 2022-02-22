@@ -4,8 +4,10 @@ import {
     domain__,
     entry_point__,
     fork__,
+    hot__,
     incoming__,
     init__,
+    library__,
     logger__,
     outgoing__,
     parser__,
@@ -29,11 +31,34 @@ export const koorieIncoming = incoming__
 export const shell_exit_codes = shell_exit_codes__
 export const domain = domain__
 export const koorie__ = koorie
-export const process_exit = process_exit__
 export const stderr = stderr__
 export const routes = routes__
 export const config_get = parser__.get
 export const config_set = parser__.set
+
+/**
+ * Exits with message and exit code.
+ *
+ * @param {string|Buffer} message - Required argument.
+ * @param {Error} [error_type] - Default set to Error('koorie - InternalError').
+ * @param {number} [exit_code=101] - Default set to 101, process exit code.
+ * @returns {Promise<void>}
+ */
+export async function process_exit( message, error_type = Error( 'koorie - InternalError' ), exit_code = 101 ){
+    return process_exit__( message, error_type, exit_code )
+}
+
+/**
+ * Switcher function for different javascript library to be served with koorie.
+ * ReactJS, SolidJS and others soon.
+ *
+ * @param {string} name - The process.env.LIBRARY value will be the switcher.
+ * @param {{filename:string, public_path:string}} resources - The requested resource from the browser.
+ * @returns {Promise<boolean|Buffer|Error>}
+ */
+export function library( name, resources ){
+    return library__( name, resources )
+}
 
 /**
  * Initialization script. An object from a json string passed to the terminal.
@@ -68,6 +93,16 @@ export async function fork( cpus, static_files ) {
     return fork__( cpus, static_files )
 }
 
+/**
+ * Dynamic importing route without the need for the server to be restarted, if the flag --hot has given.
+ * Otherwise, return the asyncFunction registered in the middleware.js.
+ *
+ * @param {string} route - The route passed from koorie.routing.
+ * @returns {(incoming:IncomingMessage, outgoing:ServerResponse)=>Answer}
+ */
+export async function hot( route ){
+    return hot__( route )
+}
 
 /**
  * Dispatcher.
