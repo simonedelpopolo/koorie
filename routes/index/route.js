@@ -6,13 +6,12 @@ import { undefined_ } from 'oftypes'
  *
  * @param {IncomingMessage} incoming - The given IncomingMessage Object.
  * @param {ServerResponse} outgoing - The given ServerResponse Object.
- * @param {object} koorie - .
  * @returns {Promise | PromiseFulfilledResult<{buffer:Buffer}> | PromiseRejectedResult<Buffer>}
  */
 export async function index( incoming, outgoing ){
 
     if( incoming.method === 'POST' ){
-        const message = await Answer.koorie().post( 'index', await Answer.koorie().body_ )
+        let message = await Answer.koorie().post( 'index', await Answer.koorie().body_ )
         
         if( await undefined_( message.invalid ) === true ){
             
@@ -23,12 +22,14 @@ export async function index( incoming, outgoing ){
                 outgoing.setHeader( 'koorie-api', 'true' )
                 outgoing.statusMessage = 'Ok'
                 
-                let bufferIncoming = Buffer.from( JSON.stringify( message ) )
-                let responseMessage = {
-                    buffer:bufferIncoming,
+                const outgoingBuffer = Buffer.from( JSON.stringify( { receiver: 'oK' } ) )
+                const incomingBuffer = Buffer.from( JSON.stringify( message ) )
+                
+                const responseMessage = {
+                    buffer: outgoingBuffer,
                     incoming:{
-                        length: Buffer.byteLength( bufferIncoming ),
-                        payload: bufferIncoming
+                        length: Buffer.byteLength( incomingBuffer ),
+                        payload: incomingBuffer
                     }
                 }
                 good( responseMessage )
@@ -45,7 +46,7 @@ export async function index( incoming, outgoing ){
             outgoing.setHeader( 'koorie-api', 'true' )
             outgoing.setHeader( 'content-type', 'application/json' )
             
-            const response = { route_index:'responseSðððððððynciiiii' }
+            const response = { route_index:'response' }
             const buffer = Buffer.from( JSON.stringify( response ) )
             
             good( {
