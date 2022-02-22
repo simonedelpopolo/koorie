@@ -24,11 +24,11 @@ ___
     - [--address[-a]](#--address-a)
     - [--cluster[-c]](#--cluster-c)
     - [--domain[-d]](#--domain-d)
+    - [--library[-lb]](#--library-lb)
     - [--logger[-l]](#--logger-l)
     - [--middleware[-ml]](#--middleware-ml)
     - [--port[-p]](#--port-p)
     - [--protocol[-pr]](#--protocol-pr)
-    - [--react[-r]](#--react-r)
     - [--static-files[-s]](#--static-files-s)
   - [Koorie-Shell commands and flags](#koorie-shell-commands-and-flags)
     - [init command](#init-command)
@@ -185,17 +185,17 @@ ___
 
 ___
 
-| flags                         | description                                                               | simple usage                |
-|:------------------------------|:--------------------------------------------------------------------------|:----------------------------|
-| --address[-a]={string}        | Sets the address to listen from. Default set to localhost.                | `npx koorie -a=localhost`   |
-| --cluster[-c]={void}-{number} | When {void} it forks the process for the half of the available CPUs.      | `npx koorie --cluster`      |
-| --domain[-d]={string}         | Default is set to the --address value.                                    | `npx koorie -d=localhost`   |
-| --logger[-l]={option:value}   | Default set to print to stdout every request.                             | `npm koorie -l=quiet:true`  |
-| --middleware[-ml]={string}    | Default set to middleware.js.                                             | `npx koorie -ml=starter.js` |
-| --port[-p]={number}-{void}    | Sets the port to listen from. Default set to 3001.                        | `npx koorie -p`             |
-| --protocol[-pr]={string}      | Default is set to `http`. Road map -> to spawn an https server.           | `npx koorie -pr=https`      |
-| --react[-r]={void}            | It tells to Koorie to expect a React application.                         | `npx koorie --react`        |
-| --static-files[-s]={string}   | It tells to Koorie to serve the files located in the specified directory. | `npx koorie -s=public`      |
+| flags                         | description                                                               | simple usage                 |
+|:------------------------------|:--------------------------------------------------------------------------|:-----------------------------|
+| --address[-a]={string}        | Sets the address to listen from. Default set to localhost.                | `npx koorie -a=localhost`    |
+| --cluster[-c]={void}-{number} | When {void} it forks the process for the half of the available CPUs.      | `npx koorie --cluster`       |
+| --domain[-d]={string}         | Default is set to the --address value.                                    | `npx koorie -d=localhost`    |
+| --logger[-l]={option:value}   | Default set to print to stdout every request.                             | `npm koorie -l=quiet:true`   |
+| --middleware[-ml]={string}    | Default set to middleware.js.                                             | `npx koorie -ml=starter.js`  |
+| --port[-p]={number}-{void}    | Sets the port to listen from. Default set to 3001.                        | `npx koorie -p`              |
+| --protocol[-pr]={string}      | Default is set to `http`. Road map -> to spawn an https server.           | `npx koorie -pr=https`       |
+| --library[-lb]={string}       | It tells to Koorie to expect a javascript library application.            | `npx koorie --library=solid` |
+| --static-files[-s]={string}   | It tells to Koorie to serve the files located in the specified directory. | `npx koorie -s=public`       |
 
 > ℹ If all the flags are omitted the default port is `3001`, the address is `localhost` and only a `single` instance of the process will run.
 
@@ -222,6 +222,12 @@ ___
   - --domain[-d]='www.example.com' -> Default set to process.env.address. _*RoadMap*_ -> kind of proxy server?
   - Not really working on it.
 
+___
+
+- ##### --library[-lb]
+  
+  - --library[-lb]=react -> It tells to Koorie to expect a React application. Koorie will look for an index.html file under the `public` directory.
+  - --library[-lb]=4789 -> process exits with errors.
 ___
 
 - ##### --logger[-l]
@@ -253,13 +259,6 @@ ___
   - Default set to `http` the `https` option still not available.
 ___
 
-- ##### --react[-r]
-  
-  - --react[-r] -> It tells to Koorie to expect a React application. Koorie will look for an index.html file under the `public` directory.
-  - --react[-r]=4789 -> process exits with errors.
-  - --react[-r]=app -> process exits with errors.
-  - Default doesn't accept any value.
-___
 
 - ##### --static-files[-s]
 
@@ -434,8 +433,8 @@ ___
 - [ ] `--ssl` generating self-signed certificate.
 - [ ] `--certbot[cb]` request to Lets Encrypt for a certificate, installing it and auto updating it.
 - [ ] `route` command and relative flags `--add[-a]`, `--delete[-d]`, `--edit[-e]` and relative options.
-- [ ] working on a way to add routes without restarting the server.
-- [ ] proxy server???
+- [X] working on a way to add routes without restarting the server.
+- [] proxy server???
 ___
 
 ### JetBrains OSS License
