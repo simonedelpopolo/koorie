@@ -32,12 +32,10 @@ async function configuration (){
     // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc
     const config_ = await config_set()
     
-    if( config_ === 'proceed' ) {
+    if( config_ === 'proceed' )
+        options = await entry_point( process.argv )
         
-        const entry_point_run = await entry_point( process.argv )
-        
-        options = await entry_point_run.value
-    }else {
+    else {
         
         let config_args
         
@@ -49,19 +47,37 @@ async function configuration (){
         else
             config_args = await entry_point( config_ )
         
-        options = await config_args.value
+        options = config_args
     }
     
     return options
 }
 
+/**
+ * @type {
+ *   {
+ *      a:string,address:string,
+ *      c:number,cluster:number,
+ *      false_flag:boolean|undefined,
+ *      hot:undefined,
+ *      l:boolean, logger:boolean,
+ *      lb:string, library: string,
+ *      ml:string, middleware:string,
+ *      p:number,port:number,
+ *      pr:string,protocol:string,
+ *      rt:string,response_time:string,
+ *      s:string,static_files:string,
+ *   } |
+ *   null
+ * }
+ */
 const options = await configuration()
 
-const resolversNull = {
+const resolvers = {
     
     false:( async() => {
         
-        const resolversUndefined = {
+        const resolvers = {
             
             false:( async() => {
                 ( await import( `${ process.cwd() }/${options.middleware || options.ml}` ) ).default()
@@ -75,7 +91,7 @@ const resolversNull = {
             
         };
         
-        ( await undefined_( options.middleware || options.ml, resolversUndefined ) )()
+        ( await undefined_( options.middleware || options.ml, resolvers ) )()
     } ),
     
     true: ( async () => {
@@ -84,5 +100,5 @@ const resolversNull = {
     } )
 };
 
-( await null_( options, resolversNull ) )()
+( await null_( options, resolvers ) )()
 
