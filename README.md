@@ -23,10 +23,9 @@ ___
   - [Koorie terminal flags](#koorie-terminal-flags)
     - [--address[-a]](#--address-a)
     - [--cluster[-c]](#--cluster-c)
-    - [--domain[-d]](#--domain-d)
     - [--library[-lb]](#--library-lb)
     - [--logger[-l]](#--logger-l)
-    - [--middleware[-ml]](#--middleware-ml)
+    - [--middleware[-m]](#--middleware-m)
     - [--port[-p]](#--port-p)
     - [--protocol[-pr]](#--protocol-pr)
     - [--static-files[-s]](#--static-files-s)
@@ -35,7 +34,7 @@ ___
       - [--author[-a]](#--author-a)
       - [--description[-d]](#--description-d)
       - [--license[-l]](#--license-l)
-      - [--middleware[-m]](#--middleware-m)
+      - [--_k-middleware[-m]](#--_k-middleware-m)
       - [--name[-n]](#--name-n)
       - [--version[-v]](#--version-v)
     - [route command](#route-command--this-command-it-not-available-yet-consider-this-section-an-idea-on-how-could-be)
@@ -133,7 +132,7 @@ koorie --port=3847 --cluster
 
 ```
 
-However, Koorie is available globally, the project itself needs it as module dependency, so will be installed project scope anyway.
+However, Koorie is available globally, the project itself needs it as module dependency, so it will be installed project scope anyway.
 
 ___
 
@@ -189,12 +188,11 @@ ___
 |:------------------------------|:--------------------------------------------------------------------------|:-----------------------------|
 | --address[-a]={string}        | Sets the address to listen from. Default set to localhost.                | `npx koorie -a=localhost`    |
 | --cluster[-c]={void}-{number} | When {void} it forks the process for the half of the available CPUs.      | `npx koorie --cluster`       |
-| --domain[-d]={string}         | Default is set to the --address value.                                    | `npx koorie -d=localhost`    |
+| --library[-lb]={string}       | It tells to Koorie to expect a javascript library application.            | `npx koorie --library=solid` |
 | --logger[-l]={option:value}   | Default set to print to stdout every request.                             | `npm koorie -l=quiet:true`   |
-| --middleware[-ml]={string}    | Default set to middleware.js.                                             | `npx koorie -ml=starter.js`  |
+| --middleware[-m]={string}     | Default set to middleware.js.                                             | `npx koorie -ml=starter.js`  |
 | --port[-p]={number}-{void}    | Sets the port to listen from. Default set to 3001.                        | `npx koorie -p`              |
 | --protocol[-pr]={string}      | Default is set to `http`. Road map -> to spawn an https server.           | `npx koorie -pr=https`       |
-| --library[-lb]={string}       | It tells to Koorie to expect a javascript library application.            | `npx koorie --library=solid` |
 | --static-files[-s]={string}   | It tells to Koorie to serve the files located in the specified directory. | `npx koorie -s=public`       |
 
 > ℹ If all the flags are omitted the default port is `3001`, the address is `localhost` and only a `single` instance of the process will run.
@@ -217,13 +215,6 @@ ___
 
 ___
 
-- ##### --domain[-d]
-  
-  - --domain[-d]='www.example.com' -> Default set to process.env.address. _*RoadMap*_ -> kind of proxy server?
-  - Not really working on it.
-
-___
-
 - ##### --library[-lb]
   
   - --library[-lb]=react -> It tells to Koorie to expect a React application. Koorie will look for an index.html file under the `public` directory.
@@ -237,7 +228,7 @@ ___
 
 ___
 
-- ##### --middleware[-ml]
+- ##### --middleware[-m]
   
   - --middleware[-ml]=starter.js -> it will look for a file named starter.js in the root directory of the project, and use it to register all the available routes.
   - Default set to `middleware.js`
@@ -304,7 +295,7 @@ ___
     - --license[-l]=Apache2.0
     - It sets the license property of the package.json
   
-  - ##### --middleware[-m]
+  - ##### --_k-middleware[-m]
     - --middleware[-m]=starter.js
     - It creates a middleware file named starter.js, and it set the npm script 'serve' to use this as default middleware loader.
   
