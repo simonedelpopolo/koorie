@@ -1,20 +1,19 @@
-import koorie from './lib/koorie.js'
 import {
     body__,
-    domain__,
     entry_point__,
     fork__,
     hot__,
-    incoming__,
     init__,
     library__,
     logger__,
+    options__,
     outgoing__,
     parser__,
     process_exit__,
     process_title__,
-    protocol__,
+    processor__,
     query__,
+    request__,
     resource__,
     routes__,
     routing__,
@@ -23,18 +22,61 @@ import {
     stderr__
 } from './lib/exporter.js'
 
-export const entry_point = entry_point__
-export const process_title = process_title__
-export const protocol = protocol__
 export const resource = resource__
-export const koorieIncoming = incoming__
+export const request = request__
 export const shell_exit_codes = shell_exit_codes__
-export const domain = domain__
-export const koorie__ = koorie
 export const stderr = stderr__
 export const routes = routes__
 export const config_get = parser__.get
 export const config_set = parser__.set
+
+// - Object [input]             ____
+
+/**
+ * Object [input.entry_point].
+ * Shared entry point for the available executable files.
+ * Its return an object from the given process.argv.
+ * Object [input.process_title] elaborates commands, flags and options dispatching to the right process switching the process.title.
+ *
+ * @param {string[]} argv - The process.argv passed to the process.
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return#using_return
+ * @returns {Promise | object} - return the return of the async function generator to set it "done" and free resources.
+ */
+export async function entry_point( argv ) {
+    return entry_point__( argv )
+}
+
+/**
+ * Switches process.title returning an object containing command, flags and options to be digested.
+ * The returned Promise always resolves.
+ *
+ * @param {{object:{[p: string]: any}, keys:string[]}} process_parsed_argv - Object.
+ * @returns {AsyncGenerator}
+ */
+export async function process_title( process_parsed_argv ) {
+    return process_title__( process_parsed_argv )
+}
+
+/**
+ * Object [ input.argv ] parses the process.argv string[] and returns an object.
+ *
+ * @param { string[] } argv - the given process.argv.
+ * @returns { Promise<{ object:{ [ p: string ]: any }, keys:string[] }> }
+ */
+export async function processors( argv ){
+    return processor__( argv )
+}
+
+/**
+ * Object [ input.options ] parses, if any, the options given to the flag.
+ *
+ * @param { string }flag_value - the flag value passed to cli.
+ * @param { string }flag_name - flag name in case of error while parsing the options.
+ * @returns { Promise<{ [ p:string ]:{ [ p:string ], any} }> }
+ */
+export async function options( flag_value, flag_name ){
+    return options__( flag_value, flag_name )
+}
 
 /**
  * Exits with message and exit code.
@@ -138,7 +180,7 @@ export async function query( url ){
  *  Routing.
  *
  * @param {{buffer:Buffer, log:object}|{log:object}} response - .
- * @param {ServerResponse} outgoing - .
+ * @param {Object<ServerResponse>} outgoing - .
  * @returns {Promise<void>}
  */
 export async function outgoing( response, outgoing ){
@@ -148,7 +190,20 @@ export async function outgoing( response, outgoing ){
 /**
  * Lightweight server.
  *
- * @param {{p:string,port:string,a:string,address:string,c:string,cluster:string|object,s:string,'static-files':string}|null} flags - Parsed arguments.
+ * @param {{
+ *      a:string,address:string,
+ *      c:number,cluster:number,
+ *      false_flag:boolean|undefined,
+ *      hot:undefined,
+ *      l:boolean, logger:boolean,
+ *      lb:string, library: string,
+ *      ml:string, middleware:string,
+ *      p:number,port:number,
+ *      pr:string,protocol:string,
+ *      rt:string,response_time:string,
+ *      s:string,static_files:string,
+ *   } |
+ *      null} flags - Parsed arguments.
  * @returns {Promise<void>}
  */
 export async function server( flags ){
