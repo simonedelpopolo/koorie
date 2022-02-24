@@ -62,7 +62,7 @@ async function configuration (){
  *      hot:undefined,
  *      l:boolean, logger:boolean,
  *      lb:string, library: string,
- *      ml:string, middleware:string,
+ *      m:string, middleware:string,
  *      p:number,port:number,
  *      pr:string,protocol:string,
  *      rt:string,response_time:string,
@@ -80,7 +80,7 @@ const resolvers = {
         const resolvers = {
             
             false:( async() => {
-                ( await import( `${ process.cwd() }/${options.middleware || options.ml}` ) ).default()
+                ( await import( `${ process.cwd() }/${options.middleware || options.m}` ) ).default()
                 await server( options )
             } ),
             
@@ -91,7 +91,7 @@ const resolvers = {
             
         };
         
-        ( await undefined_( options.middleware || options.ml, resolvers ) )()
+        ( await undefined_( options.middleware || options.m, resolvers ) )()
     } ),
     
     true: ( async () => {
