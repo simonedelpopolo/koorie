@@ -58,7 +58,6 @@
         "SwitchCase": 1
       }
     ],
-    "newline-per-chained-call": "error",
     "quotes": [
       "error",
       "single"
@@ -122,7 +121,7 @@
     "jsdoc/check-property-names": 1,
     "jsdoc/check-syntax": 0,
     "jsdoc/check-tag-names": 1,
-    "jsdoc/check-types": 1,
+    "jsdoc/check-types": 0,
     "jsdoc/check-values": 1,
     "jsdoc/empty-tags": 1,
     "jsdoc/implements-on-classes": 1,
