@@ -9,10 +9,11 @@ process.title = 'koorie-shell'
 
 const entry_point_run = await entry_point( process.argv )
 
-const shell = await entry_point_run.value
+const shell = await entry_point_run
+
 
 // eslint-disable-next-line default-case
-switch ( shell.command ){
+/*Switch ( shell.command ){
     
     // Switcher for recognized commands no need for default case.
     // Checks have been done at Object [ input.entry_point ]
@@ -28,4 +29,4 @@ switch ( shell.command ){
         
         break
     
-}
+}*/
