@@ -19,7 +19,8 @@ import {
     routing__,
     server__,
     shell_exit_codes__,
-    stderr__
+    socket__,
+    stderr__,
 } from './lib/exporter.js'
 
 export const resource = resource__
@@ -133,6 +134,16 @@ export async function logger( options ){
  */
 export async function fork( cpus, static_files ) {
     return fork__( cpus, static_files )
+}
+
+/**
+ * Socket connection to koorie.
+ *
+ * @param {{path:string}} options - socket options.
+ * @returns {Promise<void>}
+ */
+export async function socket( options ){
+    return socket__( options )
 }
 
 /**
