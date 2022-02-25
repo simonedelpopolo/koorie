@@ -18,7 +18,7 @@ export default async () => {
         '--port=34562',
         '-a=localhost',
         '-l=quiet:true',
-        '-rt=false',
+        '-r=false',
         '-s=assertions/public'
     ], {
         cwd: `${process.cwd()}`,
