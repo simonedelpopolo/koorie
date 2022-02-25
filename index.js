@@ -18,6 +18,7 @@ import {
     routes__,
     routing__,
     server__,
+    set__,
     shell_exit_codes__,
     socket__,
     stderr__,
@@ -113,6 +114,16 @@ export function library( name, resources ){
  */
 export async function init( options ){
     return init__( options )
+}
+
+/**
+ * Through socket connection to koorie, koorie-shell can edit some koorie options without restarting it.
+ *
+ * @param {{hot:string, inject:string}} options - on the fly options to set into koorie.
+ * @returns {Promise<void>}
+ */
+export async function set( options ){
+    return set__( options )
 }
 
 /**
