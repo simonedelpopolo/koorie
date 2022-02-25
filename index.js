@@ -137,16 +137,6 @@ export async function fork( cpus, static_files ) {
 }
 
 /**
- * Socket connection to koorie.
- *
- * @param {{path:string}} options - socket options.
- * @returns {Promise<void>}
- */
-export async function socket( options ){
-    return socket__( options )
-}
-
-/**
  * Dynamic importing route without the need for the server to be restarted, if the flag --hot has given.
  * Otherwise, return the asyncFunction registered in the middleware.js.
  *
@@ -219,4 +209,16 @@ export async function outgoing( response, outgoing ){
  */
 export async function server( flags ){
     return server__( flags )
+}
+
+
+
+/**
+ * Socket connection to koorie.
+ *
+ * @param {{path:string}} options - socket options.
+ * @returns {Promise<void>}
+ */
+export async function socket( options ){
+    return socket__( options )
 }
