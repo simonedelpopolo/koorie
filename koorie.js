@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import { config_get, config_set, entry_point, server } from './index.js'
 import { null_, undefined_ } from 'oftypes'
+import { is_json, parse } from 'json-swiss-knife'
 
 // - splicing out from `process.argv` the paths for node and koorie.js
 process.argv.splice( 0, 2 )
 
 // - process.title
 process.title = 'koorie'
-
 
 /**
  * This function return the parsed commands, flags and options.
@@ -17,7 +17,7 @@ process.title = 'koorie'
  *
  * @returns {object}
  */
-async function configuration (){
+async function configuration() {
     let options
     
     // Object [ config.parser.get() ]
@@ -32,18 +32,18 @@ async function configuration (){
     // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc
     const config_ = await config_set()
     
-    if( config_ === 'proceed' )
+    if ( config_ === 'proceed' )
         options = await entry_point( process.argv )
-        
-    else {
+    
+    else if ( config_ === 'read' ) {
         
         let config_args
         
-        if( process.argv.includes( '--false-flag=true' ) ) {
+        if ( process.argv.includes( '--false-flag=true' ) ) {
             config_.push( '--false-flag=true' )
             config_args = await entry_point( config_ )
-        }
-        
+        } else if ( await is_json( process.argv[ 2 ] ) )
+            return parse( process.argv[ 2 ] )
         else
             config_args = await entry_point( config_ )
         
@@ -75,19 +75,19 @@ const options = await configuration()
 
 const resolvers = {
     
-    false:( async() => {
+    false: ( async () => {
         
         const resolvers = {
             
-            false:( async() => {
-                ( await import( `${ process.cwd() }/${options.middleware || options.m}` ) ).default()
+            false: ( async () => {
+                ( await import( `${ process.cwd() }/${ options.middleware || options.m }` ) ).default()
                 await server( options )
             } ),
             
             true: ( async () => {
                 ( await import( `${ process.cwd() }/middleware.js` ) ).default()
                 await server( options )
-            } )
+            } ),
             
         };
         
@@ -97,7 +97,7 @@ const resolvers = {
     true: ( async () => {
         ( await import( `${ process.cwd() }/middleware.js` ) ).default()
         await server( options )
-    } )
+    } ),
 };
 
 ( await null_( options, resolvers ) )()
