@@ -1,4 +1,5 @@
 import {
+    api__,
     body__,
     entry_point__,
     fork__,
@@ -31,6 +32,11 @@ export const stderr = stderr__
 export const routes = routes__
 export const config_get = parser__.get
 export const config_set = parser__.set
+
+
+// Object [ koorie.api ]
+export const api_hot = api__.hot
+export const api_memory = api__.memory
 
 // - Object [input]             ____
 
