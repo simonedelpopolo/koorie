@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { entry_point, init, set } from './index.js'
+import { memory, memorySymbol } from './lib/shell/memory.js'
 
 // - splicing out from `process.argv` the paths for node and shell.js
 process.argv.splice( 0, 2 )
@@ -21,6 +22,11 @@ switch ( Object.entries( shell.command )[ 0 ][ 0 ] ){
         
         // - await init( shell )
         
+        break
+    
+    case 'memory':
+        
+        await memory[ memorySymbol ]( shell.command.memory )
         break
     
     case 'set':
