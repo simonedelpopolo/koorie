@@ -7,9 +7,11 @@ import {
     init__,
     library__,
     logger__,
+    memory__,
     options__,
     outgoing__,
     parser__,
+    performance__,
     process_exit__,
     process_title__,
     processor__,
@@ -34,9 +36,62 @@ export const config_get = parser__.get
 export const config_set = parser__.set
 
 
-// Object [ koorie.api ]
-export const api_hot = api__.hot
-export const api_memory = api__.memory
+/**
+ * Object [ monitor ]
+ *
+ * @public
+ */
+/**
+ * Get the memory usage statistic of the application.
+ * Require a socket connection.
+ *
+ * @returns {
+ *   Promise<{[unknown]:string, [p:string]:NodeJS.MemoryUsage}> |
+ *   {unknown: string, [p: string]: NodeJS.MemoryUsage}
+ *   }
+ */
+export async function memory(){
+    return memory__()
+}
+
+//
+/**
+ * Object [ koorie.api ]
+ *
+ * @public
+ */
+/**
+ * API hot.
+ *
+ * @param {Socket} socket_ - .
+ * @param {Object<{HOT:string}>} opts - .
+ * @returns {Promise<void>}
+ */
+export async function api_hot( socket_, opts ) {
+    return api__.hot( socket_, opts )
+}
+
+/**
+ * API memory.
+ *
+ * @param {Socket} socket_ - .
+ * @param {number=} refresh_rate - .
+ * @returns {Promise<void>}
+ */
+export async function api_memory ( socket_, refresh_rate ) {
+    return api__.memory( socket_, refresh_rate )
+}
+
+// Object [ shell.performance ]
+/**
+ * Through socket connection to koorie, koorie-shell will get some performance.
+ *
+ * @param {{refresh_rate:number, socket_path: string}} options - on the fly options to koorie.
+ * @returns {Promise<void>}
+ */
+export async function performance( options ){
+    return performance__( options )
+}
 
 // - Object [input]             ____
 
@@ -165,10 +220,10 @@ export async function hot( route ){
 }
 
 /**
- * Dispatcher.
+ * Dispatches the server requests/responses.
  *
- * @param {object} parameters - .
- * @returns {Promise<*>}
+ * @param {{requested_resource:string,server:{incoming:IncomingMessage, outgoing:ServerResponse}}} parameters - The given object parameters.
+ * @returns {Promise<unknown>}
  */
 export async function routing( parameters ){
     return routing__( parameters )
