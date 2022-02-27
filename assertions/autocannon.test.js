@@ -17,7 +17,7 @@ export default async () => {
         'koorie.js',
         '--port=34562',
         '-a=localhost',
-        '-l=quiet:true',
+        '-l=options(quiet:true)',
         '-r=false',
         '-s=assertions/public'
     ], {
