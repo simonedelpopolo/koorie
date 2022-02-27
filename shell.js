@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import { entry_point, init, set } from './index.js'
-import { memory, memorySymbol } from './lib/shell/memory.js'
+import { entry_point, init, performance, set } from './index.js'
 
 // - splicing out from `process.argv` the paths for node and shell.js
 process.argv.splice( 0, 2 )
@@ -10,6 +9,28 @@ process.title = 'koorie-shell'
 
 const entry_point_run = await entry_point( process.argv )
 
+/**
+ *
+ * @type {Promise|{command:{
+ *     init:{
+ *       middleware:string,
+ *       name:string,
+ *       description:string,
+ *       version:string,
+ *       author:string,
+ *       license:string
+ *     },
+ *     performance:{
+ *       refresh_rate:number,
+ *       socket_path:string,
+ *     },
+ *     set:{
+ *       hot:string,
+ *       socket_path:string,
+ *       inject: string
+ *     }
+ * }}}
+ */
 const shell = await entry_point_run
 
 // eslint-disable-next-line default-case
@@ -19,14 +40,16 @@ switch ( Object.entries( shell.command )[ 0 ][ 0 ] ){
     // Checks have been done at Object [ input.entry_point ]
     case 'init':
         
-        
-        // - await init( shell )
+        // - avoiding calling it accidentally and overwrite existent files while developing.
+        process.exit()
+        await init( shell.command.init )
         
         break
     
-    case 'memory':
+    case 'performance':
         
-        await memory[ memorySymbol ]( shell.command.memory )
+        await performance( shell.command.performance )
+        
         break
     
     case 'set':
