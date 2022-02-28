@@ -40,8 +40,6 @@ switch ( Object.entries( shell.command )[ 0 ][ 0 ] ){
     // Checks have been done at Object [ input.entry_point ]
     case 'init':
         
-        // - avoiding calling it accidentally and overwrite existent files while developing.
-        process.exit()
         await init( shell.command.init )
         
         break

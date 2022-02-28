@@ -1,4 +1,5 @@
 import {
+    Answer__,
     api__,
     body__,
     entry_point__,
@@ -27,6 +28,7 @@ import {
     stderr__,
 } from './lib/exporter.js'
 
+export const Answer = Answer__
 export const resource = resource__
 export const request = request__
 export const shell_exit_codes = shell_exit_codes__
