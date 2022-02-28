@@ -408,12 +408,17 @@ Small guide step by step:
 
 #### Route - `index`
 
-`mkdir s-scratch && cd s-scratch && npm install koorie`
+```shell
 
-Open the 'package.json' file and add the property "type":"module" save it.
+mkdir s-scratch && cd s-scratch && npm install koorie
+mkdir -p routes/index && touch ./middleware.js ./routes/index/route.js
+mkdir public` && `echo 'give me file! allright!' > public/allright
 
-`mkdir -p routes/index` && `touch ./middleware.js ./routes/index/route.js`
-`mkdir public` && `echo 'give me file! allright!' > public/allright`
+```
+
+filename `./package.json`
+
+> ❗️ Open the 'package.json' file and add the property "type":"module" and save it.
 
 filename `./middleware.js`
 
@@ -429,7 +434,7 @@ export default async () => {
     // routes always declared as async function returning an Answer
     // the incoming property should be set if the route responds to a GET|POST|PUT|DELETE request
     // in this case it will answer at http://localhost:3001 and the request will be GET [?give_me_file=allright]
-    routes.list.push( { route:'', asyncFunction: ( await import( './routes/index/route.js' ) ).index, incoming: ''  } )
+    routes.list.push( { route:'', asyncFunction: ( await import( './routes/index/route.js' ) ).index, incoming: 'give_me_file'  } )
     
     // the koorie.routes.set() will do type checking of the given object and registering the route inside Object [ koorie.routes ]
     await routes.set()
@@ -440,31 +445,77 @@ export default async () => {
 filename `./routes/index/route.js`
 > ⚠ Working in progress. On the next commit will be ready.
 ```javascript
+import {Answer} from 'koorie'
+import {readFile} from 'node:fs/promises'
 /**
  * Route (- index) - The simplest way to serve a route.
  * It is required to be an async function.
  * It is required to return an Answer.
  *
  * It accept two arguments but none of them is a required argument.
- * 
+ *
  * arguments passed to the route by Object [ koorie.routing ] :
  *
  * - Server.IncomingMessage
  * - Server.ServerResponse
- * 
- * Object Answer extends Promise so it works the same way.
- * Also it incorporates Object [ koorie.request ] and all its functions and properties.
- * before v.1.x.x the koorie.request was called koorie.incoming exported as koorieIncoming
- * 
- * It depends by the constructed logic if resolve or reject.
  *
+ * Object Answer extends Promise so it works the same way.
+ * Also, it incorporates Object [ koorie.request ] and all its functions and properties.
+ * before v.1.x.x the koorie.request was called koorie.incoming exported as koorieIncoming
+ *
+ * It depends on the constructed logic if resolve or reject.
+ * @param {IncomingMessage} incoming
+ * @param {ServerResponse} outgoing
  * @returns {Promise|Buffer}
  */
 export async function index(incoming, outgoing){
     
-    // obviously answers bad when it rejects :D
-    return new Answer( good => good( Buffer.from( JSON.stringify( { 'index-route': 'response' } ) ) ) )
+    if(incoming.method === 'GET'){
+        
+        let error = false
+        let give_me_file
+        let buffer
+        
+        give_me_file = await Answer.koorie().get( 'give_me_file', await Answer.koorie().query_ )
+        
+        if( typeof give_me_file.invalid !== 'undefined'){
+            error = true
+        }
+        else{
+            if(give_me_file.has('give_me_file')) {
+                if ( give_me_file.get( 'give_me_file' ) === 'allright' ) {
+                    outgoing.statusMessage = 'oK'
+                    outgoing.statusCode = 200
+                    outgoing.setHeader( 'content-type', 'text' )
+                    outgoing.setHeader( 'content-disposition', 'attachment; filename="allright"' )
+                    buffer = await readFile( process.cwd() + '/public/allright' )
+                } else {
+                    error = true
+                    outgoing.statusMessage = 'kO'
+                    outgoing.statusCode = 404
+                    give_me_file = { error: 'URL.searchParam not right' }
+                }
+            }else{
+                outgoing.statusMessage = 'oK'
+                outgoing.statusCode = 200
+                outgoing.setHeader( 'content-type', 'application/json' )
+                buffer = JSON.stringify({'index-route':'response'}).toBuffer()
+            }
+        }
+        
+        // obviously answers bad when it rejects :D
+        return new Answer( (good, bad )=> {
+            
+            if(error)
+                bad(JSON.stringify(give_me_file).toBuffer())
+            
+            good( buffer )
+        } )
+    
+    }
+
 }
+
 
 ```
 
@@ -476,11 +527,45 @@ we will test koorie-shell, switching off the --hot wired and see that no longer 
 
 ```shell
 
-curl -verbose http://localhost:3001/?give_me_file=allright | jq 
-# 'jq' is a small utility that formats json strings in the terminal.
+curl -verbose http://localhost:3001/?give_me_file=allright
 # request/response header shown because of the -verbose flag passed to curl
-# the response should be {"index-route":"response"}
-# and should also download a file.
+# the response should be "give me file! allright!"
+# and should also download `allright.txt` when opened in the browser.
+
+```
+
+let's now try the socket
+
+```shell
+
+# not necessary to use any query, simple as it is.
+curl -verbose http://localhost:3001/
+
+## in the shell where the server is running check that the log has hot:true
+## try to modify the file ./routes/index/route by sending a different Buffer response:
+######### good('hello'.toBuffer())
+
+curl -verbose http://localhost:3001
+
+## should print 'hello'
+
+## let's switch off the hot wired
+npx koorie-shell set --hot=false --socket-path=/tmp/koorie.sock
+
+## try to modify the route file again
+######### good('hello folks'.toBuffer())
+
+##curl again and check the log hot should be set to false and te response should be 'hello'
+curl -verbose http://localhost:3001
+
+# CTRL-C to shutdown the server
+
+npx koorie --static-files=public
+## no socket no hot wired
+
+curl -verbose http://localhost:3001
+
+## the response should be 'hello folks'
 
 ```
 
