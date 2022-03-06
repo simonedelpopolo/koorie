@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import { config_get, config_set, entry_point, server } from './index.js'
-import { is_json, parse } from 'json-swiss-knife'
 import { null_, undefined_ } from 'oftypes'
 
 // - splicing out from `process.argv` the paths for node and koorie.js
@@ -29,23 +28,26 @@ async function configuration() {
     // Object [ config.parser.set() ]
     // - Promise that always resolve after the event [config.parser.get[read] or config.parser.get[proceed] ] fired.
     // - when "proceed" it passes to Object [ input.entry_point ] the process.argv.
-    // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc
+    // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc as string[]
     const config_ = await config_set()
     
-    if ( config_ === 'proceed' )
+
+    if ( config_.includes( 'proceed' ) )
+        
         options = await entry_point( process.argv )
     
-    else if ( config_ === 'read' ) {
+    else if ( !config_.includes( 'proceed' ) ) {
         
         let config_args
         
         if ( process.argv.includes( '--false-flag=true' ) ) {
+            
             config_.push( '--false-flag=true' )
             config_args = await entry_point( config_ )
-        } else if ( await is_json( process.argv[ 2 ] ) )
-            return parse( process.argv[ 2 ] )
-        else
+        
+        }else
             config_args = await entry_point( config_ )
+        
         
         options = config_args
     }

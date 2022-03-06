@@ -33,8 +33,6 @@ export const resource = resource__
 export const request = request__
 export const shell_exit_codes = shell_exit_codes__
 export const routes = routes__
-export const config_get = parser__.get
-export const config_set = parser__.set
 
 
 /**
@@ -62,6 +60,29 @@ export async function process_exit( message, error_type = Error( 'koorie - Inter
  */
 export async function stderr( message ){
     return stderr__( message )
+}
+
+/**
+ * Object [ config ]
+ *
+ * @public
+ */
+/**
+ * Event emitter for the Object [ config.parser ].
+ *
+ * @returns {*}
+ */
+export function config_get(){
+    return parser__.get()
+}
+
+/**
+ * Event listener for the parser.get function.
+ *
+ * @returns {Promise<string[]> | string[]}
+ */
+export async function config_set(){
+    return parser__.set()
 }
 
 /**
