@@ -31,7 +31,6 @@ import {
 export const Answer = Answer__
 export const resource = resource__
 export const request = request__
-export const shell_exit_codes = shell_exit_codes__
 export const routes = routes__
 
 
@@ -84,6 +83,16 @@ export function config_get(){
 export async function config_set(){
     return parser__.set()
 }
+
+/**
+ * Object [ errors ]
+ *
+ * @public
+ */
+/**
+ * @type {{commands: 1, flags: 2, type_checking:3,internal:4}}
+ */
+export const shell_exit_codes = shell_exit_codes__
 
 /**
  * Object [ monitor ]
