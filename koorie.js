@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { config_get, config_set, entry_point, server } from './index.js'
-import { null_, undefined_ } from 'oftypes'
 import { is_json, parse } from 'json-swiss-knife'
+import { null_, undefined_ } from 'oftypes'
 
 // - splicing out from `process.argv` the paths for node and koorie.js
 process.argv.splice( 0, 2 )
