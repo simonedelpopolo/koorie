@@ -28,7 +28,6 @@ import {
     stderr__,
 } from './lib/exporter.js'
 
-export const Answer = Answer__
 export const resource = resource__
 export const request = request__
 export const routes = routes__
@@ -93,6 +92,17 @@ export async function config_set(){
  * @type {{commands: 1, flags: 2, type_checking:3,internal:4}}
  */
 export const shell_exit_codes = shell_exit_codes__
+
+/**
+ * Extends.
+ *
+ * @public
+ */
+/**
+ * Extends Promise and incorporate Object [ koorie.request ]
+ * Answer is used into routes to return responses.
+ */
+export const Answer = Answer__
 
 /**
  * Object [ monitor ]
