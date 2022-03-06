@@ -3,6 +3,7 @@ import {
     api__,
     body__,
     entry_point__,
+    exit__,
     fork__,
     hot__,
     init__,
@@ -13,7 +14,6 @@ import {
     outgoing__,
     parser__,
     performance__,
-    process_exit__,
     process_title__,
     processor__,
     query__,
@@ -32,11 +32,37 @@ export const Answer = Answer__
 export const resource = resource__
 export const request = request__
 export const shell_exit_codes = shell_exit_codes__
-export const stderr = stderr__
 export const routes = routes__
 export const config_get = parser__.get
 export const config_set = parser__.set
 
+
+/**
+ * Object [ activity ]
+ *
+ * @public
+ */
+/**
+ * Exits with message and exit code.
+ *
+ * @param {string|Buffer} message - Required argument.
+ * @param {Error} [error_type] - Default set to Error('koorie - InternalError').
+ * @param {number} [exit_code=101] - Default set to 101, process exit code.
+ * @returns {Promise<void>}
+ */
+export async function process_exit( message, error_type = Error( 'koorie - InternalError' ), exit_code = 101 ){
+    return exit__( message, error_type, exit_code )
+}
+
+/**
+ * Wrap to process.stderr.write.
+ *
+ * @param {Buffer|string} message - The message to the stderr.
+ * @returns {Promise<string> | string}
+ */
+export async function stderr( message ){
+    return stderr__( message )
+}
 
 /**
  * Object [ monitor ]
@@ -143,17 +169,7 @@ export async function options( flag_value, flag_name ){
     return options__( flag_value, flag_name )
 }
 
-/**
- * Exits with message and exit code.
- *
- * @param {string|Buffer} message - Required argument.
- * @param {Error} [error_type] - Default set to Error('koorie - InternalError').
- * @param {number} [exit_code=101] - Default set to 101, process exit code.
- * @returns {Promise<void>}
- */
-export async function process_exit( message, error_type = Error( 'koorie - InternalError' ), exit_code = 101 ){
-    return process_exit__( message, error_type, exit_code )
-}
+
 
 /**
  * Switcher function for different javascript library to be served with koorie.
