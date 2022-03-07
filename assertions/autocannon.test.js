@@ -1,17 +1,14 @@
+import * as tttt from 'trythistrythat'
 import autocannon from 'autocannon'
-import { output__ } from 'trythistrythat/lib/exporter.js'
 import { spawn } from 'child_process'
-import { describe, failed } from 'trythistrythat'
-
 
 export default async () => {
     
-    await describe( 'autocannon test'.green(), 'assertion ->'.red(), 0 )
-    await describe( '  listing statements'.green(), '⬇︎'.red(), '\n' )
-    await describe( '    220 connections for 5 seconds of execution'.green(), '⚠︎'.red(), 'statement ->'.red(), 0 )
+    tttt.describe( 'autocannon test'.green(), 'assertion ->'.red(), 0 )
+    tttt.describe( '  listing statements'.green(), '⬇︎'.red(), '\n' )
+    tttt.describe( '    220 connections for 5 seconds of execution'.green(), '⚠︎'.red(), 'statement ->'.red(), 0 )
     
-    await describe( '\n', '__________________________________________________________________________', '\n' )
-    
+    tttt.separator()
     
     const koorie = spawn( 'node', [
         'koorie.js',
@@ -30,9 +27,8 @@ export default async () => {
     } )
     
     koorie.on( 'error', error => {
-        failed( true )
+        tttt.failed( true )
         console.trace( error )
-        process.exit()
     } )
     
     koorie.on( 'spawn', () => {
@@ -47,21 +43,11 @@ export default async () => {
             }, console.log )
             
             instance.on( 'done', () => {
-                
-                
                 koorie.kill( 'SIGINT' )
-                
-                // Gives some time to autocannon print results then emit 'end'
-                setTimeout( () => {
-                    
-                    output__.event.emit( 'end' )
-                    
-                }, 1000 )
-                
             } )
     
             instance.on( 'error', () => {
-                failed( true )
+                tttt.failed( true )
             } )
             
             // Just render results
@@ -70,6 +56,13 @@ export default async () => {
                 renderLatencyTable: true
             } )
         }, 100 )
+    
         
     } )
+    
+    setTimeout( () => {
+        
+        tttt.end_test( tttt.id() )
+        
+    }, 5200 )
 }
