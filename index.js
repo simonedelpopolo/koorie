@@ -105,6 +105,57 @@ export const shell_exit_codes = shell_exit_codes__
 export const Answer = Answer__
 
 /**
+ * Object [ input ]
+ *
+ * @public
+ */
+/**
+ * Object [input.entry_point].
+ * Shared entry point for the available executable files.
+ * Its return an object from the given process.argv.
+ * Object [input.process_title] elaborates commands, flags and options dispatching to the right process switching the process.title.
+ *
+ * @param {string[]} argv - The process.argv passed to the process.
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return#using_return
+ * @returns {Promise | object} - return the return of the async function generator to set it "done" and free resources.
+ */
+export async function entry_point( argv ) {
+    return entry_point__( argv )
+}
+
+/**
+ * Switches process.title returning an object containing command, flags and options to be digested.
+ * The returned Promise always resolves.
+ *
+ * @param {{object:{[p: string]: any}, keys:string[]}} process_parsed_argv - Object.
+ * @returns {AsyncGenerator}
+ */
+export async function process_title( process_parsed_argv ) {
+    return process_title__( process_parsed_argv )
+}
+
+/**
+ * Object [ input.argv ] parses the process.argv string[] and returns an object.
+ *
+ * @param { string[] } argv - the given process.argv.
+ * @returns { Promise<{ object:{ [ p: string ]: any }, keys:string[] }> }
+ */
+export async function processors( argv ){
+    return processor__( argv )
+}
+
+/**
+ * Object [ input.options ] parses, if any, the options given to the flag.
+ *
+ * @param { string }flag_value - the flag value passed to cli.
+ * @param { string }flag_name - flag name in case of error while parsing the options.
+ * @returns { Promise<{ [ p:string ]:{ [ p:string ], any} }> }
+ */
+export async function options( flag_value, flag_name ){
+    return options__( flag_value, flag_name )
+}
+
+/**
  * Object [ monitor ]
  *
  * @public
@@ -160,56 +211,6 @@ export async function api_memory ( socket_, refresh_rate ) {
 export async function performance( options ){
     return performance__( options )
 }
-
-// - Object [input]             ____
-
-/**
- * Object [input.entry_point].
- * Shared entry point for the available executable files.
- * Its return an object from the given process.argv.
- * Object [input.process_title] elaborates commands, flags and options dispatching to the right process switching the process.title.
- *
- * @param {string[]} argv - The process.argv passed to the process.
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return#using_return
- * @returns {Promise | object} - return the return of the async function generator to set it "done" and free resources.
- */
-export async function entry_point( argv ) {
-    return entry_point__( argv )
-}
-
-/**
- * Switches process.title returning an object containing command, flags and options to be digested.
- * The returned Promise always resolves.
- *
- * @param {{object:{[p: string]: any}, keys:string[]}} process_parsed_argv - Object.
- * @returns {AsyncGenerator}
- */
-export async function process_title( process_parsed_argv ) {
-    return process_title__( process_parsed_argv )
-}
-
-/**
- * Object [ input.argv ] parses the process.argv string[] and returns an object.
- *
- * @param { string[] } argv - the given process.argv.
- * @returns { Promise<{ object:{ [ p: string ]: any }, keys:string[] }> }
- */
-export async function processors( argv ){
-    return processor__( argv )
-}
-
-/**
- * Object [ input.options ] parses, if any, the options given to the flag.
- *
- * @param { string }flag_value - the flag value passed to cli.
- * @param { string }flag_name - flag name in case of error while parsing the options.
- * @returns { Promise<{ [ p:string ]:{ [ p:string ], any} }> }
- */
-export async function options( flag_value, flag_name ){
-    return options__( flag_value, flag_name )
-}
-
-
 
 /**
  * Switcher function for different javascript library to be served with koorie.
