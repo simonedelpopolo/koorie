@@ -4,7 +4,8 @@ import {
     hot_flag__,
     koorie_process__,
     response_time_flag__,
-    shell_process__
+    shell_process__,
+    socket_flag__
 } from './lib/exporter.js'
 
 /**
@@ -77,4 +78,17 @@ export async function cluster_flag( options ){
  */
 export async function hot_flag( options ){
     return hot_flag__( options )
+}
+
+/**
+ * Object [ input.socket_flag ].
+ *
+ * - socket_flag type check.
+ *
+ * @param {string} option - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<{socket:socket}|Error|undefined>|{socket:socket}|Error|undefined}
+ */
+export async function socket_flag( option ){
+    return socket_flag__( option )
 }
