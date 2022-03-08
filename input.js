@@ -3,6 +3,7 @@ import {
     cluster_flag__,
     hot_flag__,
     koorie_process__,
+    library_flag__,
     response_time_flag__,
     shell_process__,
     socket_flag__
@@ -91,4 +92,17 @@ export async function hot_flag( options ){
  */
 export async function socket_flag( option ){
     return socket_flag__( option )
+}
+
+/**
+ * Object [ input.library_flag ].
+ *
+ * - library_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function library_flag( options ){
+    return library_flag__( options )
 }
