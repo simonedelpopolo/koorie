@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.2.11-experimental",
+  "version": "1.2.12-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -15,7 +15,7 @@
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
     "unit-tests": "npx 4t unit",
-    "nodemon.koorie": "nodemon --trace-warnings koorie.js -s=assertions/public --hot"
+    "nodemon.koorie": "npx nodemon --trace-warnings koorie.js --response-time=true -s=assertions/public --hot --socket=\"'options(active:true:path:/tmp/koorie.sock)'\" -c=3"
   },
   "publishConfig": {
     "access": "public"

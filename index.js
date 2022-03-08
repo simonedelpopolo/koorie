@@ -2,6 +2,7 @@ import {
     Answer__,
     api__,
     body__,
+    cluster_types__,
     entry_point__,
     exit__,
     fork__,
@@ -156,6 +157,21 @@ export async function options( flag_value, flag_name ){
 }
 
 /**
+ * Object [ koorie ].
+ *
+ * @public
+ */
+/**
+ * Type check for cluster given flags.
+ *
+ * @param {number|string|boolean} options - given flag.
+ * @returns {AsyncGenerator<boolean|(function(*): Promise<void>)|*|Promise<number>|Promise<unknown>|Promise<number>|Promise<never>, void, *>}
+ */
+export async function cluster_types( options ){
+    return cluster_types__( options )
+}
+
+/**
  * Object [ monitor ]
  *
  * @public
@@ -173,7 +189,8 @@ export async function memory(){
     return memory__()
 }
 
-//
+
+
 /**
  * Object [ koorie.api ]
  *
