@@ -1,6 +1,7 @@
 import {
     address_flag__,
     cluster_flag__,
+    hot_flag__,
     koorie_process__,
     response_time_flag__,
     shell_process__
@@ -25,7 +26,6 @@ export async function koorie_process( process_parsed_argv ) {
 export async function shell_process( process_parsed_argv ) {
     return shell_process__( process_parsed_argv )
 }
-
 
 /**
  * Object [ input.response_time_flag.get ].
@@ -64,4 +64,17 @@ export async function address_flag( options ){
  */
 export async function cluster_flag( options ){
     return cluster_flag__( options )
+}
+
+/**
+ * Object [ input.hot_flag ].
+ *
+ * - hot_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function hot_flag( options ){
+    return hot_flag__( options )
 }
