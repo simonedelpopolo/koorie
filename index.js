@@ -329,7 +329,7 @@ export async function outgoing( response, outgoing ){
  *      hot:undefined,
  *      l:boolean, logger:boolean,
  *      lb:string, library: string,
- *      ml:string, middleware:string,
+ *      m:string, middleware:string,
  *      p:number,port:number,
  *      pr:string,protocol:string,
  *      rt:string,response_time:string,
