@@ -1,7 +1,30 @@
 import {
     address_flag__,
-    response_time_flag__
+    koorie_process__,
+    response_time_flag__,
+    shell_process__
 } from './lib/exporter.js'
+
+/**
+ * Koorie process.
+ *
+ * @param {object} process_parsed_argv - process.argv parsed.
+ * @returns {Promise<Object<any>>}
+ */
+export async function koorie_process( process_parsed_argv ) {
+    return koorie_process__( process_parsed_argv )
+}
+
+/**
+ * Koorie-shell process.
+ *
+ * @param {object} process_parsed_argv - process.argv parsed.
+ * @returns {Promise<Object<any>>}
+ */
+export async function shell_process( process_parsed_argv ) {
+    return shell_process__( process_parsed_argv )
+}
+
 
 /**
  * Object [ input.response_time_flag.get ].
