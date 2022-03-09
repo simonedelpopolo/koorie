@@ -4,9 +4,10 @@ import {
     hot_flag__,
     koorie_process__,
     library_flag__,
+    logger_flag__,
     response_time_flag__,
     shell_process__,
-    socket_flag__
+    socket_flag__,
 } from './lib/exporter.js'
 
 /**
@@ -105,4 +106,17 @@ export async function socket_flag( option ){
  */
 export async function library_flag( options ){
     return library_flag__( options )
+}
+
+/**
+ * Object [ input.logger_flag ].
+ *
+ * - logger_flag type check.
+ *
+ * @param {string} option - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<{logger:{write:string|null, quiet:boolean}, error:any}|Error|undefined>|{logger:{write:string|null, quiet:boolean, error:any}}|Error|undefined}
+ */
+export async function logger_flag( option ){
+    return logger_flag__( option )
 }
