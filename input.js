@@ -2,6 +2,7 @@ import {
     address_flag__,
     cluster_flag__,
     hot_flag__,
+    init_command__,
     koorie_process__,
     library_flag__,
     logger_flag__,
@@ -30,6 +31,9 @@ export async function shell_process( process_parsed_argv ) {
     return shell_process__( process_parsed_argv )
 }
 
+/**
+ * Koorie flags.
+ */
 /**
  * Object [ input.response_time_flag.get ].
  *
@@ -119,4 +123,17 @@ export async function library_flag( options ){
  */
 export async function logger_flag( option ){
     return logger_flag__( option )
+}
+
+/**
+ * Koorie-shell commands and flags.
+ */
+/**
+ * The koorie-shell init command doesn't accept any options.
+ *
+ * @param {any} options - if any options is given just exits.
+ * @returns {Promise<Error|undefined>| Error|undefined}
+ */
+export async function init_command( options ){
+    return init_command__( options )
 }
