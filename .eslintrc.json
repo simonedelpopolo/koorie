@@ -98,6 +98,7 @@
         "after": true
       }
     ],
+    "no-trailing-spaces": ["error", { "ignoreComments": true }],
     "switch-colon-spacing": "warn",
     "no-fallthrough": [
       "error",

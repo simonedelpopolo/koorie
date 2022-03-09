@@ -18,40 +18,40 @@ process.title = 'koorie'
  */
 async function configuration() {
     let options
-    
+
     // Object [ config.parser.get() ]
     // - reads and parses the content of the file .koorierc.
     // - emit('read') in case koorierc was found in the root directory of the project.
     // - emit('proceed') in case koorierc was NOT found in the root directory of the project.
     config_get()
-    
+
     // Object [ config.parser.set() ]
     // - Promise that always resolve after the event [config.parser.get[read] or config.parser.get[proceed] ] fired.
     // - when "proceed" it passes to Object [ input.entry_point ] the process.argv.
     // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc as string[]
     const config_ = await config_set()
-    
+
 
     if ( config_.includes( 'proceed' ) )
-        
+
         options = await entry_point( process.argv )
-    
+
     else if ( !config_.includes( 'proceed' ) ) {
-        
+
         let config_args
-        
+
         if ( process.argv.includes( '--false-flag=true' ) ) {
-            
+
             config_.push( '--false-flag=true' )
             config_args = await entry_point( config_ )
-        
+
         }else
             config_args = await entry_point( config_ )
-        
-        
+
+
         options = config_args
     }
-    
+
     return options
 }
 
@@ -76,26 +76,26 @@ async function configuration() {
 const options = await configuration()
 
 const resolvers = {
-    
+
     false: ( async () => {
-        
+
         const resolvers = {
-            
+
             false: ( async () => {
                 ( await import( `${ process.cwd() }/${ options.middleware || options.m }` ) ).default()
                 await server( options )
             } ),
-            
+
             true: ( async () => {
                 ( await import( `${ process.cwd() }/middleware.js` ) ).default()
                 await server( options )
             } ),
-            
+
         };
-        
+
         ( await undefined_( options.middleware || options.m, resolvers ) )()
     } ),
-    
+
     true: ( async () => {
         ( await import( `${ process.cwd() }/middleware.js` ) ).default()
         await server( options )

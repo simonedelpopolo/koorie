@@ -36,34 +36,34 @@ const shell = await entry_point_run
 if( typeof shell !== 'undefined' && typeof shell?.command !== 'undefined' ){
     // eslint-disable-next-line default-case
     switch ( Object.entries( shell.command )[ 0 ][ 0 ] ){
-        
+
         // Switcher for recognized commands no need for default case.
         // Checks have been done at Object [ input.entry_point ]
         case 'init':
-            
+
             await init( shell.command.init )
-            
+
             break
-        
+
         case 'performance':
-            
+
             await performance( shell.command.performance )
-            
+
             break
-        
+
         case 'set':
-            
-            
+
+
             await set( shell.command.set )
-            
+
             break
-        
+
         case 'route':
-            
-            
-            
+
+
+
             break
-        
+
     }
 }
 
