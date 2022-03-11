@@ -6,6 +6,7 @@ import {
     koorie_process__,
     library_flag__,
     logger_flag__,
+    middleware_flag__,
     response_time_flag__,
     shell_process__,
     socket_flag__,
@@ -123,6 +124,19 @@ export async function library_flag( options ){
  */
 export async function logger_flag( option ){
     return logger_flag__( option )
+}
+
+/**
+ * Object [ input.middleware_flag ].
+ *
+ * - middleware_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function middleware_flag( options ){
+    return middleware_flag__( options )
 }
 
 /**

@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.3.20-experimental",
+  "version": "1.3.21-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -15,6 +15,8 @@
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
     "unit-tests": "npx 4t unit",
+    "autocannon-test": "\"npx 4t test --file='options(filename:autocannon.test.js)'",
+    "middleware-flag-test": "npx 4t test --file='options(filename:middleware_flag.test.js)'",
     "nodemon.koorie": "npx nodemon --trace-warnings koorie.js --response-time=true -s=assertions/public --hot --socket=\"'options(active:true:path:/tmp/koorie.sock)'\" -c=3"
   },
   "publishConfig": {
@@ -23,14 +25,14 @@
   "devDependencies": {
     "autocannon": "^7.7.0",
     "eslint": "^8.10.0",
-    "eslint-plugin-jsdoc": "^37.9.7",
+    "eslint-plugin-jsdoc": "^38.0.0",
     "nodemon": "^2.0.15",
-    "trythistrythat": "^0.0.17"
+    "trythistrythat": "^0.1.25"
   },
   "dependencies": {
-    "boolean-jokes": "^1.5.0",
-    "json-swiss-knife": "^1.6.9",
-    "oftypes": "^0.6.6"
+    "boolean-jokes": "^1.5.1",
+    "json-swiss-knife": "^1.6.10",
+    "oftypes": "^0.7.0"
   },
   "homepage": "https://github.com/simonedelpopolo/koorie#readme",
   "repository": {
