@@ -10,6 +10,7 @@ import {
     response_time_flag__,
     shell_process__,
     socket_flag__,
+    static_files_flag__
 } from './lib/exporter.js'
 
 /**
@@ -129,7 +130,7 @@ export async function logger_flag( option ){
 /**
  * Object [ input.middleware_flag ].
  *
- * - middleware_flag type check.
+ * - middleware flag type check.
  *
  * @param {string} options - the value from the shell.
  * @throws { Error }
@@ -137,6 +138,19 @@ export async function logger_flag( option ){
  */
 export async function middleware_flag( options ){
     return middleware_flag__( options )
+}
+
+/**
+ * Object [ input.static_files_flag ].
+ *
+ * - static-files flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function static_files_flag( options ){
+    return static_files_flag__( options )
 }
 
 /**

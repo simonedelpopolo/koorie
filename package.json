@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.3.22-experimental",
+  "version": "1.3.23-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -17,6 +17,7 @@
     "unit-tests": "npx 4t unit",
     "autocannon-test": "\"npx 4t test --file='options(filename:autocannon.test.js)'",
     "middleware-flag-test": "npx 4t test --file='options(filename:middleware_flag.test.js)'",
+    "static-files-flag-test": "npx 4t test --file='options(filename:static_files_flag.test.js)'",
     "nodemon.koorie": "npx nodemon --trace-warnings koorie.js --response-time=true -s=assertions/public --hot --socket=\"'options(active:true:path:/tmp/koorie.sock)'\" -c=3"
   },
   "publishConfig": {
