@@ -66,7 +66,6 @@ async function configuration() {
  *      lb:string, library: string,
  *      m:string, middleware:string,
  *      p:number,port:number,
- *      pr:string,protocol:string,
  *      rt:string,response_time:string,
  *      s:string,static_files:string,
  *   } |

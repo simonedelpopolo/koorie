@@ -30,7 +30,6 @@ ___
     - [--logger[-l]](#--logger-l)
     - [--middleware[-m]](#--middleware-m)
     - [--port[-p]](#--port-p)
-    - [--protocol[-pr]](#--protocol-pr)
     - [--socket[-sk]](#--socket-sk)
     - [--static-files[-s]](#--static-files-s)
   - [Koorie-Shell commands and flags](#koorie-shell-commands-and-flags)
@@ -216,7 +215,6 @@ ___
 | --logger[-l]={'options(option:value)'}  | Default set to print to stdout every request.                                             | `npm koorie -l='options(quiet:true)'`                                 |
 | --middleware[-m]={string}               | Default set to middleware.js.                                                             | `npx koorie -ml=starter.js`                                           |
 | --port[-p]={number}-{void}              | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. | `npx koorie -p`                                                       |
-| --protocol[-pr]={string}                | Default is set to `http`. Road map -> to spawn an https server.                           | `npx koorie -pr=https`                                                |
 | --socket[-sk]={'options(option:value)'} | Default is off. Available options: [active:boolean] required. [path:string] required.     | `npx koorie --socket='options(active:true:path:/tmp/my-server.sock)'` |
 | --static-files[-s]={string}             | It tells to Koorie to serve the files located in the specified directory.                 | `npx koorie -s=public`                                                |
 
@@ -274,12 +272,6 @@ ___
   - --port[-p]=foo -> process exits with errors.
   - Default set to `3001`
 
-___
-
-- ##### --protocol[-pr]
-  
-  - --protocol[-pr]=http -> Default is set to `http`. Road map -> to spawn a https server
-  - Default set to `http` the `https` option still not available.
 ___
 
 - ##### --socket[-sk]
@@ -627,7 +619,7 @@ ___
 
 ### Road Map
 
-- [ ] `--https[-s]` spawning https server and relative --protocol option.
+- [ ] `--https[-s]` spawning https server.
 - [ ] `--private-key[-k]` loading the private key for SSL.
 - [ ] `--public-key[-pk]` loading the public key for SSL.
 - [ ] `--ssl` generating self-signed certificate.
