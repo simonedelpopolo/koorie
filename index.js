@@ -164,6 +164,30 @@ export async function options( flag_value, flag_name ){
  * @public
  */
 
+
+/**
+ * Object [ koorie.server].
+ *
+ * @param {{
+ *      a:string,address:string,
+ *      c:number,cluster:number,
+ *      false_flag:boolean|undefined,
+ *      hot:undefined,
+ *      l:boolean, logger:boolean,
+ *      lb:string, library: string,
+ *      m:string, middleware:string,
+ *      p:number,port:number,
+ *      r:string,response_time:string,
+ *      secure:string,
+ *      s:string,static_files:string,
+ *   } |
+ *      null} flags - Parsed arguments.
+ * @returns {Promise<void>}
+ */
+export async function server( flags ){
+    return server__( flags )
+}
+
 /**
  * Socket connection to koorie.
  *
@@ -373,26 +397,4 @@ export async function query( url ){
  */
 export async function outgoing( response, outgoing ){
     return outgoing__( response, outgoing )
-}
-
-/**
- * Lightweight server.
- *
- * @param {{
- *      a:string,address:string,
- *      c:number,cluster:number,
- *      false_flag:boolean|undefined,
- *      hot:undefined,
- *      l:boolean, logger:boolean,
- *      lb:string, library: string,
- *      m:string, middleware:string,
- *      p:number,port:number,
- *      rt:string,response_time:string,
- *      s:string,static_files:string,
- *   } |
- *      null} flags - Parsed arguments.
- * @returns {Promise<void>}
- */
-export async function server( flags ){
-    return server__( flags )
 }
