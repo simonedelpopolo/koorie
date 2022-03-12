@@ -161,6 +161,16 @@ export async function options( flag_value, flag_name ){
  */
 
 /**
+ * Object [ koorie.query ].
+ *
+ * @param {string} url - the url requested from the browser.
+ * @returns {Promise<void>}
+ */
+export async function query( url ){
+    return query__( url )
+}
+
+/**
  * @type {{path: *[], query_: null, post: ((function(*, *): Promise<*|{invalid: string}>)|*), body_: null, query: (function(*): Promise<*>), get: ((function(*, *): Promise<*|{invalid: string}>)|*), body: ((function(*): Promise<*|PromiseFulfilledResult<Object>|PromiseRejectedResult<string>|{empty: string}>)|*)}}
  */
 export const request = request__
@@ -386,16 +396,6 @@ export async function hot( route ){
  */
 export async function body( raw ){
     return body__( raw )
-}
-
-/**
- * Query URL.
- *
- * @param {string} url - The given url.
- * @returns {Promise<*>}
- */
-export async function query( url ){
-    return query__( url )
 }
 
 /**
