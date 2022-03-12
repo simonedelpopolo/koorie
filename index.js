@@ -161,6 +161,17 @@ export async function options( flag_value, flag_name ){
  */
 
 /**
+ *  Object [koorie.outgoing ].
+ *
+ * @param {{buffer:Buffer, log:object}|Error} response - the response to be given back.
+ * @param {ServerResponse} outgoing - ref to ServerResponse Object.
+ * @returns {Promise<void>}
+ */
+export async function outgoing( response, outgoing ){
+    return outgoing__( response, outgoing )
+}
+
+/**
  * Object [ koorie.query ].
  *
  * @param {string} url - the url requested from the browser.
@@ -396,15 +407,4 @@ export async function hot( route ){
  */
 export async function body( raw ){
     return body__( raw )
-}
-
-/**
- *  Routing.
- *
- * @param {{buffer:Buffer, log:object}|{log:object}} response - .
- * @param {Object<ServerResponse>} outgoing - .
- * @returns {Promise<void>}
- */
-export async function outgoing( response, outgoing ){
-    return outgoing__( response, outgoing )
 }

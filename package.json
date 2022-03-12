@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.4.6-experimental",
+  "version": "1.4.7-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
