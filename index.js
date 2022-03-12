@@ -33,7 +33,6 @@ import {
 
 export const resource = resource__
 export const request = request__
-export const routes = routes__
 
 
 /**
@@ -163,6 +162,11 @@ export async function options( flag_value, flag_name ){
  *
  * @public
  */
+
+/**
+ * @type {{route: {}, set: ((function(): Promise<void>)|*), get: (function(*): Promise<*|PromiseFulfilledResult<*>>), list: *[]}}
+ */
+export const routes = routes__
 
 /**
  * Dispatches the server requests/responses.
