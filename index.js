@@ -7,6 +7,8 @@ import {
     exit__,
     fork__,
     hot__,
+    http__,
+    https__,
     init__,
     library__,
     logger__,
@@ -169,6 +171,27 @@ export async function options( flag_value, flag_name ){
  */
 export async function cluster_types( options ){
     return cluster_types__( options )
+}
+
+/**
+ * HTTP server.
+ *
+ * @returns {Promise<Server> | Server}
+ */
+export async function http(){
+    return http__()
+}
+
+/**
+ * Object [ koorie.server.https ].
+ *
+ * @param {string} key - path to the key file.
+ * @param {string} cert - path to the cert file
+ * @param {string|null=} dhparam - path to the dhparam file.
+ * @returns {Promise<Server> | Server}
+ */
+export async function https( key, cert, dhparam = null ){
+    return https__( key, cert, dhparam )
 }
 
 /**

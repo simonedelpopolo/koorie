@@ -8,6 +8,7 @@ import {
     logger_flag__,
     middleware_flag__,
     response_time_flag__,
+    secure_flag__,
     shell_process__,
     socket_flag__,
     static_files_flag__
@@ -99,6 +100,19 @@ export async function hot_flag( options ){
  */
 export async function socket_flag( option ){
     return socket_flag__( option )
+}
+
+/**
+ * Object [ input.secure_flag ].
+ *
+ * - secure_flag type check.
+ *
+ * @param {string} option - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<{socket:{}}|Error|undefined>|{socket:{}}|Error|undefined}
+ */
+export async function secure_flag( option ){
+    return secure_flag__( option )
 }
 
 /**
