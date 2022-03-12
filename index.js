@@ -164,6 +164,15 @@ export async function options( flag_value, flag_name ){
  * @public
  */
 
+/**
+ * Dispatches the server requests/responses.
+ *
+ * @param {{requested_resource:string,server:{incoming:IncomingMessage, outgoing:ServerResponse}}} parameters - The given object parameters.
+ * @returns {Promise<unknown>}
+ */
+export async function routing( parameters ){
+    return routing__( parameters )
+}
 
 /**
  * Object [ koorie.server].
@@ -356,16 +365,6 @@ export async function fork( cpus, static_files ) {
  */
 export async function hot( route ){
     return hot__( route )
-}
-
-/**
- * Dispatches the server requests/responses.
- *
- * @param {{requested_resource:string,server:{incoming:IncomingMessage, outgoing:ServerResponse}}} parameters - The given object parameters.
- * @returns {Promise<unknown>}
- */
-export async function routing( parameters ){
-    return routing__( parameters )
 }
 
 /**
