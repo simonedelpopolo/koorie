@@ -31,8 +31,6 @@ import {
     stderr__,
 } from './lib/exporter.js'
 
-export const request = request__
-
 
 /**
  * Object [ activity ]
@@ -161,6 +159,11 @@ export async function options( flag_value, flag_name ){
  *
  * @public
  */
+
+/**
+ * @type {{path: *[], query_: null, post: ((function(*, *): Promise<*|{invalid: string}>)|*), body_: null, query: (function(*): Promise<*>), get: ((function(*, *): Promise<*|{invalid: string}>)|*), body: ((function(*): Promise<*|PromiseFulfilledResult<Object>|PromiseRejectedResult<string>|{empty: string}>)|*)}}
+ */
+export const request = request__
 
 /**
  * @type {{get_path: (function(): Promise<string|*>), images: string[], finally: (function(*=): Promise<boolean>), push_application_ext: ((function(*): Promise<void>)|*), get_public: (function(): Promise<string|*>), path: string, public: string, application: string[], set_public: ((function(*=): Promise<void>)|*), push_image_ext: ((function(*): Promise<void>)|*), push_text_ext: ((function(*): Promise<void>)|*), text: string[], path_length: ((function(*): Promise<void>)|*)}}
