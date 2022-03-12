@@ -31,7 +31,6 @@ import {
     stderr__,
 } from './lib/exporter.js'
 
-export const resource = resource__
 export const request = request__
 
 
@@ -162,6 +161,11 @@ export async function options( flag_value, flag_name ){
  *
  * @public
  */
+
+/**
+ * @type {{get_path: (function(): Promise<string|*>), images: string[], finally: (function(*=): Promise<boolean>), push_application_ext: ((function(*): Promise<void>)|*), get_public: (function(): Promise<string|*>), path: string, public: string, application: string[], set_public: ((function(*=): Promise<void>)|*), push_image_ext: ((function(*): Promise<void>)|*), push_text_ext: ((function(*): Promise<void>)|*), text: string[], path_length: ((function(*): Promise<void>)|*)}}
+ */
+export const resource = resource__
 
 /**
  * @type {{route: {}, set: ((function(): Promise<void>)|*), get: (function(*): Promise<*|PromiseFulfilledResult<*>>), list: *[]}}
