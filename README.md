@@ -307,7 +307,7 @@ ___
     ```shell
        # in the root directory of you project
     
-       npx koorie-shell ssl --generate='options(path:certs:&#8203;key:koorie.key.pem:cert:koorie.cert.pem:dhparam:koorie.dhparam.pem)'
+       npx koorie-shell ssl --generate='options(path:certs:key:koorie.key.pem:cert:koorie.cert.pem:dhparam:koorie.dhparam.pem)'
     ```
       1. ⬆︎ a directory named `certs` will be made in the root of the project.
       2. a key named `koorie.key.pem` and a certificate named `koorie.cert.pem` will be placed in the cert directory.
@@ -420,8 +420,11 @@ ___
     - will generate an SSL self-signed certificate in the root directory of the project.  
       once generated **_./key.pem & ./cert.pem_**
     - `npx koorie --secure='options(active:true:key:key.pem:cert:cert.pem)`
-    - ℹ **_available options for flag --generate_**
-      - path:{string} absolute OR relative. if the path doesn't exist
+    - ℹ **_available options for flag --generate. none of them are required_**
+      - path:{string} ➡︎ absolute OR relative. if the path doesn't exist it will make it. if not given the path is process.cwd()
+      - key:{string} ➡︎ the wished name for the key. the extension should be `.pem`
+      - cert:{string} ➡︎ the wished name for the cert. the extension should be `.pem`
+      - dhparam:{string} ➡︎ the wished name for the dhparam. the extension should be `.pem`
 
 - #### route command ❗ this command it `NOT AVAILABLE` yet. Consider this section an idea on how could be.
   
