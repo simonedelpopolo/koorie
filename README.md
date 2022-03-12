@@ -287,7 +287,7 @@ ___
 - ##### --secure
   
   - > _**to run HTTPS server it's necessary to obtain an SSL certificate.**_
-    1. Using LetsEncrypt for production severs ➡︎ 
+    1. Using LetsEncrypt for production severs ➡︎ [LetsEncrypt](https://letsencrypt.org)
     2. Self-Signed certificates for (localhost)DEVELOPMENT or (trusted)PRIVATE_NETWORK ⬇︎
   - generating self-signed certificate (❗️JUST FOR DEVELOPMENT) and dhparam with `openssl`:
   - ```shell
@@ -302,7 +302,7 @@ ___
     # ℹ the below command will take some time.
     openssl dhparam -out dhparam.pem 2048
     ```
-  - > --secure='options(active:true:key:certs/key.pem:cert:certs/cert.pem:dhparam:certs/dhparam.pem)' -> it will spawn an HTTPS server.
+  - > --secure='options(active:true: key:certs/key.pem:cert:certs/cert.pem:dhparam:certs/dhparam.pem)' -> it will spawn an HTTPS server.
   - Defaults set to `active=false` `key=null` `cert=null` `dhparam=null`
   - ❗️Required Options:
     - _**active**_ must be true
