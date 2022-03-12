@@ -163,6 +163,17 @@ export async function options( flag_value, flag_name ){
  *
  * @public
  */
+
+/**
+ * Socket connection to koorie.
+ *
+ * @param {{path:string}} options - socket options.
+ * @returns {Promise<void>}
+ */
+export async function socket( options ){
+    return socket__( options )
+}
+
 /**
  * Type check for cluster given flags.
  *
@@ -193,6 +204,11 @@ export async function http(){
 export async function https( key, cert, dhparam = null ){
     return https__( key, cert, dhparam )
 }
+
+
+
+
+
 
 /**
  * Object [ monitor ]
@@ -379,16 +395,4 @@ export async function outgoing( response, outgoing ){
  */
 export async function server( flags ){
     return server__( flags )
-}
-
-
-
-/**
- * Socket connection to koorie.
- *
- * @param {{path:string}} options - socket options.
- * @returns {Promise<void>}
- */
-export async function socket( options ){
-    return socket__( options )
 }
