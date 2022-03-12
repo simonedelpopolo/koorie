@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { entry_point, init, performance, set } from './index.js'
+import { entry_point, init, performance, set, ssl } from './index.js'
 
 // - splicing out from `process.argv` the paths for node and shell.js
 process.argv.splice( 0, 2 )
@@ -28,6 +28,14 @@ const entry_point_run = await entry_point( process.argv )
  *       hot:string,
  *       socket_path:string,
  *       inject: string
+ *     },
+ *     ssl:{
+ *         generate: {
+ *             path: string|boolean,
+ *             key: string|boolean,
+ *             cert:string|boolean,
+ *             dhparam: string|boolean
+ *         }
  *     }
  * }}}
  */
@@ -55,6 +63,12 @@ if( typeof shell !== 'undefined' && typeof shell?.command !== 'undefined' ){
 
 
             await set( shell.command.set )
+
+            break
+
+        case 'ssl':
+
+            await ssl( shell.command.ssl.generate )
 
             break
 

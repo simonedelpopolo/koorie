@@ -27,7 +27,7 @@ import {
     server__,
     set__,
     shell_exit_codes__,
-    socket__,
+    socket__, ssl__,
     stderr__,
 } from './lib/exporter.js'
 
@@ -407,4 +407,23 @@ export async function hot( route ){
  */
 export async function body( raw ){
     return body__( raw )
+}
+
+
+/**
+ * Object [ shell ].
+ *
+ * @public
+ */
+
+/**
+ * Object [ shell.ssl ]
+ * Generate self-signed certificate with OpenSSL.
+ * ❗️OpenSSL must be available on host OS.
+ *
+ * @param {{path:string|boolean,key:string|boolean,cert:string|boolean,dhparam:string|boolean}} options - self-signed certificate options.
+ * @returns {Promise<void>}
+ */
+export async function ssl( options ) {
+    return ssl__( options )
 }
