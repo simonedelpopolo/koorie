@@ -16,7 +16,7 @@ export default async () => {
         '-a=localhost',
         '-l=options(quiet:true)',
         '-r=false',
-        '-s=assertions/public'
+        '-s=public'
     ], {
         cwd: `${process.cwd()}`,
         stdio: [
