@@ -18,7 +18,7 @@
     "autocannon-test": "npx 4t test --file='options(filename:autocannon.test.js)'",
     "middleware-flag-test": "npx 4t test --file='options(filename:middleware_flag.test.js)'",
     "static-files-flag-test": "npx 4t test --file='options(filename:static_files_flag.test.js)'",
-    "nodemon.koorie": "npx nodemon --trace-warnings koorie.js --response-time=true -s=assertions/public --hot --socket=\"'options(active:true:path:/tmp/koorie.sock)'\" -c=3"
+    "nodemon.koorie": "npx nodemon --trace-warnings koorie.js --response-time=true -s=public --hot --socket=\"'options(active:true:path:/tmp/koorie.sock)'\" -c=3"
   },
   "publishConfig": {
     "access": "public"
