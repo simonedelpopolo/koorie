@@ -165,6 +165,20 @@ export async function options( flag_value, flag_name ){
  * @public
  */
 
+
+
+/**
+ * Object [ koorie.fork ].
+ * Handles the cluster and forks.
+ *
+ * @param {number|string|boolean} cpus - Parsed arguments. If is set 0 it will use all the available CPUs.
+ * @param {{path:string, flag:string}} static_files - Static files absolute path (directory `public`).
+ * @returns {Promise<void> | void}
+ */
+export async function fork( cpus, static_files ) {
+    return fork__( cpus, static_files )
+}
+
 /**
  * Dynamic importing route without the need for the server to be restarted, if the flag --hot has given.
  * Otherwise, return the asyncFunction registered in the middleware.js.
@@ -409,17 +423,6 @@ export async function init( options ){
  */
 export async function set( options ){
     return set__( options )
-}
-
-/**
- * Handles the cluster and forks.
- *
- * @param {number|string|boolean} cpus - Parsed arguments. If is set 0 it will use all the available CPUs.
- * @param {{path:string, flag:string}} static_files - Static files absolute path (directory `public`).
- * @returns {Promise<void>}
- */
-export async function fork( cpus, static_files ) {
-    return fork__( cpus, static_files )
 }
 
 /**
