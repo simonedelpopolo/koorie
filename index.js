@@ -161,6 +161,16 @@ export async function options( flag_value, flag_name ){
  */
 
 /**
+ * Handles the server log.
+ *
+ * @param {{quiet:boolean, write:{disk:boolean, filename:string}=,info:any[]}} options - Infos.
+ * @returns {*}
+ */
+export async function logger( options ){
+    return logger__( options )
+}
+
+/**
  *  Object [koorie.outgoing ].
  *
  * @param {{buffer:Buffer, log:object}|Error} response - the response to be given back.
@@ -365,16 +375,6 @@ export async function init( options ){
  */
 export async function set( options ){
     return set__( options )
-}
-
-/**
- * Handles the server log.
- *
- * @param {{quiet:boolean, write:{disk:boolean, filename:string}=,info:any[]}} options - Infos.
- * @returns {*}
- */
-export async function logger( options ){
-    return logger__( options )
 }
 
 /**

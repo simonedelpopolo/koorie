@@ -60,9 +60,9 @@ ___
         - [--refresh-rate](#--refresh-rate)
     - [Creating routes](#creating-routes)
       - [Route - index](#route---index)
-- [Diagrams](#diagrams)
-  - [1. changing options on the fly through socket](#1-changing-options-on-the-fly-through-socket)
-  - [2. performance lookup](#2-performance-lookup)
+- [Diagrams](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md)
+  - [1. changing options on the fly through socket](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md#1-changing-options-on-the-fly-through-socket)
+  - [2. performance lookup](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md#2-performance-lookup)
 - [Road Map](#road-map)
 - [JetBrains OSS Licence](#jetbrains-oss-license)
 
@@ -211,21 +211,21 @@ ___
 > ℹ single quotes are required.
 > ___
 > ~~before version 1.x.x was supplied this way:  
-> npx koorie --logger=quiet:true:write:log.txt~~ ♠︎
+> npx koorie --logger=quiet:true:write:log.txt~~ ♠︎♠︎
 ___
 
-| flags                                   | description                                                                               | simple usage                                                           |
-|:----------------------------------------|:------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------|
-| --address[-a]={string}                  | Sets the address to listen from. Default set to localhost.                                | `npx koorie -a=localhost`                                              |
-| --cluster[-c]={void}-{number}           | When {void} it forks the process for the half of the available CPUs.                      | `npx koorie --cluster`                                                 |
-| --hot={boolean}-{void}                  | Default is set to false. When {void} it sets hot wired                                    | `npx koorie --hot`                                                     |
-| --library[-lb]={string}                 | It tells to Koorie to expect a javascript library application.                            | `npx koorie --library=solid`                                           |
-| --logger[-l]={'options(option:value)'}  | Default set to print to stdout every request.                                             | `npm koorie -l='options(quiet:true)'`                                  |
-| --middleware[-m]={string}               | Default set to middleware.js.                                                             | `npx koorie -ml=starter.js`                                            |
-| --port[-p]={number}-{void}              | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. | `npx koorie -p`                                                        |
-| --secure={'options(option:value)'}      | HTTPS server                                                                              | `npx koorie --secure='options(active:true:key:key.pem:cert:cert.pem)'` |
-| --socket[-sk]={'options(option:value)'} | Default is off. Available options: [active:boolean] required. [path:string] required.     | `npx koorie --socket='options(active:true:path:/tmp/my-server.sock)'`  |
-| --static-files[-s]={string}             | It tells to Koorie to serve the files located in the specified directory.                 | `npx koorie -s=public`                                                 |
+| flags                                   | description                                                                               |
+|:----------------------------------------|:------------------------------------------------------------------------------------------|
+| --address[-a]={string}                  | Sets the address to listen from. Default set to localhost.                                |
+| --cluster[-c]={void}-{number}           | When {void} it forks the process for the half of the available CPUs.                      |
+| --hot={boolean}-{void}                  | Default is set to false. When {void} it sets hot wired                                    |
+| --library[-lb]={string}                 | It tells to Koorie to expect a javascript library application.                            |
+| --logger[-l]={'options(option:value)'}  | Default set to print to stdout every request.                                             |
+| --middleware[-m]={string}               | Default set to middleware.js.                                                             |
+| --port[-p]={number}-{void}              | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. |
+| --secure={'options(option:value)'}      | HTTPS server                                                                              |
+| --socket[-sk]={'options(option:value)'} | Default is off. Available options: [active:boolean] required. [path:string] required.     |
+| --static-files[-s]={string}             | It tells to Koorie to serve the files located in the specified directory.                 |
 
 > ℹ If all the flags are omitted the default port is `3001`, the address is `localhost` and only a `single` instance of the process will run.  
 > and you'll be prompted to confirm the root of your project ad `public directory`.
@@ -234,23 +234,23 @@ ___
 
 - #### --address[-a]
   
-  - --address[-a]=192.168.1.1 -> It will listen on the specified IP address.
+  - `npx koorie --address=192.168.1.1` -> It will listen on the specified IP address.
   - Default set to `localhost`
 
 ___
 
 - #### --cluster[-c]
   
-  - --cluster[-c]=4 -> It forks the process on 4 CPUs.
-  - --cluster[-c] -> It forks processes for the half of the available CPUs
-  - --cluster[-c]=foo -> process exits with errors.
-  - --cluster[-c]=full -> It forks processes for all the available CPUs
+  - `npx koorie --cluster=4` -> It forks the process on 4 CPUs.
+  - `npx koorie --cluster` -> It forks processes for the half of the available CPUs
+  - `npx koorie --cluster=foo` -> process exits with errors.
+  - `npx koorie --cluster=full` -> It forks processes for all the available CPUs
   - Default set to half of the available CPUs.
 
 ___
 
 - #### --hot
-  - --hot=true -> it will hot wire koorie. so for every change done to the routes there will be no need to restart the
+  - `npx koorie --hot` -> it will hot wire koorie. so for every change done to the routes there will be no need to restart the
     server.
   - Default sets to false
 
@@ -258,15 +258,15 @@ ___
 
 - #### --library[-lb]
   - ⚠ work in progress to differentiate frameworks
-  - --library[-lb]=react -> It tells to Koorie to expect a React application. Koorie will look for an index.html file
+  - `npx koorie --library=react` -> It tells to Koorie to expect a React application. Koorie will look for an index.html file
     under the `public` directory.
-  - --library[-lb]=4789 -> process exits with errors.
+  - `npx koorie --library=4789` -> process exits with errors.
 
 ___
 
 - #### --logger[-l]
   
-  - --logger[-l]='options(quiet:true:write:logger.log)' -> it will silence the Object [ koorie.logger ], and it will
+  - `npx koorie --logger='options(quiet:true:write:logger.log)'` -> it will silence the Object [ koorie.logger ], and it will
     save the log to a file named logger.log in the root directory of the project.
   - Defaults set to `quiet=false` `write=null`
 
@@ -274,7 +274,7 @@ ___
 
 - #### --middleware[-m]
   
-  - --middleware[-m]=starter.js -> it will look for a file named starter.js in the root directory of the project, and
+  - `npx koorie --middleware=starter.js` -> it will look for a file named starter.js in the root directory of the project, and
     use it to register all the available routes.
   - Default set to `middleware.js`
 
@@ -282,16 +282,16 @@ ___
 
 - #### --port[-p]
   
-  - --port[-p] -> It will listen on a random port.
-  - --port[-p]=4789 -> It will listen on port 4789.
-  - --port[-p]=foo -> process exits with errors.
+  - `npx koorie --port` -> It will listen on a random port.
+  - `npx koorie --port=4789` -> It will listen on port 4789.
+  - `npx koorie --port=foo` -> process exits with errors.
   - Default set to `3001`
 
 ___
 
 - #### --socket[-sk]
   
-  - --socket[-sk]='options(active:true:path:/tmp/koorie.sock)' -> it will open a socket at the specified path.
+  - `npx koorie --socket='options(active:true:path:/tmp/koorie.sock)'` -> it will open a socket at the specified path.
   - Defaults set to `active=false` `path=null`
   - Options are required. ⚠︎ combination active:false:path:/to/file.sock is not implemented yet.
 
@@ -305,14 +305,14 @@ ___
   
   - **_koorie-shell ssl --generate_** : generating self-signed certificate and dhparam (⚠︎ ︎DEVELOPMENT)
     ```shell
-       # in the root directory of you project
+       # in the root directory of your project
     
        npx koorie-shell ssl --generate='options(path:certs:key:koorie.key.pem:cert:koorie.cert.pem:dhparam:koorie.dhparam.pem)'
     ```
       1. ⬆︎ a directory named `certs` will be made in the root of the project.
-      2. a key named `koorie.key.pem` and a certificate named `koorie.cert.pem` will be placed in the cert directory.
-      3. the process of generating the file `koorie.dhparam.pem` can't take long time. once done will be placed in the certs' directory.  
-    **_koorie-shell will just use the command below, so it is required openssl to be available on the host OS_**
+      2. a key named `koorie.key.pem` and a certificate named `koorie.cert.pem` will be placed in the `certs` directory.
+      3. the process of generating the file `koorie.dhparam.pem` can take long time. once done will be placed in the `certs` directory.  
+    **_koorie-shell will just use the command below, so, openssl is required to be available on the host OS_**
   
   - **_DoItYourself_** : generating self-signed certificate and dhparam with `openssl` (⚠︎ DEVELOPMENT):
     ```shell
@@ -334,8 +334,6 @@ ___
   - Defaults set to `active=false` `key=null` `cert=null` `dhparam=null`
   - ❗️Required Options:
     - _**active**_ ➡︎ must be true
-    - _**path**_ ➡︎ path to the directory that will store the certificate. if omitted will be used the root directory.  
-      if specified and no directory is found will be made a new directory. **_keep in mind file permission on the host OS_**
     - _**key**_ ➡︎ path to the key.pem file
     - _**cert**_ ➡︎ path to the cert.pem file
   - ❗NOT required -> _**dhparam**_ ➡︎ path to the dhparam.pem file
@@ -344,15 +342,16 @@ ___
 
 - #### --static-files[-s]
 
-- --static-files[-s]=public -> It looks for a directory called `public` in the root directory of the project, no found
+- `npx koorie --static-files=public`  
+  It looks for a directory called `public` in the root directory of the project, no found
   process exits with error.
-- --static-files[-s] -> It asks the below question.
-  - public path is set to the root directory. is this fine? [yes|no]
+- `npx koorie --static-files` -> **_It asks the below question_**.
+  - public path is set to the root directory. is this fine? [**yes** **|** **no**]
   - answers: `yes|no OR y|n`
     - yes - The process will proceed showing a warning in the console that the `public` directory is set to the root
       directory of the project. Koorie will look "here" for files requested at the server. Not that safe right?
     - no - It will ask to specify a directory.
-  - --static-files=28 -> process exits with errors.
+  - `npx koorie --static-files=28` -> process exits with errors.
   - Default it will ask the above question.
 
 ___
@@ -361,23 +360,23 @@ ___
 
 ___
 
-| commands    | flags                                       | description                                                      | simple usage                                                                      |
-|:------------|:--------------------------------------------|:-----------------------------------------------------------------|:----------------------------------------------------------------------------------|
-| init        | --bare={void}                               | Generates a project in current working directory ❗️ [overwrites] | `npx koorie-shell init --bare`                                                    |
-|             | --author[-a]={string}                       | Default set to null.                                             | `npx koorie-shell init -a='John Doe'`                                             |
-|             | --description[-d]={string}                  | Default set to null.                                             | `npx koorie-shell init -d='My Project'`                                           |
-|             | --license[-l]={string}                      | Default set to null.                                             | `npx koorie-shell init -l=Apache-2.0`                                             |
-|             | --middleware[-m]={string}                   | Default set to 'middleware[.js]'.                                | `npx koorie-shell init -m=starter.js`                                             |
-|             | --name[-n]={string}                         | Default set to null.                                             | `npx koorie-shell init -n=my-project`                                             |
-|             | --version[-v]={semver-string}               | Default set to 0.0.1.                                            | `npx koorie-shell init -v=10.2.236`                                               |
-| route       | --add[-a]={JSON} ❗️                         | Add a basic route                                                |                                                                                   |
-|             | --delete[-d]={JSON} ❗️                      | Delete a route                                                   |                                                                                   |
-|             | --edit[-e]={JSON} ❗️                        | Edit a route                                                     |                                                                                   |
-| set         | --hot={boolean}                             | Switcher                                                         | `npx koorie-shell set --hot=false --socket-path=/tmp/koorie.sock`                 |
-|             | --socket-path={string}                      | Path to koorie socket. required                                  | `npx koorie-shell set --hot-false --socket-path=/tmp/koorie.sock`                 |
-| performance | --refresh-rate={number}                     | Stats refresh rate in milliseconds                               | `npx koorie-shell performance --refresh-rate=2000 --socket-path=/tmp/koorie.sock` |
-|             | --socket-path={string}                      | Path to koorie socket. required                                  | `npx koorie-shell performance --socket-path=/tmp/koorie.sock`                     |
-| ssl         | --generate={'options(option:value)}-{void}' | Generates self-signed SSL certificate                            | `npx koorie-shell ssl --generate`                                                 |
+| commands    | flags                                       | description                                                      |
+|:------------|:--------------------------------------------|:-----------------------------------------------------------------|
+| init        | --bare={void}                               | Generates a project in current working directory ❗️ [overwrites] |
+|             | --author[-a]={string}                       | Default set to null.                                             |
+|             | --description[-d]={string}                  | Default set to null.                                             |
+|             | --license[-l]={string}                      | Default set to null.                                             |
+|             | --middleware[-m]={string}                   | Default set to 'middleware[.js]'.                                |
+|             | --name[-n]={string}                         | Default set to null.                                             |
+|             | --version[-v]={semver-string}               | Default set to 0.0.1.                                            |
+| route       | --add[-a]={JSON} ❗️                         | Add a basic route                                                |
+|             | --delete[-d]={JSON} ❗️                      | Delete a route                                                   |
+|             | --edit[-e]={JSON} ❗️                        | Edit a route                                                     |
+| set         | --hot={boolean}                             | Switcher                                                         |
+|             | --socket-path={string}                      | Path to koorie socket. required                                  |
+| performance | --refresh-rate={number}                     | Stats refresh rate in milliseconds                               |
+|             | --socket-path={string}                      | Path to koorie socket. required                                  |
+| ssl         | --generate={'options(option:value)}-{void}' | Generates self-signed SSL certificate                            |
 
 ___
 
@@ -389,28 +388,28 @@ ___
       anyway it will be asked confirmation
   
   - ##### --author[-a]
-    - `npx koorie-shell --author[-a]='John Doe'`
+    - `npx koorie-shell --author='John Doe'`
     - It sets the author property of the package.json
   
   - ##### --description[-d]
-    - `npx koorie-shell init --description[-d]='my amazing project'`
+    - `npx koorie-shell init --description='my amazing project'`
     - It sets the description property of the package.json
   
   - ##### --license[-l]
-    - `npx koorie-shell init --license[-l]=Apache2.0`
+    - `npx koorie-shell init --license=Apache2.0`
     - It sets the license property of the package.json
   
   - ##### --middleware[-m]_
-    - `npx koorie-shell --middleware[-m]=starter.js`
+    - `npx koorie-shell --middleware=starter.js`
     - It creates a middleware file named starter.js, and it set the npm script 'serve' to use this as default middleware
       loader.
   
   - ##### --name[-n]
-    - `npx koorie-shell --name[-n]=my-amazing-project`
+    - `npx koorie-shell --name=my-amazing-project`
     - It sets the name property of the package.json
   
   - ##### --version[-v]
-    - `npx koorie-shell --version[-v]=10.23.635`
+    - `npx koorie-shell --version=10.23.635`
     - It sets the version property of the package.json
 
 - #### ssl command
@@ -429,18 +428,18 @@ ___
 - #### route command ❗ this command it `NOT AVAILABLE` yet. Consider this section an idea on how could be.
   
   - ##### --add[-a]
-    - --add[-a]=dang
+    - `koorie-shell --add=dang`
     - It saves a route with name `dang` into the directory `./routes/dang/route.js`
     - It adds the route to the middleware.js file.
   
   - ##### --delete[-d]
-    - --delete[-d]=dang
+    - `npx koorie-shell --delete=dang`
     - It deletes the route named `dang`
   
   - ##### --edit[-e]
-    - --edit[-e]=dang::path:dang/dang
-    - It edits a route with name `dang` by changing the path, served by the middleware function, to `dang/dang` instead
-      of `dang`
+    - `npx koorie-shell --edit=dang`
+    - maybe open OS EDITOR ( vim, emacs ) and editing the file **_./routes/dang/route.js_**
+    - or maybe injecting code into the route public object?
 
 - #### koorie-shell socket connection to koorie API
 
@@ -451,13 +450,13 @@ ___
 - #### set command
   
   - ##### --hot_
-    - set --hot=false --socket-path=/path/to/koorie.sock
-    - it will switch the hot wired to off. anytime a route has changed the server must be restarted
+    - `npx koorie-shell set --hot=false --socket-path=/path/to/koorie.sock`
+    - it will switch off the hot wired functionality. anytime a route has changes the server must be restarted to apply che changes.
 
 - #### performance command
   
   - ##### --refresh-rate
-    - performance --refresh-rate=2000 --socket-path/path/to/koorie.sock
+    - `npx koorie-shell performance --refresh-rate=2000 --socket-path/path/to/koorie.sock`
     - it will stream every 2 seconds the process.memoryUsage object
 
 ___
@@ -489,7 +488,7 @@ mkdir public` && `echo 'give me file! alright!' > public/alright
 
 filename `./package.json`
 
-> ❗️ Open the 'package.json' file and add the property "type":"module" and save it.
+❗️ Open the `package.json` file and add the property `"type":"module"` and save it.
 
 filename `./middleware.js`
 
@@ -498,16 +497,16 @@ import { routes }  from 'koorie'
 
 export default async () => {
 	
-    // Object [ koorie.routes ] is an object 'container' 
-	// the route property set to an empty string will answer to http://localhost:3001
+    // Object [ koorie.routes ] is an object 'container'
+    // the route property set to an empty string will answer to http://localhost:3001
     // the asyncFunction property will import dynamically the route index
     // these two properties are required
     // routes always declared as async function returning an Answer
     // the incoming property should be set if the route responds to a GET|POST|PUT|DELETE request
-    // in this case it will answer at http://localhost:3001 and the request will be GET [?give_me_file=allright]
+    // in this case it will answer at http://localhost:3001 and the request will be GET [?give_me_file=alright]
     routes.list.push( { route:'', asyncFunction: ( await import( './routes/index/route.js' ) ).index, incoming: 'give_me_file'  } )
     
-    // the koorie.routes.set() will do type checking of the given object and registering the route inside Object [ koorie.routes ]
+    // the koorie.routes.set() will do type check of the given object and registering the route inside Object [ koorie.routes ]
     await routes.set()
 }
 
@@ -534,10 +533,10 @@ import {readFile} from 'node:fs/promises'
  * Also, it incorporates Object [ koorie.request ] and all its functions and properties.
  * before v.1.x.x the koorie.request was called koorie.incoming exported as koorieIncoming
  *
- * It depends on the constructed logic if resolve or reject.
+ * It depends on the constructed logic if it resolves or rejects.
  * @param {IncomingMessage} incoming
  * @param {ServerResponse} outgoing
- * @returns {Promise|Buffer}
+ * @returns {Promise<Buffer>|Buffer}
  */
 export async function index(incoming, outgoing){
     
@@ -558,8 +557,8 @@ export async function index(incoming, outgoing){
                     outgoing.statusMessage = 'oK'
                     outgoing.statusCode = 200
                     outgoing.setHeader( 'content-type', 'text' )
-                    outgoing.setHeader( 'content-disposition', 'attachment; filename="allright"' )
-                    buffer = await readFile( process.cwd() + '/public/allright' )
+                    outgoing.setHeader( 'content-disposition', 'attachment; filename="alright"' )
+                    buffer = await readFile( process.cwd() + '/public/alright' )
                 } else {
                     error = true
                     outgoing.statusMessage = 'kO'
@@ -590,7 +589,7 @@ export async function index(incoming, outgoing){
 
 ```
 
-spin up the server --hot wired and socket at the specified path.  
+spin up the server --hot wired and socket active at the specified path.  
 we will edit the route on the fly and see the changes without reloading the server.  
 we will test koorie-shell, switching off the --hot wired and see that no longer any changes to the route will be
 rendered.
@@ -599,10 +598,10 @@ rendered.
 
 ```shell
 
-curl -verbose http://localhost:3001/?give_me_file=allright
+curl -verbose http://localhost:3001/?give_me_file=alright
 # request/response header shown because of the -verbose flag passed to curl
 # the response should be "give me file! alright!"
-# and should also download `alright.txt` when opened in the browser.
+# and should also download `alright.txt` ❗️ when opened in the browser.
 
 ```
 
@@ -610,7 +609,7 @@ let's now try the socket
 
 ```shell
 
-# not necessary to use any query, simple as it is.
+## not necessary to use any query, simple as it is.
 curl -verbose http://localhost:3001/
 
 ## in the shell where the server is running check that the log has hot:true
@@ -621,19 +620,19 @@ curl -verbose http://localhost:3001
 
 ## should print 'hello'
 
+## open another shell terminal
 ## let's switch off the hot wired
 npx koorie-shell set --hot=false --socket-path=/tmp/koorie.sock
 
 ## try to modify the route file again
 ######### good('hello folks'.toBuffer())
 
-##curl again and check the log hot should be set to false and te response should be 'hello'
+## curl again and check the log hot should be set to false and te response should be 'hello'
 curl -verbose http://localhost:3001
 
-# CTRL-C to shutdown the server
+## CTRL-C to shutdown the server
 
-npx koorie --static-files=public
-## no socket no hot wired
+npx koorie --static-files=public --socket='options(active:true:path:/tmp/koorie.sock)' --hot
 
 curl -verbose http://localhost:3001
 
@@ -643,74 +642,42 @@ curl -verbose http://localhost:3001
 
 __
 
-### Diagrams
-
-___
-
-#### 1. changing options on the fly through socket
-
-```mermaid
-sequenceDiagram
-    autonumber
-    Note left of koorie: -sk='options(active:true:path:/tmp/koorie.sock)'
-    Note left of koorie: Default hot is false
-    curl->>koorie: http://localhost:3001
-    Note left of koorie: koorie log -> hot:false
-    koorie->>curl: response
-    Note right of koorie-shell: set --hot=true --socket-path=/tmp/koorie.sock
-    
-    koorie-shell->>koorie: {"hot":"true"}
-    koorie->>koorie-shell: receiving
-    Note right of koorie: data well formed received
-    loop 
-        koorie->>koorie: applying process.env.HOT=true
-    end
-    Note right of koorie: single instance no reload. if cluster the workers are reloaded.
-    koorie->>koorie-shell: closed
-    Note right of koorie-shell: message and exit
-    
-    curl->>koorie: http://localhost:3001
-    Note left of koorie: koorie log -> hot:true ?
-    koorie->>curl: response
-```
-
-___
-
-#### 2. performance lookup
-
-```mermaid
-sequenceDiagram
-    autonumber
-    Note left of koorie: -sk='options(active:true:path:/tmp/koorie.sock)'
-    Note right of koorie-shell: performance --refresh-rate=2000 --socket-path=/tmp/koorie.sock
-    
-    koorie-shell->>koorie: {"performance":"true", "refresh_rate":"2000"}
-    koorie->>koorie-shell: receiving
-    Note right of koorie: data well formed received
-    loop Every 2000ms
-        koorie-->koorie-shell: process.memoryUsage Object
-    end
-    Note right of koorie-shell: CTRL-C 
-    koorie->>koorie-shell: closed
-    Note right of koorie-shell: exit
-```
-
-___
-
 ## Road Map
 
 - [X] `koorie --secure` spawning https server.
 - [X] `koorie-shell ssl --generate` generating self-signed certificate.
-- [ ] `koorie-shell ssl --certbot` request to Lets Encrypt for a certificate, installing it and auto updating it.
-- [ ] `route` command and relative flags `--add[-a]`, `--delete[-d]`, `--edit[-e]` and relative options.
 - [X] **_working on a way to add routes without restarting the server._**
   - **_koorie --hot --socket='options=(active:true:path:/tmp/koorie.sock)_**  
     will spawn a server, hot wired, where editing a route will not require to restart the server to see the changes.  
     **_plus koorie will accept socket connection_** required to change on the fly the hot wired like shown below.
   - **_koorie-shell set --hot=false --socket-path=/tmp/koorie.sock_**  
     will switch off the hot wired and editing routes will require to restart the server to see the changes.
+- [ ] `koorie-shell ssl --certbot` request to Lets Encrypt for a certificate, installing it and auto updating it.
+- [ ] `koorie-shell route` command, relative flags `--add[-a]`, `--delete[-d]` &  
+  `--edit[-e] 💡 ENVIRONMENT_VARIABLE EDITOR?`  
+  options and any kind of sweets.
+- [ ] `koorie-shell inject --route={name}` hot wired required, new route injected in the Object [ koorie.routes ] without restarting the server. This process will edit the middleware.js file.
+- [ ] sort of class to send HTML response without reading a file. ⬇︎ 💡:  
+  ```javascript
+  import {Answer} from 'koorie'
+  export async function component(){
+    
+    // some dynamic and obvious data
+    const date = new Date()
+  
+    // the hypotetical class will handle this in some way.
+    const html = () => {
+
+      return (`<div>dynamic component loaded when hit the route[componenent]! today @ ${date}</div>`)
+    }
+    
+    return new Answer( good => good( html.toBuffer() ))
+
+  }
+  ```
+  
 - [ ] proxy server???
-- [ ] koorie website and documentation
+- [ ] koorie website, documentation of APIs and source code.
 - [ ] more socket API functionalities
 
 ___
