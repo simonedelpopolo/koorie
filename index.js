@@ -1,6 +1,7 @@
 import {
     Answer__,
-    api__,
+    api_hot__,
+    api_memory__,
     body__,
     cluster_types__,
     entry_point__,
@@ -29,10 +30,10 @@ import {
     server_resolvers__,
     set__,
     shell_exit_codes__,
-    socket__, ssl__,
+    socket__,
+    ssl__,
     stderr__,
 } from './lib/exporter.js'
-
 
 /**
  * Object [ activity ]
@@ -413,7 +414,7 @@ export async function memory(){
  * @returns {Promise<void>}
  */
 export async function api_hot( socket_, opts ) {
-    return api__.hot( socket_, opts )
+    return api_hot__( socket_, opts )
 }
 
 /**
@@ -424,7 +425,7 @@ export async function api_hot( socket_, opts ) {
  * @returns {Promise<void>}
  */
 export async function api_memory ( socket_, refresh_rate ) {
-    return api__.memory( socket_, refresh_rate )
+    return api_memory__( socket_, refresh_rate )
 }
 
 // Object [ shell.performance ]
