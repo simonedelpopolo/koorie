@@ -66,7 +66,9 @@ async function configuration() {
  *      lb:string, library: string,
  *      m:string, middleware:string,
  *      p:number,port:number,
- *      rt:string,response_time:string,
+ *      r:string,response_time:string,
+ *      secure:{active:true,key:string,cert:string,dhparam:string=},
+ *      socket:{active:true,path:string},
  *      s:string,static_files:string,
  *   } |
  *   null

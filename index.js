@@ -166,6 +166,15 @@ export async function options( flag_value, flag_name ){
  */
 
 
+/**
+ * Object [ koorie.body ].
+ *
+ * @param {IncomingMessage} raw - the incoming message body
+ * @returns {Promise<void>|void}
+ */
+export async function body( raw ){
+    return body__( raw )
+}
 
 /**
  * Object [ koorie.fork ].
@@ -289,7 +298,8 @@ export async function routing( parameters ){
  *      m:string, middleware:string,
  *      p:number,port:number,
  *      r:string,response_time:string,
- *      secure:string,
+ *      secure:{active:true,key:string,cert:string,dhparam:string?}=,
+ *      socket:{active:true,path:string},
  *      s:string,static_files:string,
  *   } |
  *      null} flags - Parsed arguments.
@@ -423,16 +433,6 @@ export async function init( options ){
  */
 export async function set( options ){
     return set__( options )
-}
-
-/**
- * The IncomingMessage body.
- *
- * @param {IncomingMessage} raw - Raw body of the incoming request.
- * @returns {Promise<*>}
- */
-export async function body( raw ){
-    return body__( raw )
 }
 
 
