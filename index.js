@@ -10,7 +10,7 @@ import {
     http__,
     https__,
     init__,
-    library__,
+    library__, library_read__,
     logger__,
     memory__,
     options__,
@@ -161,10 +161,40 @@ export async function options( flag_value, flag_name ){
  */
 
 /**
- * Handles the server log.
+ * Object [ koorie.library.read ].
  *
- * @param {{quiet:boolean, write:{disk:boolean, filename:string}=,info:any[]}} options - Infos.
- * @returns {*}
+ * @param {{filename:string, public_path:string}} resources - request filename and public path.
+ * @returns {Promise<Buffer|(void&Error)>|Buffer|(void&Error)}
+ */
+export async function library_read( resources ){
+    return library_read__( resources )
+}
+
+/**
+ * Switcher function for different javascript library to be served with koorie.
+ * ReactJS, SolidJS and others soon.
+ *
+ * @param {string} name - The process.env.LIBRARY value will be the switcher.
+ * @param {{filename:string, public_path:string}} resources - The requested resource from the browser.
+ * @returns {Promise<boolean|Buffer|Error> | boolean|Buffer|Error}
+ */
+export function library( name, resources ){
+    return library__( name, resources )
+}
+
+/**
+ * Object [ koorie.logger ].
+ *
+ * **prints, writeFile the server's log**.
+ *
+ * print to stdout ca be silenced by setting the quiet option to false.
+ *
+ * when options.write is set to file path
+ * the written file on disk, at the specified path,
+ * is a json collection of all the requests done.
+ * easy to send to an external database.
+ *
+ * @param {{quiet:boolean, write:string, info:string[]}} options - Infos.
  */
 export async function logger( options ){
     return logger__( options )
@@ -341,18 +371,6 @@ export async function api_memory ( socket_, refresh_rate ) {
  */
 export async function performance( options ){
     return performance__( options )
-}
-
-/**
- * Switcher function for different javascript library to be served with koorie.
- * ReactJS, SolidJS and others soon.
- *
- * @param {string} name - The process.env.LIBRARY value will be the switcher.
- * @param {{filename:string, public_path:string}} resources - The requested resource from the browser.
- * @returns {Promise<boolean|Buffer|Error>}
- */
-export function library( name, resources ){
-    return library__( name, resources )
 }
 
 /**
