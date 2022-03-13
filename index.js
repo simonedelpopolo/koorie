@@ -10,7 +10,8 @@ import {
     http__,
     https__,
     init__,
-    library__, library_read__,
+    library__,
+    library_read__,
     logger__,
     memory__,
     options__,
@@ -25,6 +26,7 @@ import {
     routes__,
     routing__,
     server__,
+    server_resolvers__,
     set__,
     shell_exit_codes__,
     socket__, ssl__,
@@ -283,6 +285,29 @@ export const routes = routes__
  */
 export async function routing( parameters ){
     return routing__( parameters )
+}
+
+// - koorie.server properties
+/**
+ * Resolvers for oftypes undefined_ function.
+ *
+ * @param {{
+ *      p:number,port:number,
+ *      a:string,address:string,
+ *      c:number,cluster:number,
+ *      lb:string, library: string,
+ *      l:boolean, logger:boolean,
+ *      hot:undefined,
+ *      d:string,domain:string,
+ *      s:string,static_files:string,
+ *      false_flag:boolean|undefined,
+ *      response_time:string,rt:string} |
+ *      null} flags - Parsed arguments.
+ * @returns {Promise<{false: ((function(): Promise<void>)|*), true: ((function(): Promise<void>)|*)}>}
+ */
+export async function server_resolvers( flags ){
+
+    return server_resolvers__( flags )
 }
 
 /**
