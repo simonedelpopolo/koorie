@@ -83,7 +83,7 @@
       "error",
       "always"
     ],
-    "no-return-await": "warn",
+    "no-return-await": "error",
     "capitalized-comments": [
       "warn",
       "always",
