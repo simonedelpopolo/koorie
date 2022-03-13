@@ -1,8 +1,8 @@
 ; public directory
-static-files = assertions/public
+static-files = public
 
 ; number of cpus
 cluster = full
 
 ; logger
-logger = quiet:true:write:koorie.log
+logger = options(quiet:true:write:koorie.log.json)
