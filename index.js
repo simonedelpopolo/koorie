@@ -154,11 +154,27 @@ export async function options( flag_value, flag_name ){
     return options__( flag_value, flag_name )
 }
 
+
+
+
+
+
 /**
  * Object [ koorie ].
  *
  * @public
  */
+
+/**
+ * Dynamic importing route without the need for the server to be restarted, if the flag --hot has given.
+ * Otherwise, return the asyncFunction registered in the middleware.js.
+ *
+ * @param {string} route - The route passed from koorie.routing.
+ * @returns {(incoming:IncomingMessage, outgoing:ServerResponse)=>Answer}
+ */
+export async function hot( route ){
+    return hot__( route )
+}
 
 /**
  * Object [ koorie.library.read ].
@@ -404,17 +420,6 @@ export async function set( options ){
  */
 export async function fork( cpus, static_files ) {
     return fork__( cpus, static_files )
-}
-
-/**
- * Dynamic importing route without the need for the server to be restarted, if the flag --hot has given.
- * Otherwise, return the asyncFunction registered in the middleware.js.
- *
- * @param {string} route - The route passed from koorie.routing.
- * @returns {(incoming:IncomingMessage, outgoing:ServerResponse)=>Answer}
- */
-export async function hot( route ){
-    return hot__( route )
 }
 
 /**
