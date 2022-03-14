@@ -22,6 +22,11 @@ async function about(){
     return new Answer( good => good( Buffer.from( 'about' ) ) )
 }
 
+/**
+ * - when clustering in **ejected state** 'ejected' is a required parameter or flag.
+ *
+ * @type {{cluster: number, static_files: string, port: number, ejected: string, logger: {quiet: boolean}, socket: {path: string, active: boolean}, hot: boolean, secure: {dhparam: string, active: boolean, cert: string, key: string}}}
+ */
 const options = {
     static_files: 'public',
     port: 30214,
@@ -37,9 +42,12 @@ const options = {
         active: true,
         path: '/tmp/ejected.sock'
     },
-    ejected: `${process.cwd()}/ejected.js`,
+    // - when clustering in **ejected state** ejected is a required parameter or flag
+    ejected: 'ejected_koorie.js',
     cluster: 2
 }
 
-
+/**
+ * - **it is possible to call middleware function before without passing it to server function.**
+ */
 await server( await ejected( options ) )
