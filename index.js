@@ -4,6 +4,7 @@ import {
     api_memory__,
     body__,
     cluster_types__,
+    ejected__,
     entry_point__,
     exit__,
     fork__,
@@ -24,7 +25,11 @@ import {
     query__,
     request__,
     resource__,
-    routes__,
+    routes_collection__,
+    routes_get__,
+    routes_inject__,
+    routes_injected__,
+    routes_set__,
     routing__,
     server__,
     server_resolvers__,
@@ -38,7 +43,7 @@ import {
 /**
  * Object [ activity ]
  *
- * @public
+ * @private
  */
 /**
  * Exits with message and exit code.
@@ -65,7 +70,7 @@ export async function stderr( message ){
 /**
  * Object [ config ]
  *
- * @public
+ * @private
  */
 /**
  * Event emitter for the Object [ config.parser ].
@@ -88,7 +93,7 @@ export async function config_set(){
 /**
  * Object [ errors ]
  *
- * @public
+ * @private
  */
 /**
  * @type {{commands: 1, flags: 2, type_checking:3,internal:4}}
@@ -98,7 +103,7 @@ export const shell_exit_codes = shell_exit_codes__
 /**
  * Extends.
  *
- * @public
+ * @private
  */
 /**
  * Extends Promise and incorporate Object [ koorie.request ]
@@ -109,7 +114,7 @@ export const Answer = Answer__
 /**
  * Object [ input ]
  *
- * @public
+ * @private
  */
 /**
  * Object [input.entry_point].
@@ -165,9 +170,8 @@ export async function options( flag_value, flag_name ){
 /**
  * Object [ koorie ].
  *
- * @public
+ * @private
  */
-
 
 /**
  * Object [ koorie.body ].
@@ -185,10 +189,11 @@ export async function body( raw ){
  *
  * @param {number|string|boolean} cpus - Parsed arguments. If is set 0 it will use all the available CPUs.
  * @param {{path:string, flag:string}} static_files - Static files absolute path (directory `public`).
+ * @param {string} ejected - file to bootstrap koorie ejected state.
  * @returns {Promise<void> | void}
  */
-export async function fork( cpus, static_files ) {
-    return fork__( cpus, static_files )
+export async function fork( cpus, static_files, ejected ) {
+    return fork__( cpus, static_files, ejected )
 }
 
 /**
@@ -200,6 +205,31 @@ export async function fork( cpus, static_files ) {
  */
 export async function hot( route ){
     return hot__( route )
+}
+
+/**
+ * Object [ koorie.ejected ].
+ * This Object type check & start a koorie ejected state.
+ *
+ * @param {{
+ *   cluster: number,
+ *   static_files: string,
+ *   port: number,
+ *   ejected: string,
+ *   logger: {quiet: boolean},
+ *   socket: {path: string, active: boolean},
+ *   hot: boolean,
+ *   secure: {
+ *     dhparam: string,
+ *     active: boolean,
+ *     cert: string,
+ *     key: string
+ *   }
+ * }} initializer - the initializer object that replace process.argv
+ * @returns {{}}
+ */
+export async function ejected( initializer ){
+    return ejected__( initializer )
 }
 
 /**
@@ -274,9 +304,42 @@ export const request = request__
 export const resource = resource__
 
 /**
- * @type {{route: {}, set: ((function(): Promise<void>)|*), get: (function(*): Promise<*|PromiseFulfilledResult<*>>), list: *[]}}
+ * @type {object[]}
  */
-export const routes = routes__
+export const routes_collection = routes_collection__
+
+/**
+ * Object [ koorie.routes.get ].
+ *
+ * @param {string=} name - route registered name.
+ * @returns {Promise<*|PromiseFulfilledResult<*>>}
+ */
+export async function routes_get( name ){
+    return routes_get__( name )
+}
+
+/**
+ * Object [ koorie.routes.inject ].
+ *
+ * @param {{}} route - the route imported or ejected
+ */
+export async function routes_inject( route ){
+    return routes_inject__( route )
+}
+
+/**
+ * @type {Object}
+ */
+export const routes_injected = routes_injected__
+
+/**
+ * Object [ koorie.routes.set ].
+ *
+ * @returns {Promise<void>|void}
+ */
+export async function routes_set(){
+    return routes_set__()
+}
 
 /**
  * Dispatches the server requests/responses.
@@ -384,7 +447,7 @@ export async function https( key, cert, dhparam = null ){
 /**
  * Object [ monitor ]
  *
- * @public
+ * @private
  */
 /**
  * Get the memory usage statistic of the application.
@@ -404,7 +467,7 @@ export async function memory(){
 /**
  * Object [ koorie.api ]
  *
- * @public
+ * @private
  */
 /**
  * API hot.
@@ -465,7 +528,7 @@ export async function set( options ){
 /**
  * Object [ shell ].
  *
- * @public
+ * @private
  */
 
 /**
