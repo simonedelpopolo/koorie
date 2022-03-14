@@ -162,11 +162,6 @@ export async function options( flag_value, flag_name ){
     return options__( flag_value, flag_name )
 }
 
-
-
-
-
-
 /**
  * Object [ koorie ].
  *
@@ -377,21 +372,7 @@ export async function server_resolvers( flags ){
 /**
  * Object [ koorie.server].
  *
- * @param {{
- *      a:string,address:string,
- *      c:number,cluster:number,
- *      false_flag:boolean|undefined,
- *      hot:undefined,
- *      l:boolean, logger:boolean,
- *      lb:string, library: string,
- *      m:string, middleware:string,
- *      p:number,port:number,
- *      r:string,response_time:string,
- *      secure:{active:true,key:string,cert:string,dhparam:string?}=,
- *      socket:{active:true,path:string},
- *      s:string,static_files:string,
- *   } |
- *      null} flags - Parsed arguments.
+ * @param {{address?: string, cluster?: number, ejected?: string, hot?: undefined, logger?: boolean, library?: string, port?: number, response_time?: boolean, secure?: {active: boolean, key: string, cert: string, dhparam?: string}, socket: {active: boolean, path: string}, static_files?: string}} flags - Parsed arguments.
  * @returns {Promise<void>}
  */
 export async function server( flags ){
@@ -439,11 +420,6 @@ export async function https( key, cert, dhparam = null ){
     return https__( key, cert, dhparam )
 }
 
-
-
-
-
-
 /**
  * Object [ monitor ]
  *
@@ -461,7 +437,6 @@ export async function https( key, cert, dhparam = null ){
 export async function memory(){
     return memory__()
 }
-
 
 
 /**

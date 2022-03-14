@@ -6,7 +6,7 @@ ___
 
 > ⚠ Consider this package ABSOLUTELY not ready for production environment but try it out for testing and profiling or dev server not exposed to public.
 >
-> ⚠ `v1.x.x-experimental` shall be considered unstable like hell. but it works.
+> ⚠ `v1.6.x-experimental` shall be considered unstable like hell. but it works.
 >
 > ⚠ the flags=options are always under refactoring mode.
 >

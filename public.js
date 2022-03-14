@@ -13,7 +13,7 @@ import { Answer as Answer__, ejected as ejected__, routes_inject as routes_injec
  */
 
 /**
- * Objects exported.
+ * Objects exported publicly.
  *
  * @public
  */
