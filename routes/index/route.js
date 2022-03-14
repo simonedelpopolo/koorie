@@ -6,7 +6,7 @@ import { undefined_ } from 'oftypes'
  *
  * @param {IncomingMessage} incoming - The given IncomingMessage Object.
  * @param {ServerResponse} outgoing - The given ServerResponse Object.
- * @returns {Promise | PromiseFulfilledResult<{buffer:Buffer}> | PromiseRejectedResult<Buffer>}
+ * @returns {Promise<{buffer:Buffer}> | {buffer:Buffer}}
  */
 export async function index( incoming, outgoing ){
 
