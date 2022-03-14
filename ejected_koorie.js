@@ -30,21 +30,22 @@ async function about(){
 const options = {
     static_files: 'public',
     port: 30214,
-    hot: true,
+    // - necessary to specified when clustering.
+    hot: typeof process.env.EJECTED === 'undefined' ? true : process.env.HOT,
     secure:{
         active: true,
         key: 'certs/koorie.key.pem',
         cert: 'certs/koorie.cert.pem',
         dhparam: 'certs/koorie.dhparam.pem'
     },
-    logger: { quiet: true },
+    logger: { quiet: false },
     socket: {
         active: true,
         path: '/tmp/ejected.sock'
     },
     // - when clustering in **ejected state** ejected is a required parameter or flag
     ejected: 'ejected_koorie.js',
-    cluster: 2
+    cluster: undefined
 }
 
 /**

@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.6.0-experimental",
+  "version": "1.6.1-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -20,7 +20,7 @@
     "static-files-flag-test": "npx 4t test --file='options(filename:static_files_flag.test.js)'",
     "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --response-time=true -s=public --hot --socket=\"'options(active:true|path:/tmp/koorie.sock)'\" -c=3",
     "nodemon.ssl.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --port=3302 --response-time=true -s=public --hot --socket=\"'options(active:true|path:/tmp/koorie.ssl.sock)'\" -c=3 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
-    "nodemon.ssl.koorie.ejected": "npx nodemon --trace-uncaught --trace-warnings koorie.js --ejected=ejected_koorie.js --port=3303 --response-time=true -s=public --hot --socket=\"'options(active:true|path:/tmp/koorie.ssl.ejected.sock)'\" -c=3 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
+    "nodemon.ssl.koorie.ejected": "npx nodemon --trace-uncaught --trace-warnings koorie.js --ejected=ejected_koorie.js --port=3303 --response-time=true -s=public --hot=false --socket=\"'options(active:true|path:/tmp/ejected.sock)'\" -c=3 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
     "nodemom.ejected": "npx nodemon --trace-uncaught --trace-warnings ./ejected_koorie.js",
     "ejected": "node --trace-uncaught  --trace-warnings ./ejected_koorie.js"
   },
