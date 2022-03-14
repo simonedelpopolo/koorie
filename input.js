@@ -1,6 +1,7 @@
 import {
     address_flag__,
     cluster_flag__,
+    ejected_flag__,
     hot_flag__,
     init_command__,
     koorie_process__,
@@ -87,6 +88,19 @@ export async function cluster_flag( options ){
  */
 export async function hot_flag( options ){
     return hot_flag__( options )
+}
+
+/**
+ * Object [ input.initializer_flag ].
+ *
+ * - initializer_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function ejected_flag( options ){
+    return ejected_flag__( options )
 }
 
 /**
