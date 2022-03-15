@@ -10,6 +10,8 @@ ___
 >
 > ⚠ the flags=options are always under refactoring mode.
 >
+> ⚠ the short flags may be removed.
+>
 > ⚠ This software won't run on Windows.
 
 ___
@@ -21,6 +23,13 @@ ___
 - [Description](#description)
   - [The name Koorie](#the-name-koorie)
   - [Yet another NodeJS server](#yet-another-nodejs-server)
+  - [Design](#design)
+    - [executable interfaces](#executable-interfaces-)
+    - [socket whispered](#socket-whispered-)
+    - [hot wired](#hot-wired-)
+    - [forked state](#forked-state-)
+    - [middle routes](#middle-routes-)
+    - [ejected state](#ejected-state-)
 - [Installation](#installation)
   - [Koorie as Module](#koorie-as-module)
   - [Koorie global](#koorie-global)
@@ -29,6 +38,7 @@ ___
   - [Koorie terminal flags](#koorie-terminal-flags)
     - [--address[-a]](#--address-a)
     - [--cluster[-c]](#--cluster-c)
+    - [--ejected](#--ejected)
     - [--hot](#--hot)
     - [--library[-lb]](#--library-lb)
     - [--logger[-l]](#--logger-l)
@@ -90,6 +100,79 @@ cite some of them, and so I took a chance to develop one from scratch.
 How is going so far?  
 One commit is alright the other one completely rewrite the app.  
 Fun, a lot of fun.
+
+___
+
+### Design
+
+___
+
+When installed, koorie comes with two executable interfaces ⎔, a socket interface ⌖, editing of routes without restarting the server to see the changes ♨, cluster the server into many processes as many CPUs available ⑂, middleware routes ↬, and last but not least, designing your own server without using the koorie executable file to spinning it up ⏏.  
+
+#### executable interfaces ⎔
+
+___
+
+- **_koorie_** is the spinning server up executable. Many options can be given to the command line to start up server/s in seconds.  
+  It requires just your HTML, CSS and JavaScript and `0` configuration to run your application.  
+  It can be more complex than this, but once the options are given to the command line there is `0` configuration files to write down.
+
+- **_koorie-shell_** is _"Santa's little helper"_. With this interface it's possible to:
+  - initialize a basic server project with one middle route and all the required options.
+  - initialize a basic ejected state server one middle route and all the required options.
+  - generate SSL self-signed certificate.
+  - create, add, edit routes. (not implemented yet)
+  - observe socket whispered performance behaviour.
+  - switch off hot wired option on the fly socket whispered.
+  - injecting new routes without restarting the server. (not implemented yet)
+
+___
+
+#### socket whispered ⌖
+
+___
+
+It's possible to activate the socket interface to control, edit and check the server behaviour.  
+This functionality should be given with the flag --socket='options(active:true|path:/path/to/file.sock)' during server start-up.
+
+___
+
+#### hot wired ♨︎
+
+___
+
+When activated, it will be possible to edit routes and see the changes without restarting the server.
+Consider this a functionality that may be turned off in PRODUCTION exception done for small temporary emergency editing that may be fixed and deployed correctly next commit.  
+It can be activated during start-up with the flag --hot or later socket whispered (it requires the server to have socket interface activated).
+
+___
+
+#### forked state ⑂
+
+___
+
+It is possible to fork the server into many processes as many CPUs available in the host OS  
+To fork the process pass to the command line the flag --cluster. In this case will fork processes for the half of the CPUs available.
+When forking in conjunctions with ejected state some configuration must be given to make it properly working. Examples ➡︎ [here]() 
+
+___
+
+#### middle routes ↬
+
+___
+
+Middleware are cool and koorie got you covered. Examples ➡︎ [here]() ⬇ [route- index](#route---index)
+___
+
+#### ejected state ⏏
+
+___
+
+Control on the code, configuration and personalization for a backend developer is a must.  
+This functionality can be achieved using **koorie** or any other executable like **node**, **nodemon** and whatever it's the dev choice.  
+Not rely on koorie executable is important when you want to build something different. Maybe a benchmarking testing suite? Who knows.  
+However, it is here at your disposal.  
+Examples ➡︎ [here]()
 
 ___
 
@@ -218,6 +301,7 @@ ___
 |:----------------------------------------|:------------------------------------------------------------------------------------------|
 | --address[-a]={string}                  | Sets the address to listen from. Default set to localhost.                                |
 | --cluster[-c]={void}-{number}           | When {void} it forks the process for the half of the available CPUs.                      |
+| --ejected={string}                      | Sets startup file ejected from koorie.                                                    |
 | --hot={boolean}-{void}                  | Default is set to false. When {void} it sets hot wired                                    |
 | --library[-lb]={string}                 | It tells to Koorie to expect a javascript library application.                            |
 | --logger[-l]={'options(option:value)'}  | Default set to print to stdout every request.                                             |
@@ -246,6 +330,15 @@ ___
   - `npx koorie --cluster=foo` -> process exits with errors.
   - `npx koorie --cluster=full` -> It forks processes for all the available CPUs
   - Default set to half of the available CPUs.
+
+___
+
+- #### --ejected
+  
+  - `npx koorie --ejected=servers/ejected_a.js` -> It will load the file at the specified path.
+  - ⬆︎ this example still call **_npx koorie_** to show the use of the flag --ejected.
+  - `node servers/ejected_a.js && node servers/ejected_b.js`
+  - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here]()
 
 ___
 
@@ -652,6 +745,7 @@ __
     **_plus koorie will accept socket connection_** required to change on the fly the hot wired like shown below.
   - **_koorie-shell set --hot=false --socket-path=/tmp/koorie.sock_**  
     will switch off the hot wired and editing routes will require to restart the server to see the changes.
+- [ ] EXAMPLES.md
 - [ ] `koorie-shell ssl --certbot` request to Lets Encrypt for a certificate, installing it and auto updating it.
 - [ ] `koorie-shell route` command, relative flags `--add[-a]`, `--delete[-d]` &  
   `--edit[-e] 💡 ENVIRONMENT_VARIABLE EDITOR?`  
