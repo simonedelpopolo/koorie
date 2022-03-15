@@ -119,7 +119,7 @@ ___
 
 - **_koorie-shell_** is _"Santa's little helper"_. With this interface it's possible to:
   - initialize a basic server project with one middle route and all the required options.
-  - initialize a basic ejected state server one middle route and all the required options.
+  - initialize a basic ejected state server one middle route and all the required options. (not implemented yet)
   - generate SSL self-signed certificate.
   - create, add, edit routes. (not implemented yet)
   - observe socket whispered performance behaviour.
@@ -745,6 +745,7 @@ __
     **_plus koorie will accept socket connection_** required to change on the fly the hot wired like shown below.
   - **_koorie-shell set --hot=false --socket-path=/tmp/koorie.sock_**  
     will switch off the hot wired and editing routes will require to restart the server to see the changes.
+- [ ] `koorie-help flag --address` third executable interface for the help system.
 - [ ] EXAMPLES.md
 - [ ] `koorie-shell ssl --certbot` request to Lets Encrypt for a certificate, installing it and auto updating it.
 - [ ] `koorie-shell route` command, relative flags `--add[-a]`, `--delete[-d]` &  
