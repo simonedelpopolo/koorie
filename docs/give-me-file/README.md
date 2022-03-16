@@ -217,7 +217,7 @@ the response should be "give me file! alright!"
 >
 
 
-**let the server up and running to try the socket functionality**
+**leave the server up to try the socket functionality**
 
 **first the hot wired functionality**  
 
