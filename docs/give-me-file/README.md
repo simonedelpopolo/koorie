@@ -238,6 +238,11 @@ the response should be "give me file! alright!"
 
 **open another terminal**
 
+**remember to cd into where/ever/you/cloned/koorie/docs/give-me-file**  
+**OR**  
+**remember to cd into where/ever/you/have/started/step/by/step/give-me-file**
+
+
 ```shell
 curl http://localhost:3001/
 
@@ -276,7 +281,7 @@ closed
 **save the file.**
 
 ```shell
-curl -verbose http://localhost:3001
+curl http://localhost:3001
 ```
 
 isn't crazy the output?
@@ -297,15 +302,17 @@ Not at all, because we have registered in the middleware, at the very beginning,
 
 now restart the server and check it out again :D
 
+**_CTRL-C to shut down the server_**
+
 ```shell
-## CTRL-C to shutdown the server
-
 npx koorie --static-files=public --socket='options(active:true:path:/tmp/koorie.sock)' --hot
-
-curl -verbose http://localhost:3001
-
 ## the response should be '{goodnight:'folks'}'
-
 ```
+
+```shell
+curl http://localhost:3001
+```
+
+### the response should be '{goodnight:'folks'}'
 
 ## simple as drinking a glass of water 🜄
