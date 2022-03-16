@@ -2,7 +2,6 @@ import {
     Answer__,
     api_hot__,
     api_memory__,
-    body__,
     cluster_types__,
     ejected__,
     entry_point__,
@@ -22,8 +21,14 @@ import {
     performance__,
     process_title__,
     processor__,
-    query__,
     request__,
+    request_body__,
+    request_body_get__,
+    request_get__,
+    request_post__,
+    request_query__,
+    request_query_get__,
+    request_routes__,
     resource__,
     routes_collection__,
     routes_get__,
@@ -169,16 +174,6 @@ export async function options( flag_value, flag_name ){
  */
 
 /**
- * Object [ koorie.body ].
- *
- * @param {IncomingMessage} raw - the incoming message body
- * @returns {Promise<void>|void}
- */
-export async function body( raw ){
-    return body__( raw )
-}
-
-/**
  * Object [ koorie.fork ].
  * Handles the cluster and forks.
  *
@@ -207,20 +202,19 @@ export async function hot( route ){
  * This Object type check & start a koorie ejected state.
  *
  * @param {{
- *   cluster: number,
- *   static_files: string,
- *   port: number,
- *   ejected: string,
- *   logger: {quiet: boolean},
- *   socket: {path: string, active: boolean},
- *   hot: boolean,
- *   secure: {
- *     dhparam: string,
- *     active: boolean,
- *     cert: string,
- *     key: string
- *   }
- * }} initializer - the initializer object that replace process.argv
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
+ *      hot:undefined,
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
+ *      null} initializer - the initializer object that replace process.argv
  * @returns {{}}
  */
 export async function ejected( initializer ){
@@ -279,19 +273,83 @@ export async function outgoing( response, outgoing ){
 }
 
 /**
+ * Object [ koorie.request.body ].
+ *
+ * @param {IncomingMessage} raw - the IncomingMessage raw body
+ * @returns {Promise<void>|void}
+ */
+export async function request_body( raw ){
+    return request_body__( raw )
+}
+
+/**
  * Object [ koorie.query ].
  *
  * @param {string} url - the url requested from the browser.
  * @returns {Promise<void>}
  */
-export async function query( url ){
-    return query__( url )
+export async function request_query( url ){
+    return request_query__( url )
 }
 
 /**
- * @type {{path: *[], query_: null, post: ((function(*, *): Promise<*|{invalid: string}>)|*), body_: null, query: (function(*): Promise<*>), get: ((function(*, *): Promise<*|{invalid: string}>)|*), body: ((function(*): Promise<*|PromiseFulfilledResult<Object>|PromiseRejectedResult<string>|{empty: string}>)|*)}}
+ * Object [ koorie.request.body.get ].
+ *
+ * @param {Buffer} raw - get the parsed message body.
+ * @returns {Promise<{[p:string]:any}|{empty:string}>|{[p:string]:any}|{empty: string}}
  */
-export const request = request__
+export async function request_body_get( raw ){
+    return request_body_get__( raw )
+}
+
+/**
+ * Object [ koorie.request.query.get ].
+ *
+ * @param {URLSearchParams} params - get the parsed params.
+ * @returns {Promise<URLSearchParams|{empty:string}>|URLSearchParams|{empty: string}}
+ */
+export async function request_query_get( params ){
+    return request_query_get__( params )
+}
+
+/**
+ * @type {string[]}
+ */
+export const request_routes = request_routes__
+
+/**
+ * Object [ koorie.request.post ].
+ *
+ * @param {Buffer} raw - the raw body.
+ * @param {string} path - routes path that responds to the request.
+ * @returns {Promise<{[p: string]: any} | {empty: string}|{invalid:string}> |  {[p: string]: any} | {empty: string} | {invalid:string}}
+ */
+export async function request_post( raw, path ){
+    return request_post__( raw, path )
+}
+
+/**
+ * Object [ koorie.request.get ].
+ *
+ * @param {URLSearchParams} query - the query params.
+ * @param {string} path - routes path that responds to the request.
+ * @returns {Promise<URLSearchParams | {empty: string}|{invalid:string}> | URLSearchParams | {empty: string} | {invalid:string}}
+ */
+export async function request_get( query, path ){
+    return request_get__( query, path )
+}
+
+/**
+ * Get body, params and clear on response.
+ *
+ * @param {string} action - only accept 'insert', 'retrieve', 'clear'
+ * @param {string|undefined} type - only accept 'body' OR 'params'
+ * @param {Buffer|URLSearchParams|undefined} data - the data to be inserted in the registry
+ * @returns {Promise<Buffer|URLSearchParams|ReferenceError>|Buffer|URLSearchParams|ReferenceError}
+ */
+export async function request ( action, type= undefined, data = undefined ){
+    return request__( action, type, data )
+}
 
 /**
  * @type {{get_path: (function(): Promise<string|*>), images: string[], finally: (function(*=): Promise<boolean>), push_application_ext: ((function(*): Promise<void>)|*), get_public: (function(): Promise<string|*>), path: string, public: string, application: string[], set_public: ((function(*=): Promise<void>)|*), push_image_ext: ((function(*): Promise<void>)|*), push_text_ext: ((function(*): Promise<void>)|*), text: string[], path_length: ((function(*): Promise<void>)|*)}}
@@ -351,28 +409,42 @@ export async function routing( parameters ){
  * Resolvers for oftypes undefined_ function.
  *
  * @param {{
- *      p:number,port:number,
- *      a:string,address:string,
- *      c:number,cluster:number,
- *      lb:string, library: string,
- *      l:boolean, logger:boolean,
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
  *      hot:undefined,
- *      d:string,domain:string,
- *      s:string,static_files:string,
- *      false_flag:boolean|undefined,
- *      response_time:string,rt:string} |
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
  *      null} flags - Parsed arguments.
  * @returns {Promise<{false: ((function(): Promise<void>)|*), true: ((function(): Promise<void>)|*)}>}
  */
 export async function server_resolvers( flags ){
-
     return server_resolvers__( flags )
 }
 
 /**
  * Object [ koorie.server].
  *
- * @param {{address?: string, cluster?: number, ejected?: string, hot?: undefined, logger?: boolean, library?: string, port?: number, response_time?: boolean, secure?: {active: boolean, key: string, cert: string, dhparam?: string}, socket: {active: boolean, path: string}, static_files?: string}} flags - Parsed arguments.
+ * @param {{
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
+ *      hot:undefined,
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
+ *      null} flags - Parsed arguments.
  * @returns {Promise<void>}
  */
 export async function server( flags ){
@@ -438,7 +510,6 @@ export async function memory(){
     return memory__()
 }
 
-
 /**
  * Object [ koorie.api ]
  *
@@ -466,17 +537,6 @@ export async function api_memory ( socket_, refresh_rate ) {
     return api_memory__( socket_, refresh_rate )
 }
 
-// Object [ shell.performance ]
-/**
- * Through socket connection to koorie, koorie-shell will get some performance.
- *
- * @param {{refresh_rate:number, socket_path: string}} options - on the fly options to koorie.
- * @returns {Promise<void>}
- */
-export async function performance( options ){
-    return performance__( options )
-}
-
 /**
  * Initialization script. An object from a json string passed to the terminal.
  * The arguments it is not required.
@@ -499,7 +559,6 @@ export async function set( options ){
     return set__( options )
 }
 
-
 /**
  * Object [ shell ].
  *
@@ -516,4 +575,19 @@ export async function set( options ){
  */
 export async function ssl( options ) {
     return ssl__( options )
+}
+
+/**
+ * Object [ shell.performance ]
+ *
+ * @private
+ */
+/**
+ * Through socket connection to koorie, koorie-shell will get some performance.
+ *
+ * @param {{refresh_rate:number, socket_path: string}} options - on the fly options to koorie.
+ * @returns {Promise<void>}
+ */
+export async function performance( options ){
+    return performance__( options )
 }

@@ -7,7 +7,7 @@ export default async () => {
 
     const reject_number_type = await tttt.oki( async () => {
 
-        tttt.describe( '##  -1'.yellow(), ' given a number value to --middleware[-m]=3 will exit with code 2'.color( 33 ) )
+        tttt.describe( '##  -1'.yellow(), ' given a number value to --middleware=3 will exit with code 2'.color( 33 ) )
 
         return {
             expected: `${ 'given option -> '.green() }'${'3'.red()}' - ${ process.title } flags-error`,
@@ -25,7 +25,7 @@ export default async () => {
 
     const resolve_string_type = await tttt.oki( async () => {
 
-        tttt.describe( '##  -2'.yellow(), ' given a string value to --middleware[-m]=middleware.js will go through'.color( 33 ) )
+        tttt.describe( '##  -2'.yellow(), ' given a string value to --middleware=middleware.js will go through'.color( 33 ) )
 
         return {
             expected: 'middleware.js',

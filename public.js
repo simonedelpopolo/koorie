@@ -66,7 +66,20 @@ import { Answer as Answer__, ejected as ejected__, routes_inject as routes_injec
  * }
  * // it is possible to call middleware function before without passing it to server function.
  * await server( options )
- * @param {{address?: string, cluster?: number, ejected?: string, hot?: undefined, logger?: boolean, library?: string, port?: number, response_time?: boolean, secure?: {active: boolean, key: string, cert: string, dhparam?: string}, socket: {active: boolean, path: string}, static_files?: string}|null} flags - Parsed arguments.
+ * @param {{
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
+ *      hot:undefined,
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
+ *      null} flags - Parsed arguments.
  * @param {AsyncFunction|undefined=} middleware - the middleware module.
  * @returns {Promise<void>|void}
  */
@@ -100,20 +113,34 @@ export async function routes_set(){
  * Object [ koorie.ejected ].
  * This Object type check & start a koorie ejected state.
  *
- * @param {{cluster: number, static_files: string, port: number, ejected: string, logger: {quiet: boolean}, socket: {path: string, active: boolean}, hot: boolean, secure: {dhparam: string, active: boolean, cert: string, key: string}}} initializer - the initializer object that replace process.argv
+ * @param {{
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
+ *      hot:undefined,
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
+ *      null} initializer - the initializer object that replace process.argv
  * @returns {{
- *      address:string=,
- *      cluster:number=,
- *      ejected:string=,
- *      hot:undefined=,
- *      logger:boolean=,
- *      library: string=,
- *      port:number=,
- *      response_time:boolean=,
- *      secure:{active:boolean,key:string,cert:string,dhparam:string?}=,
- *      socket:{active:boolean,path:string},
- *      static_files:string=,
- *   } | null}
+ *      port:number,
+ *      address:string,
+ *      cluster:number,
+ *      ejected: string|undefined,
+ *      library: string,
+ *      logger:{quiet:boolean, write:string},
+ *      hot:undefined,
+ *      response_time:string,
+ *      secure:{active:boolean,key:string,cert:string, dhparam: string},
+ *      socket:{active:boolean, path:string},
+ *      static_files:string,
+ *      false_flag:boolean|undefined} |
+ *      null}
  */
 export async function ejected( initializer ){
     return ejected__( initializer )
