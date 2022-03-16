@@ -1,4 +1,4 @@
-import Answer from '../../lib/extends/Promise/Answer.js'
+import { Answer } from '../../public.js'
 import { undefined_ } from 'oftypes'
 
 /**
@@ -11,7 +11,7 @@ import { undefined_ } from 'oftypes'
 export async function index( incoming, outgoing ){
 
     if( incoming.method === 'POST' ){
-        let message = await Answer.koorie().post( 'index', await Answer.koorie().body_ )
+        let message = await Answer.toPost( await Answer.getQuestion( 'body' ), 'index' || '' )
 
         if( await undefined_( message.invalid ) === true ){
 
