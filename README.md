@@ -69,8 +69,6 @@ ___
         - [--hot](#--hot_)
       - [performance command](#performance-command)
         - [--refresh-rate](#--refresh-rate)
-    - [Creating routes](#creating-routes)
-      - [Route - index](#route---index)
 - [Diagrams](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md)
   - [1. changing options on the fly through socket](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md#1-changing-options-on-the-fly-through-socket)
   - [2. performance lookup](https://github.com/simonedelpopolo/koorie/blob/main/docs/DIAGRAMS.md#2-performance-lookup)
@@ -162,7 +160,8 @@ ___
 
 ___
 
-Middleware are cool and koorie got you covered. Examples ➡︎ [here](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md) ⬇ [route- index](#route---index)
+Middleware are cool and koorie got you covered. Examples ➡︎ [here](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md)
+
 ___
 
 #### ejected state ⏏
@@ -337,7 +336,7 @@ ___
   - `npx koorie --ejected=servers/ejected_a.js` -> It will load the file at the specified path.
   - ⬆︎ this example still call **_npx koorie_** to show the use of the flag --ejected.
   - `node servers/ejected_a.js && node servers/ejected_b.js`
-  - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md)
+  - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here]()
 
 ___
 
@@ -358,7 +357,7 @@ ___
 
 - #### --logger
   
-  - `npx koorie --logger='options(quiet:true:write:logger.log)'` -> it will silence the Object [ koorie.logger ], and it will
+  - `npx koorie --logger='options(quiet:true|write:logger.log)'` -> it will silence the Object [ koorie.logger ], and it will
     save the log to a file named logger.log in the root directory of the project.
   - Defaults set to `quiet=false` `write=null`
 
@@ -551,195 +550,9 @@ ___
   - ##### --refresh-rate
     - `npx koorie-shell performance --refresh-rate=2000 --socket-path/path/to/koorie.sock`
     - it will stream every 2 seconds the process.memoryUsage object
+    
 
 ___
-
-### Creating routes
-
-Koorie has a simple interface for creating routes and handle them.  
-Small guide step by step:
-
-- Server from scratch.
-  - server without using ~~npx koorie-shell init~~ command.
-  - add the middleware handler.
-  - add one route named index that serve the http://localhost:3001
-  - add a GET request handler
-  - adding a `public` directory
-  - add a static file to be read and send back.
-  - make a request and get the response.
-  - using `npx koorie-shell set --hot=false --socket-path=/tmp/koorie.sock` to check the socket functionality
-
-#### Route - `index`
-
-```shell
-
-mkdir s-scratch && cd s-scratch && npm install koorie
-mkdir -p routes/index && touch ./middleware.js ./routes/index/route.js
-mkdir public` && `echo 'give me file! alright!' > public/alright
-
-```
-
-filename `./package.json`
-
-❗️ Open the `package.json` file and add the property `"type":"module"` and save it.
-
-filename `./middleware.js`
-
-```javascript
-import { routes_inject, routes_set } from 'koorie'
-
-export default async () => {
-	
-    // Object [ koorie.routes.inject ] will push into Object [ koorie.routes.collection ]
-    // the route property set to an empty string will answer to http://localhost:3001
-    // the asyncFunction property will import dynamically the route index
-    // these two properties are required
-    // routes always declared as async function returning an Answer
-    // the incoming property should be set if the route responds to a GET|POST|PUT|DELETE request
-    // in this case it will answer at http://localhost:3001 and the request will be GET [?give_me_file=alright]
-    // the incoming property must be set to 'give_me_file'
-    await routes_inject( { route:'', asyncFunction: ( await import( './routes/index/route.js' ) ).index, incoming: 'give_me_file'  } )
-    
-    // Object [ koorie.routes.set ] will do type check of the given object to routes_inject() and registering the route inside Object [ koorie.routes.injected ]
-    await routes_set()
-}
-
-```
-
-filename `./routes/index/route.js`
-
-```javascript
-import {Answer} from 'koorie'
-import {readFile} from 'node:fs/promises'
-/**
- * Route (- index) - The simplest way to serve a route.
- * It is required to be an async function.
- * It is required to return an Answer.
- *
- * It accept two arguments but none of them is a required argument.
- *
- * arguments passed to the route by Object [ koorie.routing ] :
- *
- * - Server.IncomingMessage
- * - Server.ServerResponse
- *
- * Object Answer extends Promise so it works the same way.
- * Methods available in Answer
- * 
- * - Answer.toGet(URLSearchParams{Awswer.getQuestion('params')}, route{string}) - it handles the GET request method.
- * - Answer.toPost(Buffer{Answer.getQuestion('body')}, route{string}) - it handles the POST request method.
- * - Answer.getQuestion('body | params') - it returns a Buffer from IncomingMessage[body] OR the URLSearchParams Object
- * - Answer.clearQuestion() - It sets to null the body OR params received from the request.
- *
- * It depends on the constructed logic if it resolves or rejects.
- * @param {IncomingMessage} incoming
- * @param {ServerResponse} outgoing
- * @returns {Promise<Buffer>|Buffer}
- */
-export async function index(incoming, outgoing){
-    
-    if(incoming.method === 'GET'){
-        
-        let error = false
-        let give_me_file
-        let buffer
-        
-        give_me_file = await Answer.toGet( await Answer.getQuestion('params'), 'give_me_file' )
-        await Answer.clearQuestion()
-        
-        if( typeof give_me_file.invalid !== 'undefined'){
-            error = true
-        }
-        else{
-            if(give_me_file.has('give_me_file')) {
-                if ( give_me_file.get( 'give_me_file' ) === 'alright' ) {
-                    outgoing.statusMessage = 'oK'
-                    outgoing.statusCode = 200
-                    outgoing.setHeader( 'content-type', 'text' )
-                    outgoing.setHeader( 'content-disposition', 'attachment; filename="alright"' )
-                    buffer = await readFile( process.cwd() + '/public/alright' )
-                } else {
-                    error = true
-                    outgoing.statusMessage = 'kO'
-                    outgoing.statusCode = 404
-                    give_me_file = { error: 'URL.searchParam not right' }
-                }
-            }else{
-                outgoing.statusMessage = 'oK'
-                outgoing.statusCode = 200
-                outgoing.setHeader( 'content-type', 'application/json' )
-                buffer = JSON.stringify({'index-route':'response'}).toBuffer()
-            }
-        }
-        
-        // obviously answers bad when it rejects :D
-        return new Answer( (good, bad )=> {
-            
-            if(error)
-                bad(JSON.stringify(give_me_file).toBuffer())
-            
-            good( buffer )
-        } )
-    
-    }
-
-}
-
-
-```
-
-spin up the server --hot wired and socket active at the specified path.  
-we will edit the route on the fly and see the changes without reloading the server.  
-we will test koorie-shell, switching off the --hot wired and see that no longer any changes to the route will be
-rendered.
-
-`npx koorie --static-files=public --socket='options(active:true|path:/tmp/koorie.sock)' --hot`
-
-```shell
-
-curl -verbose http://localhost:3001/?give_me_file=alright
-# request/response header shown because of the -verbose flag passed to curl
-# the response should be "give me file! alright!"
-# ❗ and should also download `alright.txt` when opened in the browser.
-
-```
-
-let's now try the socket
-
-```shell
-
-## not necessary to use any query, simple as it is.
-curl -verbose http://localhost:3001/
-
-## in the shell where the server is running check that the log has hot:true
-## try to modify the file ./routes/index/route by sending a different Buffer response:
-######### good('hello'.toBuffer())
-
-curl -verbose http://localhost:3001
-
-## should print 'hello'
-
-## open another shell terminal
-## let's switch off the hot wired
-npx koorie-shell set --hot=false --socket-path=/tmp/koorie.sock
-
-## try to modify the route file again
-######### good('hello folks'.toBuffer())
-
-## curl again and check the log hot should be set to false and te response should be 'hello'
-curl -verbose http://localhost:3001
-
-## CTRL-C to shutdown the server
-
-npx koorie --static-files=public --socket='options(active:true:path:/tmp/koorie.sock)' --hot
-
-curl -verbose http://localhost:3001
-
-## the response should be 'hello folks'
-
-```
-
-__
 
 ## Road Map
 

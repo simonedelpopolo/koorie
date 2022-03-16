@@ -11,7 +11,7 @@ import { Answer, routes_set, routes_inject } from 'koorie'
 const index_html = async (incoming, outgoing) => {
     
     outgoing.statusCode = 302;
-    outgoing.setHeader('Location', '/');
+    outgoing.setHeader('Location', '/')
     const message = JSON.stringify({redirect: 'remember, koorie is simple.'}).toBuffer()
     
     return Answer.resolve(message)
