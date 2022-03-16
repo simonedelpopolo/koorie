@@ -211,7 +211,7 @@ the response should be "give me file! alright!"
 >
 > @ http://localhost:3001/?give_me_file=alright  
 >
-> You'll se the index.html rendered if you 
+> You'll se the index.html rendered if you  
 > @ http://localhost:3001/ OR  
 > @ http://localhost:3001/index.html
 >
@@ -297,7 +297,7 @@ isn't crazy the output?
 ```
 
 Not at all, because we have registered in the middleware, at the very beginning, our route that was reading the file index.html!!! so that function is still cached as it was in the original file!  
->As any other route changes we have done before turning of the hot wired functionality.  
+>As any other route changes we have done before turning off the hot wired functionality.  
 > >but this is another story :)
 
 now restart the server and check it out again :D
