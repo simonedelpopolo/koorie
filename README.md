@@ -303,7 +303,7 @@ ___
 | --hot={boolean}-{void}             | Default is set to false. When {void} it sets hot wired                                    |
 | --library={string}                 | It tells to Koorie to expect a javascript library application.                            |
 | --logger={'options(option:value)'} | Default set to print to stdout every request.                                             |
-| --middleware={string}              | Default set to middleware.js.                                                             |
+| --middleware={string}              | Default set to none. If set to 'without' no middleware will be seeked.                    |
 | --port={number}-{void}             | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. |
 | --secure={'options(option:value)'} | HTTPS server                                                                              |
 | --socket={'options(option:value)'} | Default is off. Available options: [active:boolean] required. [path:string] required.     |
@@ -366,7 +366,8 @@ ___
 - #### --middleware
   
   - `npx koorie --middleware=starter.js` -> it will look for a file named starter.js in the root directory of the project, and
-    use it to register all the available routes.
+  - `npx koorie --middleware=without` -> it will NOT look for any middleware file.
+  - The middleware file is used to register all the available routes and the incoming REQUEST, if any, to the specified route.
   - Default set to `middleware.js`
 
 ___

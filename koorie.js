@@ -82,11 +82,25 @@ const resolvers = {
 
         const resolvers = {
 
+            /**
+             * To override the mandatory middleware.js file
+             * koorie --middleware=without
+             *
+             * if instead middleware file has being named differently, just pass the path/to/filename.js
+             * npx koorie --middleware=my.special.middleware.js
+             *
+             * README.md will be updated soon.
+             */
             false: ( async () => {
-                ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
-                await server( options )
+                if( options.middleware === 'without' )
+                    await server( options )
+                else{
+                    ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
+                    await server( options )
+                }
             } ),
 
+            // - if middleware flag is undefined it will look for middleware.js file in the root directory of the project
             true: ( async () => {
                 ( await import( `${ process.cwd() }/middleware.js` ) ).default()
                 await server( options )
@@ -98,8 +112,7 @@ const resolvers = {
     } ),
 
     true: ( async () => {
-        ( await import( `${ process.cwd() }/middleware.js` ) ).default()
-        await server( options )
+        await server( null )
     } ),
 };
 
