@@ -30,6 +30,7 @@ ___
     - [forked state](#forked-state-)
     - [middle routes](#middle-routes-)
     - [ejected state](#ejected-state-)
+  - [EXAMPLES](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md)
 - [Installation](#installation)
   - [Koorie as Module](#koorie-as-module)
   - [Koorie global](#koorie-global)
@@ -161,7 +162,7 @@ ___
 
 ___
 
-Middleware are cool and koorie got you covered. Examples ➡︎ [here]() ⬇ [route- index](#route---index)
+Middleware are cool and koorie got you covered. Examples ➡︎ [here](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md) ⬇ [route- index](#route---index)
 ___
 
 #### ejected state ⏏
@@ -336,7 +337,7 @@ ___
   - `npx koorie --ejected=servers/ejected_a.js` -> It will load the file at the specified path.
   - ⬆︎ this example still call **_npx koorie_** to show the use of the flag --ejected.
   - `node servers/ejected_a.js && node servers/ejected_b.js`
-  - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here]()
+  - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md)
 
 ___
 
@@ -751,7 +752,7 @@ __
   - **_koorie-shell set --hot=false --socket-path=/tmp/koorie.sock_**  
     will switch off the hot wired and editing routes will require to restart the server to see the changes.
 - [ ] `koorie-help flag --address` third executable interface for the help system.
-- [ ] EXAMPLES.md
+- [X] [EXAMPLES.md](https://github.com/simonedelpopolo/koorie/blob/main/docs/EXAMPLES.md)
 - [ ] `koorie-shell ssl --certbot` request to Lets Encrypt for a certificate, installing it and auto updating it.
 - [ ] `koorie-shell route` command, relative flags `--add[-a]`, `--delete[-d]` &  
   `--edit[-e] 💡 ENVIRONMENT_VARIABLE EDITOR?`  
