@@ -58,18 +58,18 @@ async function configuration() {
 /**
  * @type {
  *   {
- *      a:string,address:string,
- *      c:number,cluster:number,
+ *      address:string,
+ *      cluster:number,
  *      false_flag:boolean|undefined,
  *      hot:undefined,
- *      l:boolean, logger:boolean,
- *      lb:string, library: string,
- *      m:string, middleware:string,
- *      p:number,port:number,
- *      r:string,response_time:string,
+ *      logger:boolean,
+ *      library: string,
+ *      middleware:string,
+ *      port:number,
+ *      response_time:string,
  *      secure:{active:true,key:string,cert:string,dhparam:string=},
  *      socket:{active:true,path:string},
- *      s:string,static_files:string,
+ *      static_files:string,
  *   } |
  *   null
  * }
@@ -83,7 +83,7 @@ const resolvers = {
         const resolvers = {
 
             false: ( async () => {
-                ( await import( `${ process.cwd() }/${ options.middleware || options.m }` ) ).default()
+                ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
                 await server( options )
             } ),
 
@@ -94,7 +94,7 @@ const resolvers = {
 
         };
 
-        ( await undefined_( options.middleware || options.m, resolvers ) )()
+        ( await undefined_( options.middleware, resolvers ) )()
     } ),
 
     true: ( async () => {
