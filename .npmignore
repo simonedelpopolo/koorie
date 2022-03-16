@@ -13,3 +13,6 @@ assertions
 _.koorierc
 certs
 koorie.log.json
+docs
+public
+/ejected_koorie.js
