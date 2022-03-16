@@ -237,7 +237,7 @@ export async function library_read( resources ){
  *
  * @param {string} name - The process.env.LIBRARY value will be the switcher.
  * @param {{filename:string, public_path:string}} resources - The requested resource from the browser.
- * @returns {Promise<boolean|Buffer|Error> | boolean|Buffer|Error}
+ * @returns {Promise<boolean|Buffer|Error|string> | boolean|Buffer|Error|string}
  */
 export function library( name, resources ){
     return library__( name, resources )
