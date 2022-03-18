@@ -3,7 +3,15 @@ import {
     cluster_flag__,
     ejected_flag__,
     hot_flag__,
+    init_author_flag__,
+    init_bare_flag__,
     init_command__,
+    init_description_flag__,
+    init_git_flag__,
+    init_license_flag__,
+    init_middleware_flag__,
+    init_name_flag__,
+    init_version_flag__,
     koorie_process__,
     library_flag__,
     logger_flag__,
@@ -12,7 +20,7 @@ import {
     secure_flag__,
     shell_process__,
     socket_flag__,
-    static_files_flag__
+    static_files_flag__,
 } from './lib/exporter.js'
 
 /**
@@ -192,4 +200,108 @@ export async function static_files_flag( options ){
  */
 export async function init_command( options ){
     return init_command__( options )
+}
+
+/**
+ * Object [ input.init_middleware_flag ].
+ *
+ * - --middleware flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function init_middleware_flag( options ){
+    return init_middleware_flag__( options )
+}
+
+/**
+ * Object [ input.init_bare_flag ].
+ *
+ * - --bare flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function init_bare_flag( options ){
+    return init_bare_flag__( options )
+}
+
+/**
+ * Object [ input.init_git_flag ].
+ *
+ * - --git flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function init_git_flag( options ){
+    return init_git_flag__( options )
+}
+
+/**
+ * Object [ input.init_version_flag ].
+ *
+ * - version_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function init_version_flag( options ){
+    return init_version_flag__( options )
+}
+
+/**
+ * Object [ input.init_author_flag ].
+ *
+ * - author_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function init_author_flag( options ){
+    return init_author_flag__( options )
+}
+
+/**
+ * Object [ input.init_description_flag ].
+ *
+ * - description_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function init_description_flag( options ){
+    return init_description_flag__( options )
+}
+
+/**
+ * Object [ input.init_license_flag ].
+ *
+ * - license_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function init_license_flag( options ){
+    return init_license_flag__( options )
+}
+
+/**
+ * Object [ input.init_name_flag ].
+ *
+ * - name_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function init_name_flag( options ){
+    return init_name_flag__( options )
 }

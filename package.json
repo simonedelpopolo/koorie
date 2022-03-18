@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.7.9-experimental",
+  "version": "1.8.0-experimental",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -37,7 +37,9 @@
   "dependencies": {
     "boolean-jokes": "^1.5.1",
     "json-swiss-knife": "^1.6.10",
-    "oftypes": "^0.7.0"
+    "oftypes": "^0.7.0",
+    "semver": "^7.3.5",
+    "validate-npm-package-name": "^3.0.0"
   },
   "homepage": "https://github.com/simonedelpopolo/koorie#readme",
   "repository": {

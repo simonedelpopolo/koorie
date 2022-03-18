@@ -6,7 +6,7 @@ ___
 
 > ⚠ Consider this package ABSOLUTELY not ready for production environment but try it out for testing and profiling or dev server not exposed to public.
 >
-> ⚠ `v1.6.x-experimental` shall be considered unstable like hell. but it works.
+> ⚠ `v1.8.x-experimental` shall be considered unstable like hell. but it works.
 >
 > ⚠ the flags=options are always under refactoring mode.
 >
@@ -51,6 +51,7 @@ ___
   - [Koorie-Shell commands and flags](#koorie-shell-commands-and-flags)
     - [init command](#init-command)
       - [--bare](#--bare)
+      - [--git](#--git)
       - [--author](#--author)
       - [--description](#--description)
       - [--license](#--license)
@@ -455,6 +456,7 @@ ___
 | commands    | flags                                       | description                                                      |
 |:------------|:--------------------------------------------|:-----------------------------------------------------------------|
 | init        | --bare={void}                               | Generates a project in current working directory ❗️ [overwrites] |
+|             | --git={void}                                | Initialize a git repository.                                     |
 |             | --author={string}                           | Default set to null.                                             |
 |             | --description={string}                      | Default set to null.                                             |
 |             | --license={string}                          | Default set to null.                                             |
@@ -478,6 +480,9 @@ ___
     - `npx koorie-shell --bare`
     - using this flag will overwrite everything in the root directory of the project.  
       anyway it will be asked confirmation
+  
+  - ##### --git
+    - This flag doesn't accept any argument. Initialize a git repository.
   
   - ##### --author
     - `npx koorie-shell --author='John Doe'`
