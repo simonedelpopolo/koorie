@@ -40,20 +40,19 @@ npx react-dang install --bare \
 ```
 
 - check the scripts available in the **_[package.json]_**
-- change the extra properties in the **_[package.json]_**
 
-It's necessary to have familiarity wit WebPack
-
-```shell
-npm run koorie
-```
+It's necessary to have familiarity with [ ➡︎ WebPack](https://webpack.js.org)
 
 ```shell
 npm run build-prod
 ```
 
+```shell
+npm run koorie
+```
+
 ___
 
-## Done. ☑
+- [X] **_Done_** 
 
 ## simple as drinking a glass of water 🜄
