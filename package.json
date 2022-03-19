@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.9.0-alpha",
+  "version": "1.10.0-alpha",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -28,7 +28,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "autocannon": "^7.7.1",
+    "autocannon": "^7.7.2",
     "eslint": "^8.11.0",
     "eslint-plugin-jsdoc": "^38.0.6",
     "nodemon": "^2.0.15",

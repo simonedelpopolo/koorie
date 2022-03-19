@@ -7,7 +7,7 @@ import {
     entry_point__,
     exit__,
     fork__,
-    health__,
+    health__, host_os__,
     hot__,
     http__,
     https__,
@@ -17,6 +17,7 @@ import {
     logger__,
     memory__,
     options__,
+    os_uptime__,
     outgoing__,
     parser__,
     performance__,
@@ -511,15 +512,29 @@ export async function https( key, cert, dhparam = null ){
  */
 /**
  * Get the memory usage statistic of the application.
- * Require a socket connection.
  *
- * @returns {
- *   Promise<{[unknown]:string, [p:string]:NodeJS.MemoryUsage}> |
- *   {unknown: string, [p: string]: NodeJS.MemoryUsage}
- *   }
+ * @returns {{unknown: string, [p: string]: NodeJS.MemoryUsage}}
  */
-export async function memory(){
+export function memory(){
     return memory__()
+}
+
+/**
+ * Get the host_os information - system.
+ *
+ * @returns {{arch: string, platform: NodeJS.Platform}}
+ */
+export function host_os() {
+    return host_os__()
+}
+
+/**
+ * Get the os_uptime statistic for system.
+ *
+ * @returns {string}
+ */
+export function os_uptime() {
+    return os_uptime__()
 }
 
 /**
