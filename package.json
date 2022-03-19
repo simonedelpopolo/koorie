@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.8.1-experimental",
+  "version": "1.8.3-alpha",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
   "engines": {
@@ -30,14 +30,14 @@
   "devDependencies": {
     "autocannon": "^7.7.1",
     "eslint": "^8.11.0",
-    "eslint-plugin-jsdoc": "^38.0.4",
+    "eslint-plugin-jsdoc": "^38.0.5",
     "nodemon": "^2.0.15",
-    "trythistrythat": "^0.1.25"
+    "trythistrythat": "latest"
   },
   "dependencies": {
-    "boolean-jokes": "^1.5.1",
-    "json-swiss-knife": "^1.6.10",
-    "oftypes": "^0.7.0",
+    "boolean-jokes": "latest",
+    "json-swiss-knife": "latest",
+    "oftypes": "latest",
     "semver": "^7.3.5",
     "validate-npm-package-name": "^3.0.0"
   },
