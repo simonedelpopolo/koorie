@@ -2,6 +2,7 @@ import {
     address_flag__,
     cluster_flag__,
     ejected_flag__,
+    health_flag__,
     hot_flag__,
     init_author_flag__,
     init_bare_flag__,
@@ -83,6 +84,19 @@ export async function address_flag( options ){
  */
 export async function cluster_flag( options ){
     return cluster_flag__( options )
+}
+
+/**
+ * Object [ input.health_flag ].
+ *
+ * - health_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function health_flag( options ){
+    return health_flag__( options )
 }
 
 /**

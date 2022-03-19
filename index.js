@@ -7,6 +7,7 @@ import {
     entry_point__,
     exit__,
     fork__,
+    health__,
     hot__,
     http__,
     https__,
@@ -184,6 +185,17 @@ export async function options( flag_value, flag_name ){
  */
 export async function fork( cpus, static_files, ejected ) {
     return fork__( cpus, static_files, ejected )
+}
+
+/**
+ * Route - health.
+ *
+ * @param {IncomingMessage} incoming - The given IncomingMessage Object.
+ * @param {ServerResponse} outgoing - The given ServerResponse Object.
+ * @returns {Promise<{buffer:Buffer}> | {buffer:Buffer}}
+ */
+export async function health( incoming, outgoing ){
+    return health__( incoming, outgoing )
 }
 
 /**
