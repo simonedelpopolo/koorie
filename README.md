@@ -4,13 +4,15 @@ ___
 
 ###### Node.js server. ESModule asynchronous from the beginning of the Dreamtime.
 
-> ⚠ Consider this package ABSOLUTELY not ready for production environment but try it out for testing and profiling or dev server not exposed to public.
+> ⚠ Koorie shall be considered not ready for PRODUCTION.
 >
-> ⚠ `v1.8.x-experimental` shall be considered unstable like hell. but it works.
+> ⚠ `v1.x.x-alpha` shall be considered "functionalities deployed frequently" so the minor version will raise fast.  
+>
+> ⚠ No breaking changes on schedule.
 >
 > ⚠ the flags=options are always under refactoring mode.
 >
-> ⚠ ❗️ the short flags are NOW removed.
+> ⚠ ❗️ the short flags are NOT available and them will be NOT used anymore.
 >
 > ⚠ This software won't run on Windows.
 
@@ -40,6 +42,7 @@ ___
     - [--address](#--address)
     - [--cluster](#--cluster)
     - [--ejected](#--ejected)
+    - [--health](#--health)
     - [--hot](#--hot)
     - [--library](#--library)
     - [--logger](#--logger)
@@ -301,6 +304,7 @@ ___
 | --address={string}                 | Sets the address to listen from. Default set to localhost.                                |
 | --cluster={void}-{number}          | When {void} it forks the process for the half of the available CPUs.                      |
 | --ejected={string}                 | Sets startup file ejected from koorie.                                                    |
+| --health={void}                    | route health injected to check the status of the server.                                  |
 | --hot={boolean}-{void}             | Default is set to false. When {void} it sets hot wired                                    |
 | --library={string}                 | It tells to Koorie to expect a javascript library application.                            |
 | --logger={'options(option:value)'} | Default set to print to stdout every request.                                             |
@@ -339,6 +343,34 @@ ___
   - `node servers/ejected_a.js && node servers/ejected_b.js`
   - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here]()
 
+___
+
+- #### --health
+  - This flag doesn't accept any argument.
+  - It injects a route to check the health of the server.
+  - `npx koorie --health`  
+    once the server is up ad running the output should look like this ⇩ 
+  - ```shell
+       { address: '127.0.0.1', family: 'IPv4', port: 3001 }
+       koorie your browser here ⬇︎
+       http://localhost:3001
+       ----------------------------------------------------
+       health_key => da9eff89-6261-4d28-a5ac-8e648a1f3d32
+    ```
+
+    to check the health make a curl request or whatever  
+    ```shell
+       curl 'http://localhost:3002/health?key=da9eff89-6261-4d28-a5ac-8e648a1f3d32'
+    ```
+    - **_the key is generated using node:crypto.randomUUID()_**
+    - it is stored in **_process.ENV.HEALTH_KEY_**.  
+      it can be overridden with the same ENVIRONMENT_VARIABLE_NAME   
+      still the flag --health is necessary to inject the route. ⇩
+  - `HEALTH_KEY=your-super-secure-key npx nodemon ./koorie.js --static-files=public --health`
+    to check the health make a curl request or whatever
+    ```shell
+       curl 'http://localhost:3002/health?key=your-super-secure-key'
+    ``` 
 ___
 
 - #### --hot
