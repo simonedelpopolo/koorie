@@ -17,3 +17,10 @@ ___
 ## koorie and react ➡︎ [code & readme](https://github.com/simonedelpopolo/koorie/blob/main/docs/koorie-and-react/)
 
 ___
+
+
+
+## ejected server ➡︎ [code & readme](https://github.com/simonedelpopolo/koorie/blob/main/docs/ejected-server/)
+
+___
+
