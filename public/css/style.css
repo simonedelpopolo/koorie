@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;400&family=Raleway&display=swap');
+body{
+    font-family: 'Azeret Mono', monospace;
+    font-weight: 100;
+    font-size: 1rem;
+    margin: 0;
+    height: 100%;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(31, 35, 42, 1);
+}
+
+.invisible{
+    display: none;
+}
+
+.error{
+    border: 1px dotted rgba(145, 0, 58, 0.85);
+    font-weight: bold;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+div.container{
+    border-radius: 10px;
+    display: grid;
+    width: 95%;
+    margin-left: 1%;
+    grid-gap: 0;
+    grid-template-columns: 75% auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "main side";
+    padding: 1%;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.5em;
+    font-size: 1.1rem;
+    height: 90%;
+}
+
+main.content{
+    grid-area: main;
+    text-align: justify;
+}
+
+main.content > section{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+aside.aside{
+    grid-area: side;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+aside.aside > div{
+    top: 0;
+    position: sticky;
+}
+
+aside.aside > div > ul > li > a{
+    text-decoration: underline;
+}
+
+h1.intro{
+    margin-left: 2%;
+}
