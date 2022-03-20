@@ -2,7 +2,7 @@
 
 ___
 
-###### the simplest way to run you Koorie application on Docker
+###### the simplest way to run your Koorie application on Docker
 ___
 
 ### using 'git clone sparse-checkout' require git v2.19
