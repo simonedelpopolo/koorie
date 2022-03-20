@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "koorie": "^1.10.12-alpha"
+  }
+}
