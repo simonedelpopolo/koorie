@@ -1,3 +1,4 @@
+import { createRequire } from 'module'
 import {
     Answer__,
     api_hot__,
@@ -675,3 +676,6 @@ export async function ssl( options ) {
 export async function performance( options ){
     return performance__( options )
 }
+
+const require = createRequire( import.meta.url )
+export const { version } = require( './package.json' )
