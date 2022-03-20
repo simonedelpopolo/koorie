@@ -7,7 +7,8 @@ import {
     entry_point__,
     exit__,
     fork__,
-    health__, host_os__,
+    health__,
+    host_os__,
     hot__,
     http__,
     https__,
@@ -32,6 +33,11 @@ import {
     request_query_get__,
     request_routes__,
     resource__,
+    resource_get_application__,
+    resource_get_images__,
+    resource_get_public__,
+    resource_get_text__,
+    resource_set_public__,
     routes_collection__,
     routes_get__,
     routes_inject__,
@@ -362,6 +368,57 @@ export async function request_get( query, path ){
  */
 export async function request ( action, type= undefined, data = undefined ){
     return request__( action, type, data )
+}
+
+/**
+ * Object [ koorie.resource.mime_types.get_application ]
+ * returns a collection of application file extensions.
+ *
+ * @returns {string[]}
+ */
+export function resource_get_application() {
+    return resource_get_application__()
+}
+
+/**
+ * Object [ koorie.resource.get_images ]
+ * returns a collection of images file extensions.
+ *
+ * @returns {string[]}
+ */
+export function resource_get_images() {
+    return resource_get_images__()
+}
+
+/**
+ * Object [ koorie.resource.get_public ]
+ * returns the path of the public file from requests.
+ *
+ * @returns {string}
+ */
+export function resource_get_public() {
+    return resource_get_public__()
+}
+
+/**
+ * Object [ koorie.resource.mime_types.get_text ]
+ * returns a collection of text file extensions.
+ *
+ * @returns {string[]}
+ */
+export function resource_get_text() {
+    return resource_get_text__()
+}
+
+/**
+ * Object [ koorie.resource.set_public]
+ * returns the path of the public file from requests.
+ *
+ * @param {string} path - register the resource public from the request.
+ * @returns {unknown}
+ */
+export function resource_set_public( path = '' ) {
+    return resource_set_public__( path )
 }
 
 /**
