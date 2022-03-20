@@ -1,5 +1,5 @@
 import * as tttt from 'trythistrythat'
-import { default as static_files_flag } from '../lib/input/koorie/static_files_flag.js'
+import { default as static_files_flag } from '../lib/input/koorie/flag/static_files_flag.js'
 
 export default async () => {
 

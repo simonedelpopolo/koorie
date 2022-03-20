@@ -1,5 +1,5 @@
 import * as tttt from 'trythistrythat'
-import { default as middleware_flag } from '../lib/input/koorie/middleware_flag.js'
+import { default as middleware_flag } from '../lib/input/koorie/flag/middleware_flag.js'
 
 export default async () => {
 
