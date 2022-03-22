@@ -77,8 +77,7 @@ import { Answer as Answer__, ejected as ejected__, routes_inject as routes_injec
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null} flags - Parsed arguments.
  * @param {AsyncFunction|undefined=} middleware - the middleware module.
  * @returns {Promise<void>|void}
@@ -124,8 +123,7 @@ export async function routes_set(){
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null} initializer - the initializer object that replace process.argv
  * @returns {{
  *      port:number,
@@ -138,8 +136,7 @@ export async function routes_set(){
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null}
  */
 export async function ejected( initializer ){
