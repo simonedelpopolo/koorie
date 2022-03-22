@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { config_get, config_set, entry_point, server } from './index.js'
-import { null_, undefined_ } from 'oftypes'
+import { config_parser_get, config_parser_set, entry_point, server } from './index.js'
+import { null_, resolvers, undefined_ } from 'oftypes'
 
 // - splicing out from `process.argv` the paths for node and koorie.js
 process.argv.splice( 0, 2 )
@@ -19,18 +19,16 @@ process.title = 'koorie'
 async function configuration() {
     let options
 
-    // Object [ config.parser.get() ]
+    // Object [ config.parser.get ]
     // - reads and parses the content of the file .koorierc.
     // - emit('read') in case koorierc was found in the root directory of the project.
     // - emit('proceed') in case koorierc was NOT found in the root directory of the project.
-    config_get()
+    config_parser_get()
 
-    // Object [ config.parser.set() ]
-    // - Promise that always resolve after the event [config.parser.get[read] or config.parser.get[proceed] ] fired.
+    // Object [ config.parser.set ]
+    // - Promise that always resolve after the event [config.parser.get[read] or config.parser.get[proceed] ] are fired.
     // - when "proceed" it passes to Object [ input.entry_point ] the process.argv.
-    // - when "read" it first checks for the "false_flag" passed in phase of forking then it passes the configuration loaded from .koorierc as string[]
-    const config_ = await config_set()
-
+    const config_ = await config_parser_set()
 
     if ( config_.includes( 'proceed' ) )
 
@@ -40,14 +38,7 @@ async function configuration() {
 
         let config_args
 
-        if ( process.argv.includes( '--false-flag=true' ) ) {
-
-            config_.push( '--false-flag=true' )
-            config_args = await entry_point( config_ )
-
-        }else
-            config_args = await entry_point( config_ )
-
+        config_args = await entry_point( config_ )
 
         options = config_args
     }
@@ -56,65 +47,29 @@ async function configuration() {
 }
 
 /**
- * @type {
- *   {
- *      address:string,
- *      cluster:number,
- *      false_flag:boolean|undefined,
- *      hot:undefined,
- *      logger:boolean,
- *      library: string,
- *      middleware:string,
- *      port:number,
- *      response_time:string,
- *      secure:{active:true,key:string,cert:string,dhparam:string=},
- *      socket:{active:true,path:string},
- *      static_files:string,
- *   } |
- *   null
- * }
+ * @type { Object | null }
  */
 const options = await configuration()
 
-const resolvers = {
+const truthy = () => server( null )
+const falsy = async () => {
 
-    false: ( async () => {
+    const truthy = async () => {
+        ( await import( `${ process.cwd() }/middleware.js` ) ).default()
+        await server( options )
+    }
 
-        const resolvers = {
+    const falsy = async () => {
+        if( options.middleware === 'without' )
+            await server( options )
+        else{
+            ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
+            await server( options )
+        }
+    }
 
-            /**
-             * To override the mandatory middleware.js file
-             * koorie --middleware=without
-             *
-             * if instead middleware file has being named differently, just pass the path/to/filename.js
-             * npx koorie --middleware=my.special.middleware.js
-             *
-             * README.md will be updated soon.
-             */
-            false: ( async () => {
-                if( options.middleware === 'without' )
-                    await server( options )
-                else{
-                    ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
-                    await server( options )
-                }
-            } ),
+    ( await undefined_( options.middleware, await resolvers( truthy, falsy ) ) )()
+}
 
-            // - if middleware flag is undefined it will look for middleware.js file in the root directory of the project
-            true: ( async () => {
-                ( await import( `${ process.cwd() }/middleware.js` ) ).default()
-                await server( options )
-            } ),
-
-        };
-
-        ( await undefined_( options.middleware, resolvers ) )()
-    } ),
-
-    true: ( async () => {
-        await server( null )
-    } ),
-};
-
-( await null_( options, resolvers ) )()
+( await null_( options, await resolvers( truthy, falsy ) ) )()
 

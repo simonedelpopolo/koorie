@@ -3,7 +3,9 @@ import {
     Answer__,
     api_hot__,
     api_memory__,
-    cluster_types__,
+    cluster_system_check__,
+    config_parser_get__,
+    config_parser_set__,
     ejected__,
     entry_point__,
     exit__,
@@ -21,7 +23,6 @@ import {
     options__,
     os_uptime__,
     outgoing__,
-    parser__,
     performance__,
     process_title__,
     processor__,
@@ -86,22 +87,23 @@ export async function stderr( message ){
  *
  * @private
  */
+
 /**
- * Event emitter for the Object [ config.parser ].
+ * Event emitter for Object [ config.parser.get ].
  *
  * @returns {*}
  */
-export function config_get(){
-    return parser__.get()
+export function config_parser_get(){
+    return config_parser_get__()
 }
 
 /**
- * Event listener for the parser.get function.
+ * Event listener for Object [ config.parser.get ].
  *
  * @returns {Promise<string[]> | string[]}
  */
-export async function config_set(){
-    return parser__.set()
+export async function config_parser_set(){
+    return config_parser_set__()
 }
 
 /**
@@ -187,12 +189,11 @@ export async function options( flag_value, flag_name ){
  * Handles the cluster and forks.
  *
  * @param {number|string|boolean} cpus - Parsed arguments. If is set 0 it will use all the available CPUs.
- * @param {{path:string, flag:string}} static_files - Static files absolute path (directory `public`).
  * @param {string} ejected - file to bootstrap koorie ejected state.
  * @returns {Promise<void> | void}
  */
-export async function fork( cpus, static_files, ejected ) {
-    return fork__( cpus, static_files, ejected )
+export async function fork( cpus, ejected ) {
+    return fork__( cpus, ejected )
 }
 
 /**
@@ -232,8 +233,7 @@ export async function hot( route ){
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null} initializer - the initializer object that replace process.argv
  * @returns {{}}
  */
@@ -490,8 +490,7 @@ export async function routing( parameters ){
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null} flags - Parsed arguments.
  * @returns {Promise<{false: ((function(): Promise<void>)|*), true: ((function(): Promise<void>)|*)}>}
  */
@@ -513,8 +512,7 @@ export async function server_resolvers( flags ){
  *      response_time:string,
  *      secure:{active:boolean,key:string,cert:string, dhparam: string},
  *      socket:{active:boolean, path:string},
- *      static_files:string,
- *      false_flag:boolean|undefined} |
+ *      static_files:string} |
  *      null} flags - Parsed arguments.
  * @returns {Promise<void>}
  */
@@ -533,13 +531,14 @@ export async function socket( options ){
 }
 
 /**
- * Type check for cluster given flags.
+ * System check while forking the processes.
+ * NUMBER of CPUs must be greater or equal to the given argument to the flag --cluster.
  *
- * @param {number|string|boolean} options - given flag.
- * @returns {AsyncGenerator<boolean|(function(*): Promise<void>)|*|Promise<number>|Promise<unknown>|Promise<number>|Promise<never>, void, *>}
+ * @param {*=} check - given flag.
+ * @returns {AsyncGenerator<*>}
  */
-export async function cluster_types( options ){
-    return cluster_types__( options )
+export async function cluster_system_check( check ){
+    return cluster_system_check__( check )
 }
 
 /**
