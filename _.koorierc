@@ -1,8 +1,4 @@
-; public directory
 static-files = public
-
-; number of cpus
-cluster = full
-
-; logger
-logger = options(quiet:true:write:koorie.log.json)
+health = undefined
+cluster = undefined
+socket = options(active:true|path:/tmp/koorie.sock)
