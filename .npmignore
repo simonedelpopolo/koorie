@@ -8,11 +8,9 @@ nodemon.json
 /routes
 assertions
 .github
-.clinic
 .koorierc
 _.koorierc
 certs
 koorie.log.json
 docs
 public
-/ejected_koorie.js
