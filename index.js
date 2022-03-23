@@ -4,8 +4,7 @@ import {
     api_hot__,
     api_memory__,
     cluster_system_check__,
-    config_parser_get__,
-    config_parser_set__,
+    configuration__,
     ejected__,
     entry_point__,
     exit__,
@@ -34,7 +33,6 @@ import {
     request_query__,
     request_query_get__,
     request_routes__,
-    resource__,
     resource_get_application__,
     resource_get_images__,
     resource_get_public__,
@@ -80,30 +78,6 @@ export async function process_exit( message, error_type = Error( 'koorie - Inter
  */
 export async function stderr( message ){
     return stderr__( message )
-}
-
-/**
- * Object [ config ]
- *
- * @private
- */
-
-/**
- * Event emitter for Object [ config.parser.get ].
- *
- * @returns {*}
- */
-export function config_parser_get(){
-    return config_parser_get__()
-}
-
-/**
- * Event listener for Object [ config.parser.get ].
- *
- * @returns {Promise<string[]> | string[]}
- */
-export async function config_parser_set(){
-    return config_parser_set__()
 }
 
 /**
@@ -172,7 +146,7 @@ export async function processors( argv ){
  *
  * @param { string }flag_value - the flag value passed to cli.
  * @param { string }flag_name - flag name in case of error while parsing the options.
- * @returns { Promise<{ [ p:string ]:{ [ p:string ], any} }> }
+ * @returns { Promise<{ [ p:string ]:{ [ p:string ], any} }> | { [ p:string ]:{ [ p:string ], any} } }
  */
 export async function options( flag_value, flag_name ){
     return options__( flag_value, flag_name )
@@ -183,6 +157,29 @@ export async function options( flag_value, flag_name ){
  *
  * @private
  */
+
+/**
+ * Object [ koorie.configuration ]
+ * koorie configuration file function.
+ *
+ * @param {string=} path - path to your configuration file. Default ./.koorierc in the root directory of the project.
+ * @param { boolean=} process_cwd - default the absolute path starts from process.cwd(). set it to false and, it will use just the argument 'path'.
+ * @returns {Promise<KoorieServerArgumentProperties> | KoorieServerArgumentProperties}
+ */
+export async function configuration( path = '.koorierc', process_cwd = true ){
+    return configuration__( path, process_cwd )
+}
+
+/**
+ * Object [ koorie.ejected ].
+ * type check the given argument using Object [ input.koorie_process ] & start a koorie ejected state.
+ *
+ * @param {KoorieServerArgumentProperties} [initializer=null] - the initializer object that replace process.argv
+ * @returns {KoorieServerArgumentProperties}
+ */
+export async function ejected( initializer = null ){
+    return ejected__( initializer )
+}
 
 /**
  * Object [ koorie.fork ].
@@ -216,29 +213,6 @@ export async function health( incoming, outgoing ){
  */
 export async function hot( route ){
     return hot__( route )
-}
-
-/**
- * Object [ koorie.ejected ].
- * This Object type check & start a koorie ejected state.
- *
- * @param {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null} initializer - the initializer object that replace process.argv
- * @returns {{}}
- */
-export async function ejected( initializer ){
-    return ejected__( initializer )
 }
 
 /**
@@ -423,11 +397,6 @@ export function resource_set_public( path = '' ) {
 }
 
 /**
- * @type {{get_path: (function(): Promise<string|*>), images: string[], finally: (function(*=): Promise<boolean>), push_application_ext: ((function(*): Promise<void>)|*), get_public: (function(): Promise<string|*>), path: string, public: string, application: string[], set_public: ((function(*=): Promise<void>)|*), push_image_ext: ((function(*): Promise<void>)|*), push_text_ext: ((function(*): Promise<void>)|*), text: string[], path_length: ((function(*): Promise<void>)|*)}}
- */
-export const resource = resource__
-
-/**
  * @type {object[]}
  */
 export const routes_collection = routes_collection__
@@ -475,23 +444,10 @@ export async function routing( parameters ){
     return routing__( parameters )
 }
 
-// - koorie.server properties
 /**
  * Resolvers for oftypes undefined_ function.
  *
- * @param {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null} flags - Parsed arguments.
+ * @param {KoorieServerArgumentProperties} flags - Parsed arguments.
  * @returns {Promise<{false: ((function(): Promise<void>)|*), true: ((function(): Promise<void>)|*)}>}
  */
 export async function server_resolvers( flags ){
@@ -501,22 +457,10 @@ export async function server_resolvers( flags ){
 /**
  * Object [ koorie.server].
  *
- * @param {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null} flags - Parsed arguments.
+ * @param { KoorieServerArgumentProperties } [flags = null] - Parsed arguments.
  * @returns {Promise<void>}
  */
-export async function server( flags ){
+export async function server( flags = null ){
     return server__( flags )
 }
 

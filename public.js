@@ -1,5 +1,12 @@
 import { oftype_ } from 'oftypes'
-import { Answer as Answer__, ejected as ejected__, routes_inject as routes_inject__, routes_set as routes_set__, server as server__ } from './index.js'
+import {
+    Answer as Answer__,
+    configuration as configuration__,
+    ejected as ejected__,
+    routes_inject as routes_inject__,
+    routes_set as routes_set__,
+    server as server__
+} from './index.js'
 
 /**
  * JSDoc typedef
@@ -66,28 +73,28 @@ import { Answer as Answer__, ejected as ejected__, routes_inject as routes_injec
  * }
  * // it is possible to call middleware function before without passing it to server function.
  * await server( options )
- * @param {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null} flags - Parsed arguments.
+ * @param {KoorieServerArgumentProperties} flags - Parsed arguments.
  * @param {AsyncFunction|undefined=} middleware - the middleware module.
  * @returns {Promise<void>|void}
  */
-export async function server( flags, middleware= undefined ){
+export async function server( flags = null, middleware= undefined ){
 
     if( await oftype_( middleware ) !== 'undefined' && await oftype_( middleware ) === 'Promise' )
         await middleware()
 
     await server__( flags )
+}
+
+/**
+ * Object [ koorie.configuration ]
+ * koorie configuration file function.
+ *
+ * @param {string=} [path=.koorierc] - path to your configuration file. Default ./.koorierc in the root directory of the project.
+ * @param { boolean=} process_cwd - default the absolute path starts from process.cwd(). set it to false and, it will use just the argument 'path'.
+ * @returns {Promise<KoorieServerArgumentProperties> | KoorieServerArgumentProperties}
+ */
+export async function configuration( path = '.koorierc', process_cwd = true ){
+    return configuration__( path, process_cwd )
 }
 
 /**
@@ -110,36 +117,12 @@ export async function routes_set(){
 
 /**
  * Object [ koorie.ejected ].
- * This Object type check & start a koorie ejected state.
+ * type check the given argument using Object [ input.koorie_process ] & start a koorie ejected state.
  *
- * @param {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null} initializer - the initializer object that replace process.argv
- * @returns {{
- *      port:number,
- *      address:string,
- *      cluster:number,
- *      ejected: string|undefined,
- *      library: string,
- *      logger:{quiet:boolean, write:string},
- *      hot:undefined,
- *      response_time:string,
- *      secure:{active:boolean,key:string,cert:string, dhparam: string},
- *      socket:{active:boolean, path:string},
- *      static_files:string} |
- *      null}
+ * @param {KoorieServerArgumentProperties} [initializer=null] - the initializer object that replace process.argv
+ * @returns {KoorieServerArgumentProperties}
  */
-export async function ejected( initializer ){
+export async function ejected( initializer = null ){
     return ejected__( initializer )
 }
 
