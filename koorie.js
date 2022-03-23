@@ -18,7 +18,7 @@ const falsy = async () => {
 
     const truthy = async () => {
         ( await import( `${ process.cwd() }/middleware.js` ) ).default()
-        await server()
+        await server( options )
     }
 
     const falsy = async () => {

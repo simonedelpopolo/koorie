@@ -77,7 +77,7 @@ import {
  * @param {AsyncFunction|undefined=} middleware - the middleware module.
  * @returns {Promise<void>|void}
  */
-export async function server( flags = null, middleware= undefined ){
+export async function server( flags, middleware= undefined ){
 
     if( await oftype_( middleware ) !== 'undefined' && await oftype_( middleware ) === 'Promise' )
         await middleware()
@@ -119,10 +119,10 @@ export async function routes_set(){
  * Object [ koorie.ejected ].
  * type check the given argument using Object [ input.koorie_process ] & start a koorie ejected state.
  *
- * @param {KoorieServerArgumentProperties} [initializer=null] - the initializer object that replace process.argv
+ * @param {KoorieServerArgumentProperties} initializer - the initializer object that replace process.argv
  * @returns {KoorieServerArgumentProperties}
  */
-export async function ejected( initializer = null ){
+export async function ejected( initializer ){
     return ejected__( initializer )
 }
 

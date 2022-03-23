@@ -174,10 +174,10 @@ export async function configuration( path = '.koorierc', process_cwd = true ){
  * Object [ koorie.ejected ].
  * type check the given argument using Object [ input.koorie_process ] & start a koorie ejected state.
  *
- * @param {KoorieServerArgumentProperties} [initializer=null] - the initializer object that replace process.argv
+ * @param {KoorieServerArgumentProperties} initializer - the initializer object that replace process.argv
  * @returns {KoorieServerArgumentProperties}
  */
-export async function ejected( initializer = null ){
+export async function ejected( initializer ){
     return ejected__( initializer )
 }
 
@@ -457,10 +457,10 @@ export async function server_resolvers( flags ){
 /**
  * Object [ koorie.server].
  *
- * @param { KoorieServerArgumentProperties } [flags = null] - Parsed arguments.
+ * @param { KoorieServerArgumentProperties } flags - Parsed arguments.
  * @returns {Promise<void>}
  */
-export async function server( flags = null ){
+export async function server( flags ){
     return server__( flags )
 }
 
