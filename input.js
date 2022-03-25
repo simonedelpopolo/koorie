@@ -20,6 +20,7 @@ import {
     response_time_flag__,
     secure_flag__,
     shell_process__,
+    silenced_flag__,
     socket_flag__,
     static_files_flag__,
 } from './lib/exporter.js'
@@ -188,6 +189,19 @@ export async function logger_flag( option ){
  */
 export async function middleware_flag( options ){
     return middleware_flag__( options )
+}
+
+/**
+ * Object [ input.silenced_flag ].
+ *
+ * - --silenced flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function silenced_flag( options ){
+    return silenced_flag__( options )
 }
 
 /**
