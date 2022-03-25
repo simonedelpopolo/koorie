@@ -48,7 +48,6 @@ import {
     routes_set__,
     routing__,
     routing_file__,
-    routing_log__,
     routing_route__,
     server__,
     server_resolvers__,
@@ -486,15 +485,6 @@ export async function routes_set(){
  */
 export async function routing_file( filename, readable, Outgoing ) {
     return routing_file__( filename, readable, Outgoing )
-}
-
-/**
- * Object [koorie.routing.log ]
- * configurable log to be printed to stdout or written on file.
- *
- */
-export async function routing_log(){
-    return routing_log__()
 }
 
 /**
