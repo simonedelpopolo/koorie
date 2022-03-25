@@ -5,6 +5,7 @@ import {
     api_memory__,
     cluster_system_check__,
     configuration__,
+    dispatcher__,
     ejected__,
     entry_point__,
     exit__,
@@ -15,10 +16,11 @@ import {
     http__,
     https__,
     init__,
-    library__,
-    library_read__,
     logger__,
     memory__,
+    model__,
+    model_read__,
+    model_selector__,
     options__,
     os_uptime__,
     outgoing__,
@@ -34,9 +36,10 @@ import {
     request_query_get__,
     request_routes__,
     resource_get_application__,
-    resource_get_images__,
+    resource_get_image__,
     resource_get_public__,
     resource_get_text__,
+    resource_get_video__,
     resource_set_public__,
     routes_collection__,
     routes_get__,
@@ -44,6 +47,9 @@ import {
     routes_injected__,
     routes_set__,
     routing__,
+    routing_file__,
+    routing_log__,
+    routing_route__,
     server__,
     server_resolvers__,
     set__,
@@ -171,6 +177,18 @@ export async function configuration( path = '.koorierc', process_cwd = true ){
 }
 
 /**
+ * Object [ koorie.dispatcher ]
+ * ServerRequest event listener.
+ *
+ * @param {IncomingMessage} Incoming - server request
+ * @param {ServerResponse} Outgoing - server response
+ * @returns {Promise<void>}
+ */
+export async function dispatcher( Incoming, Outgoing ) {
+    return dispatcher__( Incoming, Outgoing )
+}
+
+/**
  * Object [ koorie.ejected ].
  * type check the given argument using Object [ input.koorie_process ] & start a koorie ejected state.
  *
@@ -216,25 +234,38 @@ export async function hot( route ){
 }
 
 /**
- * Object [ koorie.library.read ].
+ * Object [ koorie.model.read ].
  *
- * @param {{filename:string, public_path:string}} resources - request filename and public path.
- * @returns {Promise<Buffer|(void&Error)>|Buffer|(void&Error)}
+ * @param {string} filename - request filename and public path.
+ * @returns {Promise<Readable|Error>|Readable|Error}
  */
-export async function library_read( resources ){
-    return library_read__( resources )
+export async function model_read( filename ){
+    return model_read__( filename )
 }
 
 /**
- * Switcher function for different javascript library to be served with koorie.
- * ReactJS, SolidJS and others soon.
+ * Object [ koorie.model.selector ].
  *
- * @param {string} name - The process.env.LIBRARY value will be the switcher.
- * @param {{filename:string, public_path:string}} resources - The requested resource from the browser.
- * @returns {Promise<boolean|Buffer|Error|string> | boolean|Buffer|Error|string}
+ * @param {string} filename - request filename.
+ * @returns {Promise<Readable|Error|number|string>|Readable|Error|number|string}
  */
-export function library( name, resources ){
-    return library__( name, resources )
+export async function model_selector( filename ){
+    return model_selector__( filename )
+}
+
+/**
+ * Object [ koorie.model ]
+ * - Recognizer for routes
+ * - Switcher function for different javascript library to be served with koorie.
+ *   ReactJS, SolidJS and others soon.
+ *
+ *
+ * @param {string} library_name - The process.env.LIBRARY value will be the switcher.
+ * @param {string} filename - The requested resource from the browser.
+ * @returns {Promise<boolean|Readable|Error|string> | boolean|Readable|Error|string}
+ */
+export function model( library_name, filename ){
+    return model__( library_name, filename )
 }
 
 /**
@@ -256,9 +287,9 @@ export async function logger( options ){
 }
 
 /**
- *  Object [koorie.outgoing ].
+ *  Object [ koorie.outgoing ].
  *
- * @param {{buffer:Buffer, log:object}|Error} response - the response to be given back.
+ * @param {{buffer:Buffer, log:Object}} response - the response to be given back.
  * @param {ServerResponse} outgoing - ref to ServerResponse Object.
  * @returns {Promise<void>}
  */
@@ -356,13 +387,13 @@ export function resource_get_application() {
 }
 
 /**
- * Object [ koorie.resource.get_images ]
+ * Object [ koorie.resource.get_image ]
  * returns a collection of images file extensions.
  *
  * @returns {string[]}
  */
-export function resource_get_images() {
-    return resource_get_images__()
+export function resource_get_image() {
+    return resource_get_image__()
 }
 
 /**
@@ -383,6 +414,16 @@ export function resource_get_public() {
  */
 export function resource_get_text() {
     return resource_get_text__()
+}
+
+/**
+ * Object [ koorie.resource.get_video ]
+ * returns a collection of video file extensions.
+ *
+ * @returns {string[]}
+ */
+export function resource_get_video() {
+    return resource_get_video__()
 }
 
 /**
@@ -435,13 +476,49 @@ export async function routes_set(){
 }
 
 /**
- * Dispatches the server requests/responses.
+ * Object [ koorie.routing.file ]
+ * elaborates the ServerResponse based on the requested file.
  *
- * @param {{requested_resource:string,server:{incoming:IncomingMessage, outgoing:ServerResponse}}} parameters - The given object parameters.
- * @returns {Promise<unknown>}
+ * @param {string} filename - filename of the requested resource
+ * @param {Readable} readable - readable
+ * @param {ServerResponse} Outgoing - outgoing
+ * @returns {Promise<{Object}>|Object}
  */
-export async function routing( parameters ){
-    return routing__( parameters )
+export async function routing_file( filename, readable, Outgoing ) {
+    return routing_file__( filename, readable, Outgoing )
+}
+
+/**
+ * Object [koorie.routing.log ]
+ * configurable log to be printed to stdout or written on file.
+ *
+ */
+export async function routing_log(){
+    return routing_log__()
+}
+
+/**
+ * Object [ koorie.routing.route ]
+ * elaborates the ServerResponse based on the requested route.
+ *
+ * @param {IncomingMessage} Incoming - incoming
+ * @param {ServerResponse} Outgoing - outgoing
+ * @returns {Promise<{Object}>|Object}
+ */
+export async function routing_route( Incoming, Outgoing ) {
+    return routing_route__( Incoming, Outgoing )
+}
+
+/**
+ * Object [ koorie.routing ]
+ * sends back @ Object [ koorie.dispatcher ] the ServerResponse data.
+ *
+ * @param {IncomingMessage} Incoming - incoming
+ * @param {ServerResponse} Outgoing - outgoing
+ * @returns {Promise<{buffer:Buffer,log:Object}> | {buffer:Buffer,log:Object}}
+ */
+export async function routing( Incoming, Outgoing ){
+    return routing__( Incoming, Outgoing )
 }
 
 /**
