@@ -49,6 +49,7 @@ ___
     - [--middleware](#--middleware)
     - [--port](#--port)
     - [--secure](#--secure)
+    - [--silenced](#--silenced)
     - [--socket](#--socket)
     - [--static-files](#--static-files)
   - [Koorie-Shell commands and flags](#koorie-shell-commands-and-flags)
@@ -311,6 +312,7 @@ ___
 | --middleware={string}              | Default set to none. If set to 'without' no middleware will be seeked.                    |
 | --port={number}-{void}             | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. |
 | --secure={'options(option:value)'} | HTTPS server                                                                              |
+| --silenced={void}                  | It avoids populating the log with all the debug information. useful when in PRODUCTION    |
 | --socket={'options(option:value)'} | Default is off. Available options: [active:boolean] required. [path:string] required.     |
 | --static-files={string}            | It tells to Koorie to serve the files located in the specified directory.                 |
 
@@ -414,14 +416,6 @@ ___
 
 ___
 
-- #### --socket
-  
-  - `npx koorie --socket='options(active:true|path:/tmp/koorie.sock)'` -> it will open a socket at the specified path.
-  - Defaults set to `active=false` `path=null`
-  - Options are required. ⚠︎ combination active:false:path:/to/file.sock is not implemented yet.
-
-___
-
 - #### --secure
   
   - > _**to run HTTPS server it's necessary to obtain an SSL certificate.**_
@@ -462,6 +456,31 @@ ___
     - _**key**_ ➡︎ path to the key.pem file
     - _**cert**_ ➡︎ path to the cert.pem file
   - ❗NOT required -> _**dhparam**_ ➡︎ path to the dhparam.pem file
+
+___
+
+- #### --silenced
+  
+  - `npx koorie --silenced` -> It avoids populating the log with all the debug information. useful when in PRODUCTION.
+  - used with flag --logger='options(quiet:true)' completely disable any output at stdout. ( better performance )
+    - ⚠ **advice** run the server with the following command  
+    `npx koorie --silenced --logger='options(quiet:true|write:./log.json)'`  
+    in this way a very simple log file will be saved for keep tracks of requests.
+
+    - --silenced generates this log:
+      - method of the request
+      - url requested
+      - status code
+      - remote ip address
+      - date
+
+___
+
+- #### --socket
+  
+  - `npx koorie --socket='options(active:true|path:/tmp/koorie.sock)'` -> it will open a socket at the specified path.
+  - Defaults set to `active=false` `path=null`
+  - Options are required. ⚠︎ combination active:false:path:/to/file.sock is not implemented yet.
 
 ___
 
