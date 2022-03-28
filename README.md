@@ -6,14 +6,6 @@ ___
 
 > ⚠ Koorie shall be considered not ready for PRODUCTION.
 >
-> ⚠ `v1.x.x-alpha` shall be considered "functionalities deployed frequently" so the minor version will raise fast.  
->
-> ⚠ No breaking changes on schedule.
->
-> ⚠ the flags=options are always under refactoring mode.
->
-> ⚠ ❗️ the short flags are NOT available and them will be NOT used anymore.
->
 > ⚠ This software won't run on Windows.
 
 ___
@@ -42,6 +34,7 @@ ___
     - [--address](#--address)
     - [--cluster](#--cluster)
     - [--ejected](#--ejected)
+    - [--experimental-log-writer](#--experimental-log-writer)
     - [--health](#--health)
     - [--hot](#--hot)
     - [--library](#--library)
@@ -306,6 +299,7 @@ ___
 | --address={string}                 | Sets the address to listen from. Default set to localhost.                                |
 | --cluster={void}-{number}          | When {void} it forks the process for the half of the available CPUs.                      |
 | --ejected={string}                 | Sets startup file ejected from koorie.                                                    |
+| --experimental-log-writer          | Enables the experimental log writer                                                       |
 | --health={void}                    | route health injected to check the status of the server.                                  |
 | --hot={boolean}-{void}             | Default is set to false. When {void} it sets hot wired                                    |
 | --library={string}                 | It tells to Koorie to expect a javascript library application.                            |
@@ -346,6 +340,14 @@ ___
   - ⬆︎ this example still call **_npx koorie_** to show the use of the flag --ejected.
   - `node servers/ejected_a.js && node servers/ejected_b.js`
   - ⬆︎ this example call **_node_** to load the server_a.js & servers/ejected_b.js examples ➡︎ [here]()
+
+___
+
+- #### --experimental-log-writer
+  
+  - `npx koorie --experimental-log-writer --logger='options(write:./log.json)'` 
+    - it will enable the experimental log writer that help to improve the performance of the server while writing the log to a file.
+  - `npx koorie --experimental-log-writer` -> process exits with errors.
 
 ___
 

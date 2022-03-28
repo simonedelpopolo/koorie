@@ -2,6 +2,7 @@ import {
     address_flag__,
     cluster_flag__,
     ejected_flag__,
+    experimental_log_writer_flag__,
     health_flag__,
     hot_flag__,
     init_author_flag__,
@@ -125,6 +126,19 @@ export async function hot_flag( options ){
  */
 export async function ejected_flag( options ){
     return ejected_flag__( options )
+}
+
+/**
+ * Object [ input.experimental_log_writer_flag ].
+ *
+ * - experimental_log_writer_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function experimental_log_writer_flag( options ){
+    return experimental_log_writer_flag__( options )
 }
 
 /**
