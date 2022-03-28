@@ -17,6 +17,7 @@ import {
     library_flag__,
     logger_flag__,
     middleware_flag__,
+    no_listening_check_flag__,
     response_time_flag__,
     secure_flag__,
     shell_process__,
@@ -189,6 +190,19 @@ export async function logger_flag( option ){
  */
 export async function middleware_flag( options ){
     return middleware_flag__( options )
+}
+
+/**
+ * Object [ input.no_listening_check_flag ].
+ *
+ * - no-listening-check flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function no_listening_check_flag( options ){
+    return no_listening_check_flag__( options )
 }
 
 /**
