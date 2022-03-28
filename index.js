@@ -46,6 +46,7 @@ import {
     routes_inject__,
     routes_injected__,
     routes_set__,
+    routes_set_check__,
     routing__,
     routing_file__,
     routing_route__,
@@ -472,6 +473,16 @@ export const routes_injected = routes_injected__
  */
 export async function routes_set(){
     return routes_set__()
+}
+
+/**
+ * Object [ koorie.routes.set.check ]
+ * type check of the exports from the route module.
+ *
+ * @param {Function|AsyncFunction} route_exports - route exports
+ */
+export async function routes_set_check( route_exports ) {
+    return routes_set_check__( route_exports )
 }
 
 /**

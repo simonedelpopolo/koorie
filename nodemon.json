@@ -8,6 +8,7 @@
     ".git",
     "assertions",
     "koorie.log.json",
+    "koorie.log.**",
     ".clinic",
     ".eslintignore",
     ".gitignore",

@@ -47,6 +47,7 @@ ___
     - [--library](#--library)
     - [--logger](#--logger)
     - [--middleware](#--middleware)
+    - [--no-listening-check](#--no-listening-check)
     - [--port](#--port)
     - [--secure](#--secure)
     - [--silenced](#--silenced)
@@ -310,6 +311,7 @@ ___
 | --library={string}                 | It tells to Koorie to expect a javascript library application.                            |
 | --logger={'options(option:value)'} | Default set to print to stdout every request.                                             |
 | --middleware={string}              | Default set to none. If set to 'without' no middleware will be seeked.                    |
+| --no-listening-check={void}        | Disable the on listening check.                                                           |
 | --port={number}-{void}             | Sets the port to listen from. Default set to 3001. When {void} listen from a random port. |
 | --secure={'options(option:value)'} | HTTPS server                                                                              |
 | --silenced={void}                  | It avoids populating the log with all the debug information. useful when in PRODUCTION    |
@@ -400,10 +402,17 @@ ___
 
 - #### --middleware
   
-  - `npx koorie --middleware=starter.js` -> it will look for a file named starter.js in the root directory of the project, and
+  - `npx koorie --middleware=starter.js` -> it will look for a file named starter.js in the root directory of the project
   - `npx koorie --middleware=without` -> it will NOT look for any middleware file.
   - The middleware file is used to register all the available routes and the incoming REQUEST, if any, to the specified route.
   - Default set to `middleware.js`
+
+___
+
+- #### --no-listening-check
+  
+  - `npx koorie --no-listening-check` -> It will not run a check to see if everything work fine in the routing system.
+  - Default set to run the on-listening-check-request function
 
 ___
 
