@@ -621,35 +621,38 @@ export function os_uptime() {
  *
  * @private
  */
+
 /**
- * API hot.
+ * Object [ koorie.socket.api.hot ]
+ * it can set/unset, through socket, **hot wired**.
  *
- * @param {Socket} socket_ - .
- * @param {Object<{HOT:string}>} opts - .
- * @returns {Promise<void>}
+ * @param {Socket} socket - socket client/server.
+ * @param {string} switch_on - hot options :)
+ * @returns {Promise<void>|void}
  */
-export async function api_hot( socket_, opts ) {
-    return api_hot__( socket_, opts )
+export async function api_hot( socket, switch_on ) {
+    return api_hot__( socket, switch_on )
 }
 
 /**
- * API memory.
+ * Object [ koorie.socket.api.memory ]
+ * it streams, through socket, the MemoryUsage of the Primary Process
+ * It doesn't take in account the Workers in **forked state**.
  *
- * @param {Socket} socket_ - .
- * @param {number=} refresh_rate - .
- * @returns {Promise<void>}
+ * @param {Socket} socket - client/server.
+ * @returns {Promise<{[unknown]:string, [p:string]:NodeJS.MemoryUsage}> | {unknown: string, [p: string]: NodeJS.MemoryUsage}}
  */
-export async function api_memory ( socket_, refresh_rate ) {
-    return api_memory__( socket_, refresh_rate )
+export async function api_memory ( socket ) {
+    return api_memory__( socket )
 }
 
 /**
- * Initialization script. An object from a json string passed to the terminal.
- * The arguments it is not required.
+ * Object [ shell.init ]
  *
- * @param {{name:string=,description:string=,version:string=}=} options - The json parsed options.
+ * The options aren't required.
+ *
+ * @param {{git:boolean=,middleware:string=,name:string=,description:string=,version:string=,author:string=,license:string=, bare:false=}=} options - flags passed to the command init.
  * @returns {Promise<void>}
- * @example npx koorie init='{"name":"my-app", "description":"my frivolous app"}'
  */
 export async function init( options ){
     return init__( options )
