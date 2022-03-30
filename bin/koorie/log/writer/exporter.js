@@ -64,11 +64,12 @@ export function koorie_log_writer_read(){
  * Object [ binary.koorie.log.writer.add ]
  * it populates the queue and begin the writing process.
  *
+ * @param {Object} data - the new request data.
  * @fires 'add'
  * @returns {*}
  */
-export function koorie_log_writer_add(){
-    return koorie_log_writer_add__()
+export function koorie_log_writer_add( data ){
+    return koorie_log_writer_add__( data )
 }
 
 /**

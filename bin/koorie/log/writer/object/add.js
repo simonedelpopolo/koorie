@@ -12,6 +12,13 @@ const add = Object.defineProperty( writer, addSymbol, {
     writable: false,
     configurable: false,
 
+    /**
+     * Object [ binary.koorie.log.writer.add ]
+     * it populates the queue and begin the writing process.
+     *
+     * @param {Object} data - the new request data.
+     * @fires 'add'
+     */
     value: function koorie_log_writer_add( data ){
         koorie_log_writer_read()
         const request_id = randomUUID()
