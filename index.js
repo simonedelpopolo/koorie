@@ -543,10 +543,11 @@ export async function server( flags ){
 }
 
 /**
- * Socket connection to koorie.
+ * Object [ koorie.socket ]
+ * Socket server connection to koorie PrimaryProcess.
  *
- * @param {{path:string}} options - socket options.
- * @returns {Promise<void>}
+ * @param {{path:string}} options - path from th the --socket flag
+ * @returns {Promise<void> |void }
  */
 export async function socket( options ){
     return socket__( options )
@@ -659,10 +660,13 @@ export async function init( options ){
 }
 
 /**
- * Through socket connection to koorie, koorie-shell can edit some koorie options without restarting it.
+ * Object [ shell.set ]
+ * Through socket connection to koorie,
+ * koorie-shell can set/unset options without restarting the server
+ * this is because most of the options are ENVIRONMENT_VARIABLES.
  *
- * @param {{hot:string, inject:string}} options - on the fly options to set into koorie.
- * @returns {Promise<void>}
+ * @param {{hot:string, socket_path:string}} options - on the fly options to set/unset
+ * @returns {Promise<void> | void}
  */
 export async function set( options ){
     return set__( options )
