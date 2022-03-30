@@ -280,7 +280,7 @@ export function model( library_name, filename ){
  * is a json collection of all the requests done.
  * easy to send to an external database.
  *
- * @param {{quiet:boolean, write:string, info:string[]}} options - Infos.
+ * @param {{quiet:Promise<boolean|string>|boolean, write:null|string, info:any[]}} options - Infos.
  */
 export async function logger( options ){
     return logger__( options )
@@ -289,12 +289,12 @@ export async function logger( options ){
 /**
  *  Object [ koorie.outgoing ].
  *
- * @param {{buffer:Buffer, log:Object}} response - the response to be given back.
- * @param {ServerResponse} outgoing - ref to ServerResponse Object.
- * @returns {Promise<void>}
+ * @param {Promise<buffer|undefined>|buffer|undefined} response - the response to be given back.
+ * @param {ServerResponse} Outgoing - ref to ServerResponse Object.
+ * @returns {Promise<void> | void}
  */
-export async function outgoing( response, outgoing ){
-    return outgoing__( response, outgoing )
+export async function outgoing( response, Outgoing ){
+    return outgoing__( response, Outgoing )
 }
 
 /**
@@ -516,7 +516,7 @@ export async function routing_route( Incoming, Outgoing ) {
  *
  * @param {IncomingMessage} Incoming - incoming
  * @param {ServerResponse} Outgoing - outgoing
- * @returns {Promise<{buffer:Buffer,log:Object}> | {buffer:Buffer,log:Object}}
+ * @returns {Promise<Buffer|undefined>| Buffer|undefined}
  */
 export async function routing( Incoming, Outgoing ){
     return routing__( Incoming, Outgoing )
