@@ -42,10 +42,7 @@ export default async () => {
 
             instance.on( 'done', () => {
                 koorie.kill( 'SIGINT' )
-            } )
-
-            instance.on( 'error', () => {
-                tttt.failed( true )
+                process.exit( 0 )
             } )
 
             // Just render results
@@ -55,11 +52,11 @@ export default async () => {
             } )
         }, 100 )
 
-        koorie.on( 'close', code => {
+        koorie.on( 'exit', code => {
             if( code !== 0 ) {
-                instance.stop()
                 tttt.failed( true )
                 koorie.kill( 'SIGINT' )
+                process.exit( 1 )
             }
         } )
     } )
@@ -68,5 +65,5 @@ export default async () => {
 
         tttt.end_test( tttt.id() )
 
-    }, 6000 )
+    }, 5200 )
 }
