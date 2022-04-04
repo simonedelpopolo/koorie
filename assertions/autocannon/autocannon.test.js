@@ -29,40 +29,45 @@ export default async () => {
 
     koorie.on( 'spawn', () => {
 
+        const pid = koorie.pid
+
         let instance
         // Give some time for Koorie to be ready 100%
         setTimeout( () => {
+
             instance = autocannon( {
                 url: 'http://localhost:34562',
                 method: 'GET',
                 duration: 5,
                 connections: 220,
-            }, console.log )
+            } )
 
             instance.on( 'done', () => {
-                koorie.kill( 'SIGINT' )
-                process.exit( 0 )
+                try{
+                    process.kill( pid )
+                    tttt.failed( false )
+                    tttt.end_test( tttt.id() )
+                }catch ( error ) {
+                    console.trace( error.code )
+                    tttt.failed( true )
+                    tttt.end_test( tttt.id() )
+                }
             } )
 
             // Just render results
             autocannon.track( instance, {
                 renderProgressBar: true,
-                renderLatencyTable: true
+                renderLatencyTable: false
             } )
-        }, 100 )
 
-        koorie.on( 'exit', code => {
-            if( code !== 0 ) {
-                tttt.failed( true )
-                koorie.kill( 'SIGINT' )
-                process.exit( 1 )
-            }
-        } )
+            koorie.on( 'exit', ( code, signal ) => {
+                if( signal === 'SIGTERM' ) {
+                    process.exit( 0 )
+                    tttt.failed( false )
+                    tttt.end_test( tttt.id() )
+                }
+            } )
+        }, 500 )
+
     } )
-
-    setTimeout( () => {
-
-        tttt.end_test( tttt.id() )
-
-    }, 5200 )
 }

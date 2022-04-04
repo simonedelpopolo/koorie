@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.16.18-alpha",
+  "version": "1.16.19-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -12,8 +12,8 @@
   "scripts": {
     "eslint": "npx eslint . --ext .js",
     "eslint-fix": "npx eslint --fix . --ext .js",
-    "unit-tests": "npx 4t unit",
-    "autocannon-test": "npx 4t test --file='options(filename:autocannon.test.js)'",
+    "unit-tests": "npx 4t unit --exclude='autocannon.test.js'",
+    "autocannon-test": "npx 4t test --file='options(filename:autocannon/autocannon.test.js)'",
     "middleware-flag-test": "npx 4t test --file='options(filename:middleware_flag.test.js)'",
     "static-files-flag-test": "npx 4t test --file='options(filename:static_files_flag.test.js)'",
     "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080 --logger=\"'options(quiet:false)'\"",
@@ -24,7 +24,7 @@
     "eslint": "^8.12.0",
     "eslint-plugin-jsdoc": "^38.1.6",
     "nodemon": "^2.0.15",
-    "trythistrythat": "^1.2.4"
+    "trythistrythat": "^1.3.1"
   },
   "dependencies": {
     "boolean-jokes": "^1.5.4",
