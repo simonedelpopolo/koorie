@@ -1,11 +1,9 @@
 {
   "name": "koorie",
   "version": "1.16.15-alpha",
+  "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
-  "engines": {
-    "node": ">=v16.14.2 <17"
-  },
   "main": "public.js",
   "bin": {
     "koorie": "koorie.js",
@@ -21,31 +19,20 @@
     "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080",
     "nodemon.ssl.koorie.socket.hot": "npx nodemon --trace-uncaught --trace-warnings koorie.js --port=4443 --static-files=public --hot --socket=\"'options(active:true|path:/tmp/koorie.ssl.sock)'\" --cluster=3 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\""
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
-    "autocannon": "^7.8.0",
+    "autocannon": "^7.8.1",
     "eslint": "^8.12.0",
-    "eslint-plugin-jsdoc": "^38.1.3",
+    "eslint-plugin-jsdoc": "^38.1.6",
     "nodemon": "^2.0.15",
-    "trythistrythat": "latest"
+    "trythistrythat": "^1.2.4"
   },
   "dependencies": {
-    "boolean-jokes": "latest",
-    "json-swiss-knife": "latest",
-    "oftypes": "latest",
+    "boolean-jokes": "^1.5.4",
+    "cli-decors": "^1.0.1",
+    "json-swiss-knife": "^1.6.13",
+    "oftypes": "^1.7.1",
     "semver": "^7.3.5",
-    "validate-npm-package-name": "^3.0.0"
-  },
-  "homepage": "https://github.com/simonedelpopolo/koorie#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/simonedelpopolo/koorie.git"
-  },
-  "bugs": {
-    "email": "simonedelpopolo@outlook.com",
-    "url": "https://github.com/simonedelpopolo/koorie/issues"
+    "validate-npm-package-name": "^4.0.0"
   },
   "keywords": [
     "server",
@@ -60,5 +47,13 @@
     "email": "simonedelpopolo@outlook.com",
     "url": "https://github.com/simonedelpopolo"
   },
-  "license": "Apache-2.0"
+  "homepage": "https://github.com/simonedelpopolo/koorie#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonedelpopolo/koorie.git"
+  },
+  "bugs": {
+    "email": "simonedelpopolo@outlook.com",
+    "url": "https://github.com/simonedelpopolo/koorie/issues"
+  }
 }
