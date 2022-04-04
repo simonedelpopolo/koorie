@@ -59,8 +59,7 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement by opening a public issue at https://github.com/simonedelpopolo/koorie/issues.  
-Use the abuse flag, specifying the user account and explaining the thing publicly.  
+reported to the community leaders responsible for enforcement @ simonedelpopolo@outlook.com
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

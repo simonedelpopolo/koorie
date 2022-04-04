@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.16.15-alpha",
+  "version": "1.16.16-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
