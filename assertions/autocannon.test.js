@@ -16,7 +16,6 @@ export default async () => {
         '--address=localhost',
         '--logger=options(quiet:true)',
         '--response-time=false',
-        '--no-listening-check',
         '--silenced',
         '--static-files=public'
     ], {

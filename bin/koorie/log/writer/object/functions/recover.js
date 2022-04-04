@@ -11,9 +11,7 @@ export async function koorie_log_writer_recover(){
     const filename = `${ dirname( koorie_log_writer_filename ) }/${ basename( koorie_log_writer_filename, 'json' ) }${ Date.now() }-read-error.json`
     cpSync( koorie_log_writer_filename, filename )
     try{
-        process.nextTick( () => {
-            writeFileSync( koorie_log_writer_filename, '[]', { flag: 'w' } )
-        } )
+        process.nextTick( writeFileSync, koorie_log_writer_filename, '[]', { flag: 'w' } )
 
         try{
             const buffer = readFileSync( koorie_log_writer_filename )

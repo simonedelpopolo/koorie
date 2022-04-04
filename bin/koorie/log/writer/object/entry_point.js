@@ -31,9 +31,7 @@ const entry_point = Object.defineProperty( writer, entry_pointSymbol, {
 
                 const filename = `${ dirname( logger.filename ) }/${ basename( logger.filename, 'json' ) }${ Date.now() }.json`
                 copyFileSync( logger.filename, filename )
-                process.nextTick( () => {
-                    writeFileSync( logger.filename, '[]', { flag: 'w' } )
-                } )
+                process.nextTick( writeFileSync, logger.filename, '[]', { flag: 'w' } )
 
                 setImmediate( () => { koorie_log_writer_add( logger.log ) } )
             }else
