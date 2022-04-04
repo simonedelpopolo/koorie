@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.16.16-alpha",
+  "version": "1.16.17-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -16,7 +16,7 @@
     "autocannon-test": "npx 4t test --file='options(filename:autocannon.test.js)'",
     "middleware-flag-test": "npx 4t test --file='options(filename:middleware_flag.test.js)'",
     "static-files-flag-test": "npx 4t test --file='options(filename:static_files_flag.test.js)'",
-    "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080",
+    "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080 --logger=\"'options(quiet:false)'\"",
     "nodemon.ssl.koorie.socket.hot": "npx nodemon --trace-uncaught --trace-warnings koorie.js --port=4443 --static-files=public --hot --socket=\"'options(active:true|path:/tmp/koorie.ssl.sock)'\" --cluster=3 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\""
   },
   "devDependencies": {

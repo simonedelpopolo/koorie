@@ -13,9 +13,11 @@ export default async () => {
     const koorie = spawn( 'node', [
         'koorie.js',
         '--port=34562',
-        '--address=localhost',
+        '--addre',
         '--logger=options(quiet:true)',
         '--response-time=false',
+        '--no-listening-check',
+        '--silenced',
         '--static-files=public'
     ], {
         cwd: `${process.cwd()}`,
@@ -26,16 +28,12 @@ export default async () => {
         ],
     } )
 
-    koorie.on( 'error', error => {
-        tttt.failed( true )
-        console.trace( error )
-    } )
-
     koorie.on( 'spawn', () => {
 
+        let instance
         // Give some time for Koorie to be ready 100%
         setTimeout( () => {
-            const instance = autocannon( {
+            instance = autocannon( {
                 url: 'http://localhost:34562',
                 method: 'GET',
                 duration: 5,
@@ -57,12 +55,18 @@ export default async () => {
             } )
         }, 100 )
 
-
+        koorie.on( 'close', code => {
+            if( code !== 0 ) {
+                instance.stop()
+                tttt.failed( true )
+                koorie.kill( 'SIGINT' )
+            }
+        } )
     } )
 
     setTimeout( () => {
 
         tttt.end_test( tttt.id() )
 
-    }, 5200 )
+    }, 6000 )
 }
