@@ -13,7 +13,7 @@ export default async () => {
     const koorie = spawn( 'node', [
         'koorie.js',
         '--port=34562',
-        '--addre',
+        '--address=localhost',
         '--logger=options(quiet:true)',
         '--response-time=false',
         '--no-listening-check',
