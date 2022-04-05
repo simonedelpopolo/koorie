@@ -24,7 +24,7 @@ import {
     silenced_flag__,
     socket_flag__,
     static_files_flag__,
-} from './lib/exporter.js'
+} from './lib/exports.js'
 
 /**
  * Koorie process.

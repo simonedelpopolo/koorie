@@ -48,6 +48,7 @@ import {
     routes_set__,
     routes_set_check__,
     routing__,
+    routing_all__,
     routing_file__,
     routing_route__,
     server__,
@@ -57,7 +58,7 @@ import {
     socket__,
     ssl__,
     stderr__,
-} from './lib/exporter.js'
+} from './lib/exports.js'
 
 /**
  * Object [ activity ]
@@ -483,6 +484,19 @@ export async function routes_set(){
  */
 export async function routes_set_check( route_exports ) {
     return routes_set_check__( route_exports )
+}
+
+/**
+ * Object [ koorie.routing.all ]
+ * elaborates the ServerResponse with the injected catch-all route.
+ *
+ * @param {Function|AsyncFunction} RouteExport - catch all route
+ * @param {IncomingMessage} Incoming - incoming
+ * @param {ServerResponse} Outgoing - outgoing
+ * @returns {Promise<{Object}>|Object}
+ */
+export async function routing_all( RouteExport, Incoming, Outgoing ) {
+    return routing_all__( RouteExport, Incoming, Outgoing )
 }
 
 /**
