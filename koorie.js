@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { configuration, server } from './index.js'
 import { null_, resolvers, undefined_ } from 'oftypes'
 

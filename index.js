@@ -57,7 +57,7 @@ import {
     shell_exit_codes__,
     socket__,
     ssl__,
-    stderr__,
+    stderr__
 } from './lib/exports.js'
 
 /**
