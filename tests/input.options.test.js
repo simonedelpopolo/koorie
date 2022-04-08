@@ -1,7 +1,13 @@
 import * as tttt from 'trythistrythat'
 import { default as options } from '../lib/input/options.js'
 
-export default async () => {
+/**
+ * Exports in module input.options.test.js
+ *
+ * @param {string} id - UNIT-test
+ * @returns {Promise<void> | void}
+ */
+export default async ( id ) => {
 
     tttt.describe( 'UNIT test for Object [ input.options ]' )
 
@@ -21,6 +27,6 @@ export default async () => {
         console.log( 'test passed'.green() )
 
 
-    tttt.end_test( tttt.id() )
+    tttt.end_test( id )
 
 }

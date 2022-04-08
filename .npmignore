@@ -6,7 +6,7 @@
 nodemon.json
 /middleware.js
 /routes
-assertions
+tests
 .github
 .koorierc
 _.koorierc

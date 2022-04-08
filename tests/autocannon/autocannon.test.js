@@ -2,7 +2,13 @@ import * as tttt from 'trythistrythat'
 import autocannon from 'autocannon'
 import { spawn } from 'child_process'
 
-export default async () => {
+/**
+ * Exports in module autocannon.test.js
+ *
+ * @param {string} id - UNIT-test
+ * @returns {Promise<void> | void}
+ */
+export default async ( id ) => {
 
     tttt.describe( 'autocannon test'.green(), 'assertion ->'.red(), 0 )
     tttt.describe( '  listing statements'.green(), '⬇︎'.red(), '\n' )
@@ -46,11 +52,11 @@ export default async () => {
                 try{
                     process.kill( pid )
                     tttt.failed( false )
-                    tttt.end_test( tttt.id() )
+                    tttt.end_test( id )
                 }catch ( error ) {
                     console.trace( error.code )
                     tttt.failed( true )
-                    tttt.end_test( tttt.id() )
+                    tttt.end_test( id )
                 }
             } )
 
@@ -64,7 +70,7 @@ export default async () => {
                 if( signal === 'SIGTERM' ) {
                     process.exit( 0 )
                     tttt.failed( false )
-                    tttt.end_test( tttt.id() )
+                    tttt.end_test( id )
                 }
             } )
         }, 500 )

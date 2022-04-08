@@ -1,7 +1,13 @@
 import * as tttt from 'trythistrythat'
 import { default as static_files_flag } from '../lib/input/koorie/flag/static_files_flag.js'
 
-export default async () => {
+/**
+ * Exports in module static_files_flag.js
+ *
+ * @param {string} id - UNIT-test
+ * @returns {Promise<void> | void}
+ */
+export default async ( id ) => {
 
     tttt.describe( '# UNIT test for the static_files_flag type checking'.underline().strong() )
 
@@ -40,5 +46,5 @@ export default async () => {
     }else
         console.log( '##  test passed'.green() )
 
-    tttt.end_test( tttt.id() )
+    tttt.end_test( id )
 }
