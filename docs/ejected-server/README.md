@@ -161,7 +161,7 @@ import { Answer } from 'koorie'
  * @returns {Promise<{buffer:Buffer}> | {buffer:Buffer}}
  */
 export async function index( ){
-    return new Answer( good => good( JSON.stringify( { 'index-route' : 'response' } ).toBuffer() ) )
+    return new Answer( good => good( Buffer.from( JSON.stringify( { 'index-route' : 'response' } ) ) ) )
 }
 ```
 

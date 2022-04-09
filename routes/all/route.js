@@ -6,5 +6,5 @@ import { Answer } from '../../public.js'
  * @returns {Promise<{buffer:Buffer}> | {buffer:Buffer}}
  */
 export async function all(){
-    return new Answer( good => good( JSON.stringify( { 'all-route' : 'response' } ).toBuffer() ) )
+    return new Answer( good => good( Buffer.from( JSON.stringify( { 'all-route' : 'response' } ) ) ) )
 }

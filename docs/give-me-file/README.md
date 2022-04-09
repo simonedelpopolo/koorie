@@ -132,7 +132,7 @@ export async function index(incoming, outgoing){
         if( typeof give_me_file.empty !== 'undefined' ) {
             const message = await readFile(process.cwd() + '/public/index.html')
                 //catch error.message
-                .catch(error => error.message.toBuffer())
+                .catch(error => Buffer.from( error.message ) )
             outgoing.statusCode = 200
             outgoing.setHeader( 'content-type', 'text/html' )
         
@@ -146,7 +146,7 @@ export async function index(incoming, outgoing){
             error = true
             outgoing.statusMessage = 'internal_error'
             outgoing.statusCode = 500
-            give_me_file = JSON.stringify(give_me_file).toBuffer()
+            give_me_file = Buffer.from( JSON.stringify(give_me_file) )
         }
         else{
             if(give_me_file.has('give_me_file')) {
@@ -161,13 +161,13 @@ export async function index(incoming, outgoing){
                     error = true
                     outgoing.statusMessage = 'kO'
                     outgoing.statusCode = 404
-                    give_me_file = JSON.stringify({ error: 'URLSearchParams not right' }).toBuffer()
+                    give_me_file = Buffer.from( JSON.stringify({ error: 'URLSearchParams not right' }) )
                 }
             }else {
                 error = true
                 outgoing.statusMessage = 'kO'
                 outgoing.statusCode = 404
-                give_me_file = JSON.stringify({ error: 'URLSearchParams not right' }).toBuffer()
+                give_me_file = Buffer.from( JSON.stringify({ error: 'URLSearchParams not right' }) )
             }
         }
         
@@ -230,7 +230,7 @@ the response should be "give me file! alright!"
 ```javascript
 //[.....]
 /*line 42*/ outgoing.setHeader( 'content-type', 'application/json' )
-/*line 43*/ const message = JSON.stringify({hello:'folks'}).toBuffer()
+/*line 43*/ const message = Buffer.from( JSON.stringify({hello:'folks'}) )
 //[....]
 ```
 
@@ -274,7 +274,7 @@ closed
 
 ```javascript
 //[.....]
-/*line 43*/ const message = JSON.stringify({goodnight:'folks'}).toBuffer()
+/*line 43*/ const message = Buffer.from( JSON.stringify({goodnight:'folks'}) )
 //[....]
 ```
 

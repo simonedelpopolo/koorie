@@ -643,7 +643,7 @@ ___
       return (`<div>dynamic component loaded when hit the route[component]! today @ ${date}</div>`)
     }
     
-    return new Answer( good => good( html.toBuffer() ))
+    return new Answer( good => good( Buffer.from( html ) ) )
 
   }
   ```

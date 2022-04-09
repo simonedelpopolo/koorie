@@ -33,7 +33,7 @@ import {
  * @returns {Promise<Object<any>>}
  */
 export async function koorie_process( process_parsed_argv ) {
-    return koorie_process__( process_parsed_argv )
+    return koorie_process__[ Symbol.for( 'input.process_title.koorie_process' ) ]( process_parsed_argv )
 }
 
 /**
@@ -43,7 +43,7 @@ export async function koorie_process( process_parsed_argv ) {
  * @returns {Promise<Object<any>>}
  */
 export async function shell_process( process_parsed_argv ) {
-    return shell_process__( process_parsed_argv )
+    return shell_process__[ Symbol.for( 'input.process_title.shell_process' ) ]( process_parsed_argv )
 }
 
 /**

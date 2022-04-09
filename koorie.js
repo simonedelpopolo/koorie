@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-
+import { override } from '@cli-blaze/decors'
 import { configuration, server } from './index.js'
 import { null_, resolvers, undefined_ } from 'oftypes'
 
+await override()
 // - splicing out from `process.argv` the paths for node and koorie.js
 process.argv.splice( 0, 2 )
 

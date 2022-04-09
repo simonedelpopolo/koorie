@@ -12,7 +12,7 @@ const index_html = async (incoming, outgoing) => {
     
     outgoing.statusCode = 302;
     outgoing.setHeader('Location', '/')
-    const message = JSON.stringify({redirect: 'remember, koorie is simple.'}).toBuffer()
+    const message = Buffer.from( JSON.stringify({redirect: 'remember, koorie is simple.'}) )
     
     return Answer.resolve(message)
 }

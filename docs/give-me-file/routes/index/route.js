@@ -40,7 +40,7 @@ export async function index(incoming, outgoing){
             
             outgoing.statusCode = 200
             outgoing.setHeader( 'content-type', 'text/html' )
-            const message = await readFile(process.cwd() + '/public/index.html').catch(error => error.message.toBuffer())/*catch error.message.toBuffer()*/
+            const message = await readFile(process.cwd() + '/public/index.html').catch(error => Buffer.from( error.message) )/*catch error.message.toBuffer()*/
             
             return Answer.resolve( message )
         }
@@ -52,7 +52,7 @@ export async function index(incoming, outgoing){
             error = true
             outgoing.statusMessage = 'internal_error'
             outgoing.statusCode = 500
-            give_me_file = JSON.stringify(give_me_file).toBuffer()
+            give_me_file = Buffer.from( JSON.stringify(give_me_file) )
         }
         else{
             if(give_me_file.has('give_me_file')) {
@@ -67,13 +67,13 @@ export async function index(incoming, outgoing){
                     error = true
                     outgoing.statusMessage = 'kO'
                     outgoing.statusCode = 404
-                    give_me_file = JSON.stringify({ error: 'URLSearchParams not right' }).toBuffer()
+                    give_me_file = Buffer.from(JSON.stringify({ error: 'URLSearchParams not right' }))
                 }
             }else {
                 error = true
                 outgoing.statusMessage = 'kO'
                 outgoing.statusCode = 404
-                give_me_file = JSON.stringify({ error: 'URLSearchParams not right' }).toBuffer()
+                give_me_file = Buffer.from(JSON.stringify({ error: 'URLSearchParams not right' }))
             }
         }
         

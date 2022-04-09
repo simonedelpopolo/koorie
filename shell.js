@@ -1,13 +1,16 @@
 #!/usr/bin/env node
-import { entry_point, init, performance, set, ssl } from './index.js'
+import { entry_point } from '@cli-blaze/input'
+import { override } from '@cli-blaze/decors'
+import { shell_process } from './input.js'
+import { init, performance, set, ssl } from './index.js'
+
+await override()
 
 // - splicing out from `process.argv` the paths for node and shell.js
 process.argv.splice( 0, 2 )
 
 // - process.title
 process.title = 'koorie-shell'
-
-const entry_point_run = await entry_point( process.argv )
 
 /**
  *
@@ -39,7 +42,7 @@ const entry_point_run = await entry_point( process.argv )
  *     }
  * }}}
  */
-const shell = await entry_point_run
+const shell = await entry_point( process.argv, { 'koorie-shell':shell_process, executable:[ 'koorie-shell' ] } )
 
 if( typeof shell !== 'undefined' && typeof shell?.command !== 'undefined' ){
     // eslint-disable-next-line default-case
