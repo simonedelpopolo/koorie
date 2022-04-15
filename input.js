@@ -100,7 +100,7 @@ export async function cluster_flag( options ){
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
 export async function ejected_flag( options ){
-    return ejected_flag__( options )
+    return ejected_flag__[ Symbol.for( 'input.ejected_flag' ) ]( options )
 }
 
 /**
