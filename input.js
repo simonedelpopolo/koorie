@@ -5,6 +5,7 @@ import {
     experimental_log_writer_flag__,
     health_flag__,
     hot_flag__,
+    http2_flag__,
     init_author_flag__,
     init_bare_flag__,
     init_command__,
@@ -89,6 +90,32 @@ export async function cluster_flag( options ){
 }
 
 /**
+ * Object [ input.initializer_flag ].
+ *
+ * - initializer_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export async function ejected_flag( options ){
+    return ejected_flag__( options )
+}
+
+/**
+ * Object [ input.experimental_log_writer_flag ].
+ *
+ * - experimental_log_writer_flag type check.
+ *
+ * @param {string} options - the value from the shell.
+ * @throws { Error }
+ * @returns {Promise<Error|undefined>|Error|undefined}
+ */
+export async function experimental_log_writer_flag( options ){
+    return experimental_log_writer_flag__( options )
+}
+
+/**
  * Object [ input.health_flag ].
  *
  * - health_flag type check.
@@ -115,29 +142,16 @@ export async function hot_flag( options ){
 }
 
 /**
- * Object [ input.initializer_flag ].
+ * Object [ input.http2_flag ]
  *
- * - initializer_flag type check.
+ * - http2_flag type check.
  *
  * @param {string} options - the value from the shell.
  * @throws { Error }
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
-export async function ejected_flag( options ){
-    return ejected_flag__( options )
-}
-
-/**
- * Object [ input.experimental_log_writer_flag ].
- *
- * - experimental_log_writer_flag type check.
- *
- * @param {string} options - the value from the shell.
- * @throws { Error }
- * @returns {Promise<Error|undefined>|Error|undefined}
- */
-export async function experimental_log_writer_flag( options ){
-    return experimental_log_writer_flag__( options )
+export async function http2_flag( options ){
+    return http2_flag__[ Symbol.for( 'input.http2_flag' ) ]( options )
 }
 
 /**

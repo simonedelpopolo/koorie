@@ -11,6 +11,7 @@ import {
     health__,
     host_os__,
     hot__,
+    http2__,
     http__,
     https__,
     init__,
@@ -502,6 +503,18 @@ export async function http(){
  */
 export async function https( key, cert, dhparam = null ){
     return https__( key, cert, dhparam )
+}
+
+/**
+ * Object [ koorie.server.http2 ].
+ *
+ * @param {string} key - path to the key file.
+ * @param {string} cert - path to the cert file
+ * @param {string|null=} dhparam - path to the dhparam file.
+ * @returns {Promise<Server> | Server}
+ */
+export async function http2( key, cert, dhparam = null ){
+    return http2__[ Symbol.for( 'koorie.server.http2' ) ]( key, cert, dhparam )
 }
 
 /**

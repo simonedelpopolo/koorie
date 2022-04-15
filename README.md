@@ -37,6 +37,7 @@ ___
     - [--experimental-log-writer](#--experimental-log-writer)
     - [--health](#--health)
     - [--hot](#--hot)
+    - [--http2](#--http2)
     - [--library](#--library)
     - [--logger](#--logger)
     - [--middleware](#--middleware)
@@ -301,6 +302,7 @@ ___
 | --experimental-log-writer          | Enables the experimental log writer                                                       |
 | --health={void}                    | route health injected to check the status of the server.                                  |
 | --hot={boolean}-{void}             | Default is set to false. When {void} it sets hot wired                                    |
+| --http2={void}                     | HTTP2 server                                                                              |
 | --library={string}                 | It tells to Koorie to expect a javascript library application.                            |
 | --logger={'options(option:value)'} | Default set to print to stdout every request.                                             |
 | --middleware={string}              | Default set to none. If set to 'without' no middleware will be seeked.                    |
@@ -381,6 +383,13 @@ ___
   - `npx koorie --hot` -> it will hot wire koorie. so for every change done to the routes there will be no need to restart the
     server.
   - Default sets to false
+
+___
+
+- #### --http2
+  - `npx koorie --http2 --secure='options(active:true|key:certs/key.pem:cert:certs/cert.pem:dhparam:certs/dhparam.pem)'` 
+  - it will spawn an HTTP2 server.
+  - ❗ requires [--secure](#--secure) to be set
 
 ___
 
@@ -615,6 +624,7 @@ ___
 ## Road Map
 
 - [X] `koorie --secure` spawning https server.
+- [X] `koorie --http2` spawning http2 server.
 - [X] `koorie-shell ssl --generate` generating self-signed certificate.
 - [X] **_working on a way to add routes without restarting the server._**
   - **_koorie --hot --socket='options=(active:true:path:/tmp/koorie.sock)_**  
