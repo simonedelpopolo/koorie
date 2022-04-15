@@ -39,7 +39,7 @@ export async function index(incoming, outgoing){
         if( typeof give_me_file.empty !== 'undefined' ) {
             
             outgoing.statusCode = 200
-            outgoing.setHeader( 'content-type', 'text/html' )
+            outgoing.setHeader( 'content-type', 'text/html; charset=utf-8' )
             const message = await readFile(process.cwd() + '/public/index.html').catch(error => Buffer.from( error.message) )/*catch error.message.toBuffer()*/
             
             return Answer.resolve( message )
