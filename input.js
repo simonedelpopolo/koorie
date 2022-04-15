@@ -2,7 +2,7 @@ import {
     address_flag__,
     cluster_flag__,
     ejected_flag__,
-    experimental_log_writer_flag__,
+    experimental_log_writer_flag__, generator__,
     health_flag__,
     hot_flag__,
     http2_flag__,
@@ -19,6 +19,7 @@ import {
     library_flag__,
     logger_flag__,
     middleware_flag__,
+    promise__,
     response_time_flag__,
     secure_flag__,
     shell_process__,
@@ -73,7 +74,7 @@ export async function response_time_flag( options ){
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
 export async function address_flag( options ){
-    return address_flag__( options )
+    return address_flag__[ Symbol.for( 'input.address_flag' ) ]( options )
 }
 
 /**
@@ -86,7 +87,7 @@ export async function address_flag( options ){
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
 export async function cluster_flag( options ){
-    return cluster_flag__( options )
+    return cluster_flag__[ Symbol.for( 'input.cluster_flag' ) ]( options )
 }
 
 /**
@@ -360,4 +361,28 @@ export async function init_license_flag( options ){
  */
 export async function init_name_flag( options ){
     return init_name_flag__( options )
+}
+
+/**
+ * Object [ input ]
+ */
+/**
+ * Object [ input.promise ]
+ *
+ * @param {any} promise - returned
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export function promise( promise ){
+    return promise__[ Symbol.for( 'input.promise' ) ]( promise )
+}
+
+/**
+ * Object [ input.generator ]
+ * type check for flag.
+ *
+ * @param {any} logic - check
+ * @returns {AsyncGenerator<any, Error, *>}
+ */
+export function generator( logic ){
+    return generator__[ Symbol.for( 'input.generator' ) ]( logic )
 }
