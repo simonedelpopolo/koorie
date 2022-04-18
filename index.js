@@ -103,7 +103,7 @@ export async function dispatcher( Incoming, Outgoing ) {
  * @returns {KoorieServerArgumentProperties}
  */
 export async function ejected( initializer ){
-    return ejected__( initializer )
+    return ejected__[ Symbol.for( 'koorie.ejected' ) ]( initializer )
 }
 
 /**

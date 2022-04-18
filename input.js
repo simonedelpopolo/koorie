@@ -2,7 +2,8 @@ import {
     address_flag__,
     cluster_flag__,
     ejected_flag__,
-    experimental_log_writer_flag__, generator__,
+    experimental_log_writer_flag__,
+    generator__,
     health_flag__,
     hot_flag__,
     http2_flag__,
@@ -19,6 +20,8 @@ import {
     library_flag__,
     logger_flag__,
     middleware_flag__,
+    only_string__,
+    only_void__,
     promise__,
     response_time_flag__,
     secure_flag__,
@@ -91,11 +94,11 @@ export async function cluster_flag( options ){
 }
 
 /**
- * Object [ input.initializer_flag ].
+ * Object [ input.ejected_flag ]
  *
- * - initializer_flag type check.
+ * - --ejected type check.
  *
- * @param {string} options - the value from the shell.
+ * @param {any} options - check
  * @throws { Error }
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
@@ -126,7 +129,7 @@ export async function experimental_log_writer_flag( options ){
  * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
 export async function health_flag( options ){
-    return health_flag__( options )
+    return health_flag__[ Symbol.for( 'input.health_flag' ) ]( options )
 }
 
 /**
@@ -366,6 +369,18 @@ export async function init_name_flag( options ){
 /**
  * Object [ input ]
  */
+
+/**
+ * Object [ input.generator ]
+ * type check for flag.
+ *
+ * @param {any} logic - check
+ * @returns {AsyncGenerator<any, Error, *>}
+ */
+export function generator( logic ){
+    return generator__[ Symbol.for( 'input.generator' ) ]( logic )
+}
+
 /**
  * Object [ input.promise ]
  *
@@ -377,12 +392,23 @@ export function promise( promise ){
 }
 
 /**
- * Object [ input.generator ]
- * type check for flag.
+ * Object [ input.type.only_string ]
  *
- * @param {any} logic - check
- * @returns {AsyncGenerator<any, Error, *>}
+ * @param {any} flag - returned
+ * @param {any} resolves - value
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
  */
-export function generator( logic ){
-    return generator__[ Symbol.for( 'input.generator' ) ]( logic )
+export function only_string( flag, resolves ){
+    return only_string__[ Symbol.for( 'input.type.only_string' ) ]( flag, resolves )
+}
+
+/**
+ * Object [ input.type.only_void ]
+ *
+ * @param {any} flag - returned
+ * @param {any} resolves - value
+ * @returns {Promise<string|Error|undefined>|string|Error|undefined}
+ */
+export function only_void( flag, resolves ){
+    return only_void__[ Symbol.for( 'input.type.only_void' ) ]( flag, resolves )
 }
