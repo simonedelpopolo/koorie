@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.17.5-alpha",
+  "version": "1.17.6-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -14,8 +14,8 @@
   },
   "scripts": {
     "eslint": "npx eslint . --ext .js",
-    "test": "npx 4t unit",
-    "coverage": "npx 4t --coverage unit",
+    "test": "npx 4t unit --exclude=koorie_log_writer.bin.test.js",
+    "coverage": "npx 4t --coverage unit --exclude=koorie_log_writer.bin.test.js",
     "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080",
     "nodemon.ssl.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=4443 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
     "nodemon.http2.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --http2 --port=4444 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\""
@@ -25,7 +25,7 @@
     "eslint": "^8.13.0",
     "eslint-plugin-jsdoc": "^39.2.2",
     "nodemon": "^2.0.15",
-    "trythistrythat": "^1.6.6"
+    "trythistrythat": "^1.7.0"
   },
   "dependencies": {
     "@cli-blaze/activity": "^0.0.2",
@@ -34,7 +34,7 @@
     "@cli-blaze/input": "^0.0.2",
     "boolean-jokes": "^1.5.4",
     "json-swiss-knife": "^1.6.13",
-    "oftypes": "^1.7.12",
+    "oftypes": "^1.7.13",
     "semver": "^7.3.7",
     "validate-npm-package-name": "^4.0.0"
   },

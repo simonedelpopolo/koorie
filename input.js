@@ -116,7 +116,7 @@ export async function ejected_flag( options ){
  * @returns {Promise<Error|undefined>|Error|undefined}
  */
 export async function experimental_log_writer_flag( options ){
-    return experimental_log_writer_flag__( options )
+    return experimental_log_writer_flag__[ Symbol.for( 'input.experimental_log_writer_flag' ) ]( options )
 }
 
 /**
