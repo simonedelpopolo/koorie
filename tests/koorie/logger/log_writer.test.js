@@ -1,7 +1,6 @@
 import * as tttt from 'trythistrythat'
 import { fork } from 'node:child_process'
-import { parse } from 'json-swiss-knife'
-import { readFile } from 'node:fs/promises'
+import { is_json } from 'json-swiss-knife'
 import { request } from 'node:http'
 
 /**
@@ -22,37 +21,51 @@ export default async ( id ) => {
         cwd: process.cwd()
     } )
 
-    const make_request = () => {
-        setTimeout( () => {
-            const Outgoing = request( 'http://localhost:36586/', Incoming => {
+    let Outgoing
 
-                Incoming.on( 'data', async data => {
+    const make_request = (  ) => {
 
-                    const log_file = working_directory + '/logs/log.json'
+        Outgoing = request( 'http://localhost:36586/', Incoming => {
 
-                    const relax = async () => {
-                        if( Incoming.statusCode !== 200 ){
-                            tttt.failed( true )
-                            tttt.describe( ' test failed'.red() )
-                        }else{
-                            tttt.describe( ' test passed'.green() )
-                            await tttt.line( 2 )
-                        }
+            Incoming.on( 'data', async data => {
 
-                        tttt.describe( 'response from server', await parse( data ) )
-
-                        await readFile( log_file ).then( async buffer => {
-                            tttt.describe( 'log file parsed', await parse( buffer ) )
-                        } )
-
-                        tttt.end_test( id )
+                if( Incoming.statusCode !== 200 ){
+                    tttt.failed( true )
+                    tttt.describe( ' test failed'.red() )
+                }else{
+                    if( !( await is_json( data ) ) ){
+                        tttt.failed( true )
+                        tttt.describe( ' test failed'.red() )
                     }
-                    setTimeout( relax, 500 )
-                } )
+                }
             } )
-            Outgoing.end()
-        }, 500 )
+
+            Incoming.on( 'error', error => console.trace( error ) )
+        } )
+        Outgoing.on( 'error', () => {} )
+        Outgoing.end()
     }
 
-    koorie_log_writer.on( 'spawn', make_request )
+    koorie_log_writer.on( 'spawn', () => {
+        const repeater = () => {
+            let counter = 1
+            const request_100 = setInterval( async function (){
+                process.stdout.write( counter.toString( 10 ).yellow() + ' requests done\r' )
+                counter++
+                make_request()
+                if( counter === 101 ) {
+                    Outgoing.destroy()
+                    clearInterval( request_100 )
+                    process.kill( koorie_log_writer.pid )
+                    tttt.describe( '\n test passed'.green() )
+                    tttt.end_test( id )
+                }
+
+            }, 25 )
+        }
+        setTimeout( repeater, 500 )
+
+
+    } )
+
 }
