@@ -225,7 +225,7 @@ the response should be "give me file! alright!"
 
 - at line 42 change the content-type to application/json
 - at line 43 replace message `const message = await readFile().....`  
-  with `const message = JSON.stringify({hello:'folks'}).toBuffer()`
+  with `const message = Buffer.from(JSON.stringify({hello:'folks'}))`
 
 ```javascript
 //[.....]
@@ -270,7 +270,7 @@ closed
 **_edit AGAIN filename `./routes/index/route.js`_**
 
 - at line 43 replace message again  
-  with `const message = JSON.stringify({goodnight:'folks'}).toBuffer()`
+  with `const message = Buffer.from(JSON.stringify({goodnight:'folks'}))`
 
 ```javascript
 //[.....]
