@@ -1,11 +1,12 @@
 import * as assert from 'node:assert'
 /**
- * - import everything from public.js to mock imports and exports.
+ * - import everything from index.js to mock imports and exports.
  */
 // eslint-disable-next-line no-unused-vars
-import * as mock from '../../../../public.js'
+import * as mock from '../../../../index.js'
 import * as tttt from 'trythistrythat'
-import { ejected_flag } from '../../../../input.js'
+import { Blaze } from '@cli-blaze/decors'
+import { ejected_flag } from '../../../../private.js'
 
 /**
  * Module filename - /Volumes/code/koorie/tests/koorie/server/function.ejected.test.js
@@ -35,7 +36,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( '##  test passed' ) )
 
     error = await tttt.oki( async () => {
         await tttt.line()
@@ -54,7 +55,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     await tttt.line()
     tttt.describe( 'it rejects with OftypesError' )
@@ -72,7 +73,7 @@ export default async ( id ) => {
                 return true
             } )
 
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     }catch ( AssertionError ) {
 

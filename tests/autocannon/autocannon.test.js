@@ -1,5 +1,6 @@
 import * as tttt from 'trythistrythat'
 import autocannon from 'autocannon'
+import { Blaze } from '@cli-blaze/decors'
 import { spawn } from 'child_process'
 
 /**
@@ -10,9 +11,9 @@ import { spawn } from 'child_process'
  */
 export default async ( id ) => {
 
-    tttt.describe( 'autocannon test'.green(), 'assertion ->'.red(), 0 )
-    tttt.describe( '  listing statements'.green(), '⬇︎'.red(), '\n' )
-    tttt.describe( '    220 connections for 5 seconds of execution'.green(), '⚠︎'.red(), 'statement ->'.red(), 0 )
+    tttt.describe( Blaze.green( 'autocannon test' ), Blaze.red( 'assertion ->' ), 0 )
+    tttt.describe( Blaze.green( '  listing statements' ), Blaze.red( '⬇︎' ), '\n' )
+    tttt.describe( Blaze.green( '    220 connections for 5 seconds of execution' ), Blaze.red( '⚠︎' ), Blaze.red( 'statement ->' ), 0 )
 
     tttt.separator()
 

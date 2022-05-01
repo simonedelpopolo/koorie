@@ -1,4 +1,5 @@
 import * as tttt from 'trythistrythat'
+import { Blaze } from '@cli-blaze/decors'
 import { fork } from 'node:child_process'
 import { is_json } from 'json-swiss-knife'
 import { request } from 'node:http'
@@ -31,11 +32,11 @@ export default async ( id ) => {
 
                 if( Incoming.statusCode !== 200 ){
                     tttt.failed( true )
-                    tttt.describe( ' test failed'.red() )
+                    tttt.describe( Blaze.red( ' test failed' ) )
                 }else{
                     if( !( await is_json( data ) ) ){
                         tttt.failed( true )
-                        tttt.describe( ' test failed'.red() )
+                        tttt.describe( Blaze.red( ' test failed' ) )
                     }
                 }
             } )
@@ -50,14 +51,14 @@ export default async ( id ) => {
         const repeater = () => {
             let counter = 1
             const request_100 = setInterval( async function (){
-                process.stdout.write( counter.toString( 10 ).yellow() + ' requests done\r' )
+                process.stdout.write( Blaze.yellow( counter.toString( 10 ) ) + ' requests done\r' )
                 counter++
                 make_request()
                 if( counter === 101 ) {
                     Outgoing.destroy()
                     clearInterval( request_100 )
                     process.kill( koorie_log_writer.pid )
-                    tttt.describe( '\n test passed'.green() )
+                    tttt.describe( Blaze.green( '\n test passed' ) )
                     tttt.end_test( id )
                 }
 

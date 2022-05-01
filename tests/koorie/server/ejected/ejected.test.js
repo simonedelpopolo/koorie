@@ -1,5 +1,5 @@
 import * as tttt from 'trythistrythat'
-import { ejected } from '../../../../public.js'
+import { ejected } from '../../../../index.js'
 
 /**
  * Module filename - /Volumes/code/koorie/tests/koorie/server/function.ejected.test.js
@@ -14,7 +14,7 @@ export default async ( id ) => {
     await tttt.separator( 240, 75, '~' )
     await tttt.line()
 
-    console.trace( await ejected( {
+    console.log( await ejected( {
         static_files: 'public',
         port: 3023,
         health: undefined

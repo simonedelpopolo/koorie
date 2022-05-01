@@ -1,9 +1,7 @@
 #!/usr/bin/env node
-import { override } from '@cli-blaze/decors'
-import { configuration, server } from './index.js'
+import { config, server } from './private.js'
 import { null_, resolvers, undefined_ } from 'oftypes'
 
-await override()
 // - splicing out from `process.argv` the paths for node and koorie.js
 process.argv.splice( 0, 2 )
 
@@ -13,7 +11,7 @@ process.title = 'koorie'
 /**
  * @type { KoorieServerArgumentProperties }
  */
-const options = await configuration()
+const options = await config()
 
 const truthy = () => server( null )
 const falsy = async () => {

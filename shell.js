@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { entry_point } from '@cli-blaze/input'
 import { override } from '@cli-blaze/decors'
-import { shell_process } from './input.js'
-import { init, performance, set, ssl } from './index.js'
+import { shell_process } from './private.js'
+import { init, performance, set, ssl } from './private.js'
 
 await override()
 

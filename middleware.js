@@ -1,4 +1,4 @@
-import { routes_inject, routes_set } from './public.js'
+import { routes_inject, routes_set } from './index.js'
 
 export default async () => {
     await routes_inject( { route:'', asyncFunction: ( await import( './routes/index/route.js' ) ).index  } )

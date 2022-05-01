@@ -1,10 +1,10 @@
 {
   "name": "koorie",
-  "version": "1.17.7-alpha",
+  "version": "1.17.11-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
-  "main": "public.js",
+  "main": "index.js",
   "bin": {
     "koorie": "koorie.js",
     "koorie-shell": "shell.js"
@@ -22,19 +22,21 @@
   },
   "devDependencies": {
     "autocannon": "^7.8.1",
-    "eslint": "^8.13.0",
-    "eslint-plugin-jsdoc": "^39.2.2",
-    "nodemon": "^2.0.15",
-    "trythistrythat": "^1.7.0"
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-syntax-import-assertions": "^7.16.7",
+    "eslint": "^8.14.0",
+    "eslint-plugin-jsdoc": "^39.2.9",
+    "nodemon": "^2.0.16",
+    "trythistrythat": "^1.8.3"
   },
   "dependencies": {
-    "@cli-blaze/activity": "^0.0.2",
-    "@cli-blaze/decors": "^0.0.5",
-    "@cli-blaze/error": "^0.0.2",
-    "@cli-blaze/input": "^0.0.2",
-    "boolean-jokes": "^1.5.4",
-    "json-swiss-knife": "^1.6.13",
-    "oftypes": "^1.7.13",
+    "@cli-blaze/activity": "^1.0.2",
+    "@cli-blaze/decors": "^1.0.2",
+    "@cli-blaze/error": "^1.0.1",
+    "@cli-blaze/input": "^1.0.3",
+    "boolean-jokes": "^1.5.5",
+    "json-swiss-knife": "^1.6.14",
+    "oftypes": "^1.8.2",
     "semver": "^7.3.7",
     "validate-npm-package-name": "^4.0.0"
   },

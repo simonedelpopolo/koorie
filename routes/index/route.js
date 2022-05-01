@@ -1,4 +1,4 @@
-import { Answer } from '../../public.js'
+import { Answer } from '../../index.js'
 
 /**
  * Route - Index.

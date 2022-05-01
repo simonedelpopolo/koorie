@@ -1,4 +1,5 @@
 import * as tttt from 'trythistrythat'
+import { Blaze } from '@cli-blaze/decors'
 import { default as middleware_flag } from '../lib/input/koorie/flag/middleware_flag.js'
 
 /**
@@ -9,14 +10,14 @@ import { default as middleware_flag } from '../lib/input/koorie/flag/middleware_
  */
 export default async ( id ) => {
 
-    tttt.describe( '# UNIT test for the middleware_flag type checking'.underline().strong() )
+    tttt.describe( Blaze.underline( Blaze.strong( '# UNIT test for the middleware_flag type checking' ) ) )
 
     const reject_number_type = await tttt.oki( async () => {
 
-        tttt.describe( '##  -1'.yellow(), ' given a number value to --middleware=3 will exit with code 2'.color( 33 ) )
+        tttt.describe( Blaze.yellow( '##  -1' ), Blaze.color( 33, ' given a number value to --middleware=3 will exit with code 2' ) )
 
         return {
-            expected: `${ 'given option -> '.green() }'${'3'.red()}' - ${ process.title } flags-error`,
+            expected: `${ Blaze.green( 'given option -> ' ) }'${Blaze.red( '3' )}' - ${ process.title } flags-error`,
             actual : await middleware_flag( 3 ).catch( error => error.message ),
             error: '## the expected result mismatched'
         }
@@ -24,14 +25,14 @@ export default async ( id ) => {
 
     if( reject_number_type instanceof Error ) {
         tttt.failed( true )
-        console.error( reject_number_type.message.red() )
+        tttt.describe( Blaze.red( reject_number_type.message ) )
     }else
-        console.log( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
 
     const resolve_string_type = await tttt.oki( async () => {
 
-        tttt.describe( '##  -2'.yellow(), ' given a string value to --middleware=middleware.js will go through'.color( 33 ) )
+        tttt.describe( Blaze.yellow( '##  -2' ), Blaze.color( 33, ' given a string value to --middleware=middleware.js will go through' ) )
 
         return {
             expected: 'middleware.js',
@@ -42,9 +43,9 @@ export default async ( id ) => {
 
     if( resolve_string_type instanceof Error ) {
         tttt.failed( true )
-        console.error( resolve_string_type.message.red() )
+        tttt.describe( Blaze.red( resolve_string_type.message ) )
     }else
-        console.log( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     tttt.end_test( id )
 }

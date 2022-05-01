@@ -1,4 +1,5 @@
 import * as tttt from 'trythistrythat'
+import { Blaze } from '@cli-blaze/decors'
 import { ejected } from '../../../../lib/koorie/server/functions/ejected.js'
 
 /**
@@ -31,7 +32,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     error = await tttt.oki( async () => {
         await tttt.line()
@@ -48,7 +49,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     error = await tttt.oki( async () => {
         await tttt.line()
@@ -65,7 +66,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     error = await tttt.oki( async () => {
         await tttt.line()
@@ -82,7 +83,7 @@ export default async ( id ) => {
         tttt.failed( true )
         console.error( error )
     }else
-        tttt.describe( '##  test passed'.green() )
+        tttt.describe( Blaze.green( ' test passed' ) )
 
     tttt.end_test( id )
 }

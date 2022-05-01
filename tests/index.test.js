@@ -1,4 +1,4 @@
-import * as index_module from '../index.js'
+import * as index_module from '../private.js'
 import * as tttt from 'trythistrythat'
 
 /**
@@ -9,7 +9,7 @@ import * as tttt from 'trythistrythat'
  */
 export default async ( id ) => {
 
-    tttt.describe( '# it shows all the private exports in module ./index.js' )
+    tttt.describe( '# it shows all the private exports in module ./private.js' )
     await tttt.separator( 240, 75, '~' )
     await tttt.line()
 

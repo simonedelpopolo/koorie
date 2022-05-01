@@ -30,7 +30,7 @@ export default function koorie_log_writer_entry_point( logger ){
 
     }catch ( error ) {
 
-        console.trace( error )
+        console.error( error )
     }
 
 }
