@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.17.14-alpha",
+  "version": "1.17.15-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -34,7 +34,7 @@
     "@cli-blaze/decors": "^1.0.3",
     "@cli-blaze/dissection": "^1.0.0",
     "@cli-blaze/error": "^1.0.2",
-    "@cli-blaze/input": "^1.0.5",
+    "@cli-blaze/input": "^1.0.6",
     "boolean-jokes": "^1.5.5",
     "json-swiss-knife": "^1.6.14",
     "oftypes": "^1.8.2",
