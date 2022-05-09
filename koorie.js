@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-json-modules --experimental-import-meta-resolve --trace-warnings --no-warnings
 import { config, server } from './private.js'
 import { null_, resolvers, undefined_ } from 'oftypes'
 
@@ -22,7 +22,7 @@ const falsy = async () => {
     }
 
     const falsy = async () => {
-        if( options.middleware === 'without' )
+        if( options.middleware === 'off' )
             await server( options )
         else{
             ( await import( `${ process.cwd() }/${ options.middleware }` ) ).default()
