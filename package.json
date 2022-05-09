@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.17.15-alpha",
+  "version": "1.17.16-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -16,9 +16,9 @@
     "eslint": "npx eslint . --ext .js",
     "test": "npx 4t unit --exclude=koorie_log_writer.bin.test.js",
     "coverage": "npx 4t --coverage unit --exclude=koorie_log_writer.bin.test.js",
-    "nodemon.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=8080",
-    "nodemon.ssl.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --port=4443 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
-    "nodemon.http2.koorie": "npx nodemon --trace-uncaught --trace-warnings koorie.js --static-files=public --http2 --port=4444 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\""
+    "nodemon.koorie": "npx nodemon --experimental-json-modules --experimental-import-meta-resolve --trace-warnings --no-warnings koorie.js --static-files=public --port=8080",
+    "nodemon.ssl.koorie": "npx nodemon --experimental-json-modules --experimental-import-meta-resolve --trace-warnings --no-warnings koorie.js --static-files=public --port=4443 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\"",
+    "nodemon.http2.koorie": "npx nodemon --experimental-json-modules --experimental-import-meta-resolve --trace-warnings --no-warnings koorie.js --static-files=public --http2 --port=4444 --secure=\"'options(active:true|key:certs/koorie.key.pem|cert:certs/koorie.cert.pem|dhparam:certs/koorie.dhparam.pem)'\""
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
