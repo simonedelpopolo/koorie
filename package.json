@@ -1,6 +1,6 @@
 {
   "name": "koorie",
-  "version": "1.17.16-alpha",
+  "version": "1.17.17-alpha",
   "license": "Apache-2.0",
   "description": "Node.js server. ESModule asynchronous from the beginning of the Dreamtime.",
   "type": "module",
@@ -27,12 +27,12 @@
     "eslint": "^8.15.0",
     "eslint-plugin-jsdoc": "^39.2.9",
     "nodemon": "^2.0.16",
-    "trythistrythat": "^1.8.9"
+    "trythistrythat": "^1.8.16"
   },
   "dependencies": {
     "@cli-blaze/activity": "^1.0.3",
     "@cli-blaze/decors": "^1.0.3",
-    "@cli-blaze/dissection": "^1.0.0",
+    "@cli-blaze/dissection": "^1.0.2",
     "@cli-blaze/error": "^1.0.2",
     "@cli-blaze/input": "^1.0.6",
     "boolean-jokes": "^1.5.5",

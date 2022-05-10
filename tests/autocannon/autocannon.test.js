@@ -18,6 +18,8 @@ export default async ( id ) => {
     tttt.separator()
 
     const koorie = spawn( 'node', [
+        '--experimental-json-modules',
+        '--experimental-import-meta-resolve',
         'koorie.js',
         '--port=34562',
         '--address=localhost',

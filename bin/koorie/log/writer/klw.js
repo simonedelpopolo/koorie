@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node  --experimental-json-modules --experimental-import-meta-resolve --trace-warnings --no-warnings
 import { Blaze } from '@cli-blaze/decors'
 import { error_code } from '@cli-blaze/error'
 import { exit } from '@cli-blaze/activity'

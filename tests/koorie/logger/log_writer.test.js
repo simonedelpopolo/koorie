@@ -65,8 +65,6 @@ export default async ( id ) => {
             }, 25 )
         }
         setTimeout( repeater, 500 )
-
-
     } )
 
 }

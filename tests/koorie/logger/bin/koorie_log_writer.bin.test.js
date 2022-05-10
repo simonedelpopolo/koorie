@@ -8,7 +8,7 @@ await server( await ejected( {
     static_files: 'public',
     experimental_log_writer: undefined,
     logger: { quiet: true, write:'logs/log.json' },
-    middleware: 'without',
+    middleware: 'off',
     response_time: 'false',
     silenced: undefined
 } ) )
